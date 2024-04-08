@@ -10,7 +10,7 @@
 	<img src="../logo.png" alt="PunkCloud Logo" width="auto" height="auto">
     	</a> 
     <h1>Add Entry</h1>
-	<form action="insertEntry.php" method="post">
+	<form action="tools/insertEntry.php" method="post">
 		<label>English Name: </label><input type="text" name="eng_name"><br>
 		<label>Romanized Name: </label><input type="text" name="rom_name"><br>
 		<label>Image Path: </label><input type="file" name="image"><br>
