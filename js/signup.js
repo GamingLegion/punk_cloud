@@ -1,5 +1,5 @@
 // JavaScript Document
-document.getElementById("loginForm").addEventListener("submit", function(event) {
+document.getElementById("signupForm").addEventListener("submit", function(event) {
     event.preventDefault();
     var email = document.getElementById("email").value;
     var username = document.getElementById("username").value;
@@ -23,5 +23,5 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
             }
         }
     };
-    xhr.send("email=" + email + "username=" + username + "&password=" + password);
+    xhr.send("email=" + email + "&username=" + username + "&password=" + password);
 });

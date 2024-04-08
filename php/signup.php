@@ -10,9 +10,9 @@
    <img src="../images/icons/vegapunk.png" alt="Vegapunk" style="position: fixed; width: 15%; margin: 100px 0px 0px 150px">
 <div class="container">
    <h2>Sign Up</h2>
-   <form id="loginForm" action="tools/login.php" method="post">
+   <form id="signupForm" action="tools/signup.php" method="post">
       <div class="form-group">
-         <label for="username">Email:</label>
+         <label for="email">Email:</label>
          <input type="text" id="email" name="email" required>
       </div>
       <div class="form-group">
