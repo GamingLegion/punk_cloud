@@ -9,12 +9,18 @@ $result = mysqli_query( $connect, 'Select username, email FROM users' );
 
 // Check if the submitted username and password match the valid credentials
 
+$check = true;
 while ( $record = mysqli_fetch_assoc( $result ) ) {
    if ($username === $record[ 'email' ]) {
       echo "mailFail";
+      $check = false;
    } else if ($username === $record[ 'username' ]) {
       echo "userFail";
+      $check = false;
    }
+}
+if($check) {
+   mysqli_query( $connect, "INSERT INTO users(id, username, email, password) VALUES ('NULL', '$username', '$email', '$password');");
 }
 
 ?>
