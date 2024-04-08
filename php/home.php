@@ -24,7 +24,7 @@
 			while($record = mysqli_fetch_assoc($result)) {
 				echo '<div class="card" id="card">';				
 					echo '<img src="../images/anime/'.$record['image'].'" alt="'.$record['eng_name'].'" width="auto" height="auto">';
-					echo '<div class="text_overlay">';
+					echo '<div class="text">';
 						if($record['eng_name'] != NULL) {
 							echo '<p>'.$record['eng_name'].'</p>';
 						} else {

@@ -5,16 +5,13 @@
   margin: 0px 10px;
 }
 .card img {
-  position: absolute; /* Ensure stacking context */
+  position: static; /* Ensure stacking context */
   display: inline-block;
   width: auto;
   height: 250px;
   overflow: hidden;
 }
-.text-overlay {
-  position: absolute;
-  background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
+.text {
+  position: center;
   color: white;
-  height: auto;
-  text-align: center;
 }
