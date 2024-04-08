@@ -12,6 +12,6 @@
   overflow: hidden;
 }
 .text {
-  position: center;
+  text-align: center;
   color: white;
 }
