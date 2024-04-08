@@ -8,10 +8,15 @@ $result = mysqli_query( $connect, 'Select username, email, password FROM users' 
 
 // Check if the submitted username and password match the valid credentials
 
+$check = true;
 while ( $record = mysqli_fetch_assoc( $result ) ) {
-   if ( ($username === $record['username'] || $username === $record['email']) && $password === $record['password'] ) {
+   if ( ( $username === $record[ 'username' ] || $username === $record[ 'email' ] ) && $password === $record[ 'password' ] ) {
       echo "success";
+      $check = false;
    }
+}
+if ( $check ) {
+   echo "fail";
 }
 
 ?>

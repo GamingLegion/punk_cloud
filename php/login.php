@@ -24,7 +24,7 @@
       </div>
       <p id="error-msg"></p>
    </form>
-   <p>Sign Up</p>
+   <a href="signup.php">Sign Up</a>
 </div>
 <script src="../js/login.js"></script>
 </body>

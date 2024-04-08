@@ -14,7 +14,7 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
         if (xhr.readyState == 4 && xhr.status == 200) {
             var response = xhr.responseText;
             if (response === "success") {
-                window.location.href = "home.php"; // Redirect to dashboard on successful login
+                window.location.href = "home.php";
             } else {
                 document.getElementById("error-msg").innerText = "Invalid username or password.";
             }
