@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="../css/card.css">
 </head>
 <body>
-<a href="home.php">  <img src="../logo.png" alt="PunkCloud Logo" width="auto" height="auto"> </a>
+<a href="home.php">  <img src="../images/icons/logo.png" alt="PunkCloud Logo" width="auto" height="auto"> </a>
 <a href="addEntry.php"> <button>Insert Entry</button> </a>
 <a href="login.php"> <img src="../images/icons/login_icon.png" alt="Login" width="50px" height="50px"> </a>
 

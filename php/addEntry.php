@@ -7,7 +7,7 @@
 </head>
 <body>
 		<a href="home.php">
-	<img src="../logo.png" alt="PunkCloud Logo" width="auto" height="auto">
+	<img src="../images/icons/logo.png" alt="PunkCloud Logo" width="auto" height="auto">
     	</a> 
     <h1>Add Entry</h1>
 	<form action="tools/insertEntry.php" method="post">
