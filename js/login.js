@@ -14,8 +14,10 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
             document.getElementById("error-msg").innerText = "Invalid username/email or password";
          } else {
             window.location.href = "../php/home.php";
+            
          }
       }
    };
    xhr.send("username=" + username + "&password=" + password);
+   
 });

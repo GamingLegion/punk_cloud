@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sign Up</title>
-<link rel="stylesheet" href="../css/login.css">
+<link rel="stylesheet" href="../css/loginPage.css">
 </head>
 <body>
    <img src="../images/icons/vegapunk.png" alt="Vegapunk" style="position: fixed; width: 15%; margin: 100px 0px 0px 150px">
