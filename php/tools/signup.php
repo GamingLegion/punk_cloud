@@ -1,11 +1,11 @@
 <?php
-$connect = mysqli_connect( 'localhost', 'root', 'theallseeingeyes', 'punkcloud' );
+$connect = mysqli_connect( 'localhost', 'root', 'theallseeingeyes', 'punkcloud_users' );
 
 $email = $_POST[ 'email' ];
 $username = $_POST[ 'username' ];
 $password = $_POST[ 'password' ];
 
-$result = mysqli_query( $connect, 'Select username, email FROM users' );
+$result = mysqli_query( $connect, 'Select username, email FROM userlist' );
 
 $check = true;
 while ( $record = mysqli_fetch_assoc( $result ) ) {
@@ -18,7 +18,7 @@ while ( $record = mysqli_fetch_assoc( $result ) ) {
    }
 }
 if ( $check ) {
-   mysqli_query( $connect, "INSERT INTO users(id, username, email, password) VALUES ('NULL', '$username', '$email', '$password');" );
+   mysqli_query( $connect, "INSERT INTO userlist(id, username, email, password) VALUES ('NULL', '$username', '$email', '$password');" );
 }
 
 ?>

@@ -1,10 +1,10 @@
 <?php
-$connect = mysqli_connect( 'localhost', 'root', 'theallseeingeyes', 'punkcloud' );
+$connect = mysqli_connect( 'localhost', 'root', 'theallseeingeyes', 'punkcloud_users' );
 
 $username = $_POST[ 'username' ];
 $password = $_POST[ 'password' ];
 
-$result = mysqli_query( $connect, 'Select username, email, password FROM users' );
+$result = mysqli_query( $connect, 'Select username, email, password FROM userlist' );
 
 $check = true;
 while ( $record = mysqli_fetch_assoc( $result ) ) {
