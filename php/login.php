@@ -9,14 +9,14 @@
 <body>
    <img src="../images/icons/vegapunk.png" alt="Vegapunk" style="position: fixed; width: 15%; margin: 100px 0px 0px 150px">
 <div class="container">
-   <h2>Login</h2>
+   <h2 style="color: white;">Login</h2>
    <form id="loginForm" action="tools/login.php" method="post">
       <div class="form-group">
-         <label for="username">User/Email:</label>
+         <label for="username" style="color: white;">User/Email:</label>
          <input type="text" id="username" name="username" required>
       </div>
       <div class="form-group">
-         <label for="password">Password:</label>
+         <label for="password" style="color: white;">Password:</label>
          <input type="password" id="password" name="password" required>
       </div>
       <div class="form-group">
