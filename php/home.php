@@ -18,19 +18,7 @@
       <div class="userOpts">
       <a href="addEntry.php"> <img src="../images/icons/addEntry_icon.png" alt="PunkCloud Logo" class="addEntryBtn"> </a>
       <a href="login.php"> <img src="../images/icons/login_icon.png" alt="Login" class="loginBtn"> </a>
-         <script>
-         // Assume account information is received via AJAX request
-         // Replace 'login.php' with the actual path to your login PHP file
-         fetch('tools/login.php')
-             .then(response => response.json())
-             .then(accountInfo => {
-                 // Modify the HTML based on the received account information
-                 document.getElementByClass("loginBtn").src = "../images/icons/test.png";
-             })
-             .catch(error => {
-                 console.error('Error fetching account information:', error);
-             });
-         </script>
+         
       </div>
    </div>
 
