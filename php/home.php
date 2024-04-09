@@ -1,16 +1,25 @@
 <!doctype html>
-<html lang="en">
+<html style="background-color: #222425">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PunkCloud Home</title>
 <link rel="stylesheet" type="text/css" href="../css/home.css">
+<link rel="stylesheet" type="text/css" href="../css/header.css">
 <link rel="stylesheet" type="text/css" href="../css/card.css">
 </head>
 <body>
-<a href="home.php">  <img src="../images/icons/logo.png" alt="PunkCloud Logo" width="auto" height="auto"> </a>
-<a href="addEntry.php"> <button>Insert Entry</button> </a>
-<a href="login.php"> <img src="../images/icons/login_icon.png" alt="Login" width="50px" height="50px"> </a>
+   <div class="headerBar">
+      <div class="searchCats">
+<a href="home.php"> <img src="../images/icons/logo.png" alt="PunkCloud Logo" class="homeBtn"> </a>
+      </div>
+      <div class="searchBar">
+      </div>
+      <div class="userOpts">
+<a href="addEntry.php"> <img src="../images/icons/addEntry_icon.png" alt="PunkCloud Logo" class="addEntryBtn"> </a>
+<a href="login.php"> <img src="../images/icons/login_icon.png" alt="Login" class="loginBtn"> </a>
+      </div>
+   </div>
 
 <h1>Recently Added to the PunkCloud</h1>
 <div class="new_added">

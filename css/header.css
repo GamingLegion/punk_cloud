@@ -1,0 +1,13 @@
+/* CSS Document */
+.headerBar {
+   display: flex;
+   justify-content: space-between;
+   background-color: #9C89B8;
+   width: auto;
+   height: 75px;
+}
+.headerBar img {
+   position: static;
+   height: 55px;
+   margin: 10px;
+}
