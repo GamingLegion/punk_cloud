@@ -11,14 +11,13 @@
 <body>
    <div class="headerBar">
       <div class="searchCats">
-<a href="home.php"> <img src="../images/icons/logo.png" alt="PunkCloud Logo" class="homeBtn"> </a>
+         <a href="home.php"> <img src="../images/icons/logo.png" alt="PunkCloud Logo" class="homeBtn"> </a>
       </div>
       <div class="searchBar">
       </div>
       <div class="userOpts">
       <a href="addEntry.php"> <img src="../images/icons/addEntry_icon.png" alt="PunkCloud Logo" class="addEntryBtn"> </a>
       <a href="login.php"> <img src="../images/icons/login_icon.png" alt="Login" class="loginBtn"> </a>
-         
       </div>
    </div>
 
@@ -26,7 +25,7 @@
 <div class="new_added">
    <?php
    $connect = mysqli_connect( 'localhost', 'root', 'theallseeingeyes', 'punkcloud' );
-   $result = mysqli_query( $connect, 'Select id, upd_date, eng_name, rom_name, image FROM anime_shows ORDER BY ins_date DESC' );
+   $result = mysqli_query( $connect, 'Select eng_name, rom_name, image FROM anime_shows ORDER BY ins_date DESC' );
 
    while ( $record = mysqli_fetch_assoc( $result ) ) {
       echo '<div class="card" id="card">';
@@ -47,7 +46,7 @@
 <div class="new_added">
    <?php
    $connect = mysqli_connect( 'localhost', 'root', 'theallseeingeyes', 'punkcloud' );
-   $result = mysqli_query( $connect, 'Select id, upd_date, eng_name, rom_name, image FROM anime_shows ORDER BY upd_date DESC' );
+   $result = mysqli_query( $connect, 'Select eng_name, rom_name, image FROM anime_shows ORDER BY upd_date DESC' );
 
    while ( $record = mysqli_fetch_assoc( $result ) ) {
       echo '<div class="card" id="card">';

@@ -8,6 +8,10 @@ $password = $_POST[ 'password' ];
 $result = mysqli_query( $connect, 'Select username, email FROM userlist' );
 
 $check = true;
+if(!preg_match("/([\w\-]+\@[\w\-]+\.[\w\-]+)/", $email)) {
+   echo "invalMail";
+   $check = false;
+}
 while ( $record = mysqli_fetch_assoc( $result ) ) {
    if ( $username === $record[ 'email' ] ) {
       echo "mailFail";

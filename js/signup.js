@@ -15,6 +15,8 @@ document.getElementById("signupForm").addEventListener("submit", function (event
             document.getElementById("error-msg").innerText = "Username is already taken";
          } else if (response === "mailFail") {
             document.getElementById("error-msg").innerText = "Email is already in use";
+         } else if (response === "invalMail") {
+            document.getElementById("error-msg").innerText = "That is not a valid email";
          } else {
             window.location.href = "../php/home.php";
          }

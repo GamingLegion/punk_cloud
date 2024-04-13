@@ -20,11 +20,5 @@ if ( isset( $_POST[ 'submit' ] ) ) {
 
   mysqli_query( $connect, "INSERT INTO anime_shows(id, ins_date, upd_date, eng_name, rom_name, image, status, epi_num, start_date, end_date, air_season, demographic)
 	VALUES ('NULL', '$ins_date', '$ins_date', '$eng_name', '$rom_name', '$image', '$status', '$epi_num', '$start_date', '$end_date', '$air_season', '$demographic');");
-  if ( $start_date === "0000-00-00" ) {
-    mysqli_query( $connect, "UPDATE anime_shows SET start_date = NULL WHERE eng_name = '$eng_name';");
-  }
-  if ( $end_date === "0000-00-00" ) {
-    mysqli_query( $connect, "UPDATE anime_shows SET end_date = NULL WHERE eng_name = '$eng_name';");
-  }
 }
 ?>
