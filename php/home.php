@@ -9,10 +9,6 @@
 <link rel="stylesheet" type="text/css" href="../css/card.css">
 </head>
 <body>
-<?php
-session_start();
-   print_r($_SESSION);
-?>
 <div class="headerBar">
    <div class="searchCats"> <a href="home.php"> <img src="../images/icons/logo.png" alt="PunkCloud Logo" class="homeBtn"> </a> </div>
    <div class="searchBar"> </div>
