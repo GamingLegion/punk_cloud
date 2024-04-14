@@ -11,22 +11,26 @@
    display: flex;
    flex-direction: column;
 }
-.anime-header,
-.anime-body {
+.anime-header, .anime-body {
    display: flex;
    align-items: flex-start;
 }
 .anime-image {
-   width: 225px;
+   width: 350px;
    height: auto;
    border-radius: 4px;
    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
-.anime-names {
+.anime-image img {
    width: 100%;
 }
+.anime-names {
+   width: 100%;
+   overflow: hidden;
+}
 .anime-name {
-   margin-left: 20px;
+   white-space: nowrap;
+   margin: 0 0 3px 20px;
    padding: 10px;
    border-radius: 20px;
    background-color: #9C89B8;
@@ -52,7 +56,6 @@
    display: flex;
    margin-bottom: 10px;
 }
-
 .info_line p {
    display: inline-block;
    padding: 0 50px 0 0;
