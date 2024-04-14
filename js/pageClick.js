@@ -1,12 +1,12 @@
 // JavaScript Document
 
-var divs = document.querySelectorAll(".card");
+var divs = document.querySelectorAll(".aniCard");
 
 // Loop through each div and attach a click event listener
 divs.forEach(function(div) {
     div.addEventListener("click", function() {
 		var name = this.querySelector("p").innerText;
-		var link = "http://localhost/PunkCloud/php/entryPage.php?link=" + name;
+		var link = "http://localhost/PunkCloud/php/animePage.php?link=" + name;
 
         window.location.href = link; // Redirect to the specified URL
     });

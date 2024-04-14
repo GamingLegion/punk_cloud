@@ -1,11 +1,11 @@
 /* CSS Document */
-.card {
+#card {
   position: static;
-  border: 1px solid #ccc; /* Optional: Add border for the card */
+  border: 1px solid #ccc;
   margin: 0px 10px;
 }
-.card img {
-  position: static; /* Ensure stacking context */
+#card img {
+  position: static;
   display: inline-block;
   width: auto;
   height: 250px;
