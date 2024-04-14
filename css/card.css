@@ -1,17 +1,24 @@
 /* CSS Document */
 #card {
-  position: static;
-  border: 1px solid #ccc;
-  margin: 0px 10px;
+   position: static;
+   display: inline-block;
+   border: 2px solid #ccc;
+   margin: 7px 9px;
+   width: 185px;
+   height: 310px;
 }
 #card img {
-  position: static;
-  display: inline-block;
-  width: auto;
-  height: 250px;
-  overflow: hidden;
+   display: flex;
+   width: 185px;
+   overflow-y: hidden;
 }
-.text {
-  text-align: center;
-  color: white;
+#thumbnail {
+   height: 260px;
+   overflow-y: hidden;
+   margin-bottom: 10px;
+}
+.title {
+   text-align: center;
+   color: white;
+   margin-top: 10px;
 }

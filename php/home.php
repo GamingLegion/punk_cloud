@@ -6,14 +6,13 @@
 <title>PunkCloud Home</title>
 <link rel="stylesheet" type="text/css" href="../css/home.css">
 <link rel="stylesheet" type="text/css" href="../css/card.css">
-   
 <?php
 $IPATH = $_SERVER[ "DOCUMENT_ROOT" ] . "/PunkCloud/php/components/";
 include( $IPATH . "header.html" );
 ?>
 </head>
 <body>
-<h1>Recently Added to the PunkCloud</h1>
+<h1>Recently Added</h1>
 <div class="new_added">
    <?php
    $connect = mysqli_connect( 'localhost', 'root', 'theallseeingeyes', 'punkcloud' );
@@ -21,8 +20,10 @@ include( $IPATH . "header.html" );
 
    while ( $record = mysqli_fetch_assoc( $result ) ) {
       echo '<div class="aniCard" id="card">';
-      echo '<img src="../images/anime/' . $record[ 'image' ] . '" alt="' . $record[ 'eng_name' ] . '" width="auto" height="auto">';
-      echo '<div class="text">';
+      echo '<div id="thumbnail">';
+      echo '<img src="../images/anime/' . $record[ 'image' ] . '" alt="' . $record[ 'eng_name' ] . '">';
+      echo '</div>';
+      echo '<div class="title">';
       if ( $record[ 'eng_name' ] != NULL ) {
          echo '<p>' . $record[ 'eng_name' ] . '</p>';
       } else {
@@ -34,7 +35,7 @@ include( $IPATH . "header.html" );
    ?>
    <script src="../js/pageClick.js"></script> 
 </div>
-<h1>Recently Updated in the PunkCloud</h1>
+<h1>Recently Updated</h1>
 <div class="new_added">
    <?php
    $connect = mysqli_connect( 'localhost', 'root', 'theallseeingeyes', 'punkcloud' );
@@ -42,8 +43,10 @@ include( $IPATH . "header.html" );
 
    while ( $record = mysqli_fetch_assoc( $result ) ) {
       echo '<div class="aniCard" id="card">';
-      echo '<img src="../images/anime/' . $record[ 'image' ] . '" alt="' . $record[ 'eng_name' ] . '" width="auto" height="auto">';
-      echo '<div class="text">';
+      echo '<div id="thumbnail">';
+      echo '<img src="../images/anime/' . $record[ 'image' ] . '" alt="' . $record[ 'eng_name' ] . '">';
+      echo '</div>';
+      echo '<div class="title">';
       if ( $record[ 'eng_name' ] != NULL ) {
          echo '<p>' . $record[ 'eng_name' ] . '</p>';
       } else {
