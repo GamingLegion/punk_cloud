@@ -4,6 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Entry Page</title>
+   
+<?php
+$IPATH = $_SERVER[ "DOCUMENT_ROOT" ] . "/PunkCloud/php/components/";
+include( $IPATH . "header.html" );
+?>
 </head>
 <body>
 <?php
