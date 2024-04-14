@@ -24,19 +24,6 @@ include( $IPATH . "header.html" );
          <input type="text" name="rom_name" required>
       </div>
       <div class="form-group">
-         <label>Entry Type: </label>
-         <select name="entry_type" required>
-            <option></option>
-            <option value="usa_la_shows">American Live-Action Show</option>
-            <option value="usa_la_movies">American Live-Action Movie</option>
-            <option value="usa_cartoon_shows">American Cartoon Show</option>
-            <option value="usa_cartoon_movies">American Cartoon Movie</option>
-            <option value="anime_shows">Anime Show</option>
-            <option value="anime_movies">Anime Movie</option>
-            <option value="anime_onas">Anime ONA</option>
-         </select>
-      </div>
-      <div class="form-group">
          <label>Series Image: </label>
          <input type="file" name="image">
       </div>
