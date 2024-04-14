@@ -24,9 +24,9 @@ include( $IPATH . "header.html" );
       echo '<img src="../images/anime/' . $record[ 'image' ] . '" alt="' . $record[ 'eng_name' ] . '">';
       echo '<div class="title">';
       if ( $record[ 'eng_name' ] != NULL ) {
-         echo '<p>' . $record[ 'eng_name' ] . '</p>';
+         echo '<p title="'.$record[ 'rom_name' ].'">' . $record[ 'eng_name' ] . '</p>';
       } else {
-         echo '<p>' . $record[ 'rom_name' ] . '</p>';
+         echo '<p title="'.$record[ 'rom_name' ].'">' . $record[ 'rom_name' ] . '</p>';
       }
       echo '</div>';
       echo '</div>';
