@@ -1,0 +1,67 @@
+/* CSS Document */
+.container {
+   max-width: 1200px;
+   margin: 20px auto;
+   background-color: #434748;
+   border-radius: 8px;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.anime-details {
+   padding: 20px;
+   display: flex;
+   flex-direction: column;
+}
+.anime-header,
+.anime-body {
+   display: flex;
+   align-items: flex-start;
+}
+.anime-image {
+   width: 225px;
+   height: auto;
+   border-radius: 4px;
+   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+.anime-names {
+   width: 100%;
+}
+.anime-name {
+   margin-left: 20px;
+   padding: 10px;
+   border-radius: 20px;
+   background-color: #9C89B8;
+   border: 2px solid #BBAECE;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+}
+.anime-name p {
+   margin: 0;
+   font-size: 24px;
+   font-weight: bold;
+}
+.anime-description {
+   padding: 10px;
+   border-radius: 20px;
+   background-color: #9C89B8;
+   border: 2px solid #BBAECE;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+   margin-top: 20px;
+   width: 30%; /* Adjust the width as needed */
+   margin-right: 20px; /* Add margin to separate from the collapsible */
+}
+.info-line {
+   display: flex;
+   margin-bottom: 10px;
+}
+
+.info_line p {
+   display: inline-block;
+   padding: 0 50px 0 0;
+}
+.info-line p:first-child {
+   margin-right: 10px;
+   font-weight: bold;
+}
+.info_line button {
+   display: inline-block;
+   margin-right: 5px;
+}

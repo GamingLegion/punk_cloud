@@ -1,0 +1,84 @@
+/* CSS Document */
+.seasons {
+   display: block;
+   width: 70%; /* Adjust the width as needed */
+}
+.collapsible {
+   margin: 5px 0;
+}
+.collapsible-btn {
+   width: 100%;
+   background-color: #9C89B8;
+   border: none;
+   padding: 10px 20px;
+   font-size: 30px;
+   cursor: pointer;
+   outline: none;
+   border-radius: 25px; /* Adjust the border-radius to create a bubble effect */
+   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+   transition: all 0.3s ease; /* Add a smooth transition effect */
+}
+.collapsible-btn:hover {
+   background-color: #51406B; /* Darker shade on hover */
+}
+.episode-section {
+   display: none;
+}
+.episode-section .episode {
+   opacity: 1;
+   transition: opacity 0.5s ease;
+}
+.episode-section .episode.hidden {
+   opacity: 0;
+   pointer-events: none; /* Ensure no interaction when hidden */
+}
+.episode {
+   display: flex;
+   align-items: center; /* Align items vertically */
+   width: 100%; /* Adjust width based on the number of episodes per row */
+   background-color: #353839;
+   border-radius: 8px;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+   overflow: hidden;
+   margin: 5px 0;
+}
+.episode-thumbnail {
+   width: 120px;
+   flex-shrink: 0;
+}
+.episode-thumbnail img {
+   width: 100%;
+   height: auto;
+   border-top-left-radius: 8px;
+   border-bottom-left-radius: 8px;
+}
+.episode-details {
+   padding: 15px;
+   flex-grow: 1; /* Allow the episode details to grow to fill the remaining space */
+}
+.episode-info {
+   display: flex;
+   align-items: center; /* Align items vertically */
+   justify-content: space-between; /* Align items at the beginning and end */
+}
+.episode-title {
+   margin: 0; /* Reset margin */
+}
+.checkbox-btn {
+   width: 35px;
+   height: 35px;
+   border-radius: 50%;
+   border: 2px solid #000;
+   cursor: pointer;
+}
+.checkbox-btn::after {
+   content: "";
+   display: block;
+   background-color: transparent;
+   border-radius: 50%;
+   margin: 3px; /* Adjust the spacing inside the button */
+   transition: background-color 0.3s ease;
+}
+.checkbox-btn.checked::after {
+   background-color: #000;
+}
