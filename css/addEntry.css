@@ -1,0 +1,54 @@
+/* CSS Document */
+.container {
+   max-width: 500px;
+   margin: 50px auto;
+   padding: 20px;
+   border: 1px solid #ccc;
+   border-radius: 5px;
+}
+.form-group {
+   margin-bottom: 20px;
+}
+h1 {
+   color: white;
+}
+label {
+   display: inline-block;
+   min-width: 125px;
+   text-align: left;
+   color: white;
+}
+input[type="text"], input[type="password"] {
+   width: 250px;
+   padding: 10px;
+   border-radius: 5px;
+   border: 1px solid #ccc;
+   overflow-y: auto;
+   resize: vertical;
+}
+input[type="number"] {
+   width: 60px;
+   padding: 5px;
+   border-radius: 5px;
+   border: 1px solid #ccc;
+}
+#text2 {
+   width: 125px;
+   padding: 5px;
+   border-radius: 5px;
+   border: 1px solid #ccc;
+}
+button {
+   padding: 10px 20px;
+   background-color: #007bff;
+   color: #fff;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+}
+button:hover {
+   background-color: #0056b3;
+}
+#error-msg {
+   color: red;
+}
