@@ -5,15 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PunkCloud Home</title>
 <link rel="stylesheet" type="text/css" href="../css/home.css">
-<link rel="stylesheet" type="text/css" href="../css/header.css">
 <link rel="stylesheet" type="text/css" href="../css/card.css">
+   
+<?php
+$IPATH = $_SERVER[ "DOCUMENT_ROOT" ] . "/PunkCloud/php/components/";
+include( $IPATH . "header.html" );
+?>
 </head>
 <body>
-<div class="headerBar">
-   <div class="searchCats"> <a href="home.php"> <img src="../images/icons/logo.png" alt="PunkCloud Logo" class="homeBtn"> </a> </div>
-   <div class="searchBar"> </div>
-   <div class="userOpts"> <a href="addEntry.php"> <img src="../images/icons/addEntry_icon.png" alt="PunkCloud Logo" class="addEntryBtn"> </a> <a href="login.php"> <img src="../images/icons/login_icon.png" alt="Login" class="loginBtn"> </a> </div>
-</div>
 <h1>Recently Added to the PunkCloud</h1>
 <div class="new_added">
    <?php
@@ -21,7 +20,7 @@
    $result = mysqli_query( $connect, 'Select eng_name, rom_name, image FROM anime_shows ORDER BY ins_date DESC' );
 
    while ( $record = mysqli_fetch_assoc( $result ) ) {
-      echo '<div class="card" id="card">';
+      echo '<div class="aniCard" id="card">';
       echo '<img src="../images/anime/' . $record[ 'image' ] . '" alt="' . $record[ 'eng_name' ] . '" width="auto" height="auto">';
       echo '<div class="text">';
       if ( $record[ 'eng_name' ] != NULL ) {
@@ -42,7 +41,7 @@
    $result = mysqli_query( $connect, 'Select eng_name, rom_name, image FROM anime_shows ORDER BY upd_date DESC' );
 
    while ( $record = mysqli_fetch_assoc( $result ) ) {
-      echo '<div class="card" id="card">';
+      echo '<div class="aniCard" id="card">';
       echo '<img src="../images/anime/' . $record[ 'image' ] . '" alt="' . $record[ 'eng_name' ] . '" width="auto" height="auto">';
       echo '<div class="text">';
       if ( $record[ 'eng_name' ] != NULL ) {
