@@ -43,6 +43,7 @@ include( $IPATH . "header.html" );
             }
             mysqli_close( $connect );
             ?>
+         <script src="../js/titleOverflow.js"></script>
          </div>
       </div>
       <div class="anime-body">
