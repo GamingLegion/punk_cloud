@@ -22,13 +22,13 @@ include( $IPATH . "header.html" );
       echo '<div class="aniCard" id="card">';
       echo '<div id="thumbnail">';
       echo '<img src="../images/anime/' . $record[ 'image' ] . '" alt="' . $record[ 'eng_name' ] . '">';
-      echo '</div>';
       echo '<div class="title">';
       if ( $record[ 'eng_name' ] != NULL ) {
          echo '<p>' . $record[ 'eng_name' ] . '</p>';
       } else {
          echo '<p>' . $record[ 'rom_name' ] . '</p>';
       }
+      echo '</div>';
       echo '</div>';
       echo '</div>';
    }
@@ -45,13 +45,13 @@ include( $IPATH . "header.html" );
       echo '<div class="aniCard" id="card">';
       echo '<div id="thumbnail">';
       echo '<img src="../images/anime/' . $record[ 'image' ] . '" alt="' . $record[ 'eng_name' ] . '">';
-      echo '</div>';
       echo '<div class="title">';
       if ( $record[ 'eng_name' ] != NULL ) {
          echo '<p>' . $record[ 'eng_name' ] . '</p>';
       } else {
          echo '<p>' . $record[ 'rom_name' ] . '</p>';
       }
+      echo '</div>';
       echo '</div>';
       echo '</div>';
    }

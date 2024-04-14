@@ -1,24 +1,39 @@
 /* CSS Document */
 #card {
-   position: static;
+   position: relative;
    display: inline-block;
    border: 2px solid #ccc;
    margin: 7px 9px;
-   width: 185px;
-   height: 310px;
-}
-#card img {
-   display: flex;
-   width: 185px;
-   overflow-y: hidden;
+   width: 200px;
+   height: 280px;
+   overflow: hidden;
 }
 #thumbnail {
-   height: 260px;
-   overflow-y: hidden;
-   margin-bottom: 10px;
+   position: relative;
+   height: 280px;
+   overflow: hidden;
+}
+#thumbnail img {
+   width: 100%;
 }
 .title {
-   text-align: center;
+   position: absolute;
+   bottom: 0;
+   left: 0;
+   width: 100%;
+   height: auto;
+   background-color: rgba(0, 0, 0, 0.75);
    color: white;
-   margin-top: 10px;
+   padding: 10px;
+   box-sizing: border-box;
+   opacity: 0;
+   transition: opacity 0.3s;
+}
+#card:hover,
+#card:hover .title {
+   opacity: 1;
+   cursor: pointer;
+}
+.title p {
+   margin: 0;
 }
