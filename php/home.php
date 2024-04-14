@@ -9,18 +9,15 @@
 <link rel="stylesheet" type="text/css" href="../css/card.css">
 </head>
 <body>
-   <div class="headerBar">
-      <div class="searchCats">
-         <a href="home.php"> <img src="../images/icons/logo.png" alt="PunkCloud Logo" class="homeBtn"> </a>
-      </div>
-      <div class="searchBar">
-      </div>
-      <div class="userOpts">
-      <a href="addEntry.php"> <img src="../images/icons/addEntry_icon.png" alt="PunkCloud Logo" class="addEntryBtn"> </a>
-      <a href="login.php"> <img src="../images/icons/login_icon.png" alt="Login" class="loginBtn"> </a>
-      </div>
-   </div>
-
+<?php
+session_start();
+   print_r($_SESSION);
+?>
+<div class="headerBar">
+   <div class="searchCats"> <a href="home.php"> <img src="../images/icons/logo.png" alt="PunkCloud Logo" class="homeBtn"> </a> </div>
+   <div class="searchBar"> </div>
+   <div class="userOpts"> <a href="addEntry.php"> <img src="../images/icons/addEntry_icon.png" alt="PunkCloud Logo" class="addEntryBtn"> </a> <a href="login.php"> <img src="../images/icons/login_icon.png" alt="Login" class="loginBtn"> </a> </div>
+</div>
 <h1>Recently Added to the PunkCloud</h1>
 <div class="new_added">
    <?php

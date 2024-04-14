@@ -5,7 +5,7 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
    var password = document.getElementById("password").value;
 
    var xhr = new XMLHttpRequest();
-   xhr.open("POST", "/php/tools/login.php", true);
+   xhr.open("POST", "../php/tools/login.php", true);
    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
    xhr.onreadystatechange = function () {
       if (xhr.readyState == 4 && xhr.status == 200) {
