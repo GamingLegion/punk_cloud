@@ -16,12 +16,12 @@ include( $IPATH . "header.html" );
    <h1>Add Entry</h1>
    <form action="tools/insertEntry.php" method="post" id="form">
       <div class="form-group">
-         <label>English Name: </label>
-         <input type="text" name="eng_name">
-      </div>
-      <div class="form-group">
          <label>Romanized Name: </label>
          <input type="text" name="rom_name" required>
+      </div>
+      <div class="form-group">
+         <label>English Name: </label>
+         <input type="text" name="eng_name">
       </div>
       <div class="form-group">
          <label>Series Image: </label>
