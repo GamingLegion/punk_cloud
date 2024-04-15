@@ -1,23 +1,17 @@
 <?php
-$connect = mysqli_connect( 'localhost', 'root', 'theallseeingeyes', 'punkcloud_users' );
+$connect = mysqli_connect( 'localhost', 'root', 'theallseeingeyes', 'punkcloud' );
+$result = mysqli_query( $connect, 'SELECT username, email, password FROM users' );
 
 $username = $_POST[ 'username' ];
 $password = $_POST[ 'password' ];
 
-$result = mysqli_query( $connect, 'Select id, username, email, password, user_icon FROM userlist' );
-
-$check = true;
 while ( $record = mysqli_fetch_assoc( $result ) ) {
    if ( ( $username === $record[ 'username' ] || $username === $record[ 'email' ] ) && $password === $record[ 'password' ] ) {
-      $_SESSION[ 'userid' ] = $record[ 'id' ];
-
-      echo "success";
-      $check = false;
-
+      $_SESSION[ 'user' ] = $record[ 'username' ];
+      echo $_SESSION[ 'user' ];
    }
 }
-if ( $check ) {
-   echo "fail";
-}
 
+mysqli_close( $connect );
+//header( "Location: http://localhost/PunkCloud/php/home.php" );
 ?>

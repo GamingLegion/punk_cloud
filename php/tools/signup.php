@@ -1,11 +1,11 @@
 <?php
-$connect = mysqli_connect( 'localhost', 'root', 'theallseeingeyes', 'punkcloud_users' );
+$connect = mysqli_connect( 'localhost', 'root', 'theallseeingeyes', 'punkcloud' );
 
 $email = $_POST[ 'email' ];
 $username = $_POST[ 'username' ];
 $password = $_POST[ 'password' ];
 
-$result = mysqli_query( $connect, 'Select username, email FROM userlist' );
+$result = mysqli_query( $connect, 'Select username, email FROM user' );
 
 $check = true;
 if(!preg_match("/([\w\-]+\@[\w\-]+\.[\w\-]+)/", $email)) {
@@ -22,7 +22,9 @@ while ( $record = mysqli_fetch_assoc( $result ) ) {
    }
 }
 if ( $check ) {
-   mysqli_query( $connect, "INSERT INTO userlist(id, username, email, password) VALUES ('NULL', '$username', '$email', '$password');" );
+   date_default_timezone_set( 'America/New_York' );
+   $ins_date = date( "Y-m-d H:i:s" );
+   mysqli_query( $connect, "INSERT INTO user(id, ins_date, username, email, password) VALUES ('NULL', '$ins_date', $username', '$email', '$password');" );
 }
 
 ?>

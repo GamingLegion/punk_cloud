@@ -1,45 +1,37 @@
 /* CSS Document */
-
 .container {
-    max-width: 400px;
-    margin: 50px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    text-align: center;
+   max-width: 400px;
+   margin: 50px auto;
+   padding: 20px;
+   border: 1px solid #ccc;
+   border-radius: 5px;
+   text-align: center;
 }
-
 .form-group {
-    margin-bottom: 20px;
+   margin-bottom: 20px;
 }
-
 label {
-    display: inline-block;
-    width: 100px;
-    text-align: left;
+   display: inline-block;
+   width: 100px;
+   text-align: left;
 }
-
-input[type="text"],
-input[type="password"] {
-    width: 250px;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+input[type="text"], input[type="password"] {
+   width: 250px;
+   padding: 10px;
+   border-radius: 5px;
+   border: 1px solid #ccc;
 }
-
 button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+   padding: 10px 20px;
+   background-color: #007bff;
+   color: #fff;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
 }
-
 button:hover {
-    background-color: #0056b3;
+   background-color: #0056b3;
 }
-
 #error-msg {
-    color: red;
+   color: red;
 }
