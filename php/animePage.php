@@ -23,7 +23,7 @@ include( $IPATH . "header.php" );
             $result = mysqli_query( $connect, "SELECT image FROM anime_shows WHERE rom_name='" . $name . "'" );
             $record = mysqli_fetch_assoc( $result );
 
-            echo '<img src="../images/anime/' . $record[ 'image' ] . '" id="image">';
+            echo '<img src="../images/arts/anime/' . $record[ 'image' ] . '" id="image">';
             mysqli_close( $connect );
             ?>
          </div>
@@ -64,7 +64,7 @@ include( $IPATH . "header.php" );
                   echo '<div id="collapsible">';
                   echo '<div class="anime-description">';
 
-                  echo '<img src="../images/anime/' . $record[ 'image' ] . '" id="image" style="margin: 0 15%;">';
+                  echo '<img src="../images/arts/anime/' . $record[ 'image' ] . '" id="image">';
                   echo '<div class="info_line">';
                   echo '<a><strong>Start Date:</strong></a>';
                   if ( $record[ 'start_date' ] !== NULL ) {
@@ -123,7 +123,11 @@ include( $IPATH . "header.php" );
                   for ( $i = 1; $i <= $record[ 'epi_num' ]; $i++ ) {
                      $record2 = mysqli_fetch_assoc( $result2 );
                      echo '<div class="episode hidden">';
-                     echo '<div class="episode-thumbnail"> <img src="episode' . $i . '.jpg" alt="Episode ' . $i . '"> </div>';
+                     echo '<div class="episode-thumbnail">';
+                     $ei = $record[ 'image' ];
+                     $ei = substr( $ei, 0, strlen( $ei ) - 4 );
+                     echo '<img src="../images/episodes/anime/' . $ei . '/' . $i . '.jpg" alt="Episode ' . $i . '">';
+                     echo '</div>';
                      echo '<div class="episode-details">';
                      echo '<div class="episode-info">';
                      $epi_name = '';
