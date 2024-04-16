@@ -17,7 +17,7 @@
             echo '<a href="addEntry.php"><img src="../images/icons/addEntry_icon.png" alt="PunkCloud Logo" class="addEntryBtn"></a>';
          }
       
-         $result = mysqli_query( $connect, "Select id, icon FROM users WHERE username = '" . $_SESSION[ 'user' ] . "' " );
+         $result = mysqli_query( $connect, "Select icon FROM users WHERE username = '" . $_SESSION[ 'user' ] . "' " );
          $record = mysqli_fetch_assoc( $result );
          echo '<a href="userPage.php"><img src="../images/users/' . $record[ 'icon' ] . '" alt="User" class="loginBtn"></a>';
       } else {
