@@ -13,8 +13,11 @@ include( $IPATH . "header.php" );
 </head>
 <body>
 <div class="container">
-   <button id="signout">Sign Out</button>
+   <form action="tools/signout.php" method="post">
+      <div class="form-group">
+         <button type="signout">Sign Out</button>
+      </div>
+   </form>
 </div>
-<script src="../js/signout.js"></script>
 </body>
 </html>
