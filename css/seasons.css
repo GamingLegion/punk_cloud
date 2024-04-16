@@ -107,15 +107,12 @@
    border-radius: 50%;
    border: 2px solid #000;
    cursor: pointer;
+   background-repeat: no-repeat;
+   background-position: center;
 }
-.checkbox-btn::after {
-   content: "";
-   display: block;
-   background-color: transparent;
-   border-radius: 50%;
-   margin: 3px;
-   transition: background-color 0.3s ease;
+.checkbox-btn.unchecked {
+   background-image: url("../images/icons/unchecked.png");
 }
-.checkbox-btn.checked::after {
-   background-color: #000;
+.checkbox-btn.checked {
+   background-image: url("../images/icons/checked.png");
 }
