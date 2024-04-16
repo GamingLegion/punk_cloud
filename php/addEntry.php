@@ -24,8 +24,20 @@ include( $IPATH . "header.html" );
          <input type="text" name="eng_name">
       </div>
       <div class="form-group">
-         <label>Series Image: </label>
+         <label>Anime Image: </label>
          <input type="file" name="image">
+      </div>
+      <div class="form-group">
+         <label>Number of Episodes: </label>
+         <input type="number" name="epis">
+      </div>
+      <div class="form-group">
+         <label>Series Name: </label>
+         <input type="text" name="series" required>
+      </div>
+      <div class="form-group">
+         <label>Season/Arc: </label>
+         <input type="text" name="season" required>
       </div>
       <br>
       <button type="submit" name="submit">Submit</button>
