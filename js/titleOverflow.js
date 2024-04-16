@@ -14,10 +14,9 @@ function adjustFontSize(div) {
 
    if (textWidth > containerWidth) {
       var fontSize = parseInt(window.getComputedStyle(name).fontSize);
-      fontSize -= 1; // Reduce font size by 1px
+      fontSize -= 1;
       name.style.fontSize = fontSize + "px";
 
-      // Recursive call until text fits
       adjustFontSize(div);
    }
 }
