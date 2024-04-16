@@ -35,6 +35,10 @@
    width: 45%;
    margin: 20px 20px auto 0;
 }
+.anime-description img {
+   display: flex;
+   margin: 0 auto;
+}
 .info-line {
    display: inline-flex;
 }
