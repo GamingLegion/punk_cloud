@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css" href="../css/addEntry.css">
 <title>Add Entry</title>
-
 <?php
+session_start();
 $IPATH = $_SERVER[ "DOCUMENT_ROOT" ] . "/PunkCloud/php/components/";
 include( $IPATH . "header.html" );
 ?>

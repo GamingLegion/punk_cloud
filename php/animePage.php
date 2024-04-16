@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css" href="../css/animePage.css">
 <link rel="stylesheet" type="text/css" href="../css/seasons.css">
+<title>Anime Page</title>
 <?php
-//print_r($_SESSION['user']);
+session_start();
 $IPATH = $_SERVER[ "DOCUMENT_ROOT" ] . "/PunkCloud/php/components/";
 include( $IPATH . "header.html" );
 ?>
-<title>Anime Page</title>
 </head>
 <body>
 <div class="container">
@@ -145,18 +145,18 @@ include( $IPATH . "header.html" );
 
                      $query = "SELECT epi_num 
                        FROM $user
-                       WHERE anime_name = '".$record[ 'rom_name' ]."' 
-                       AND anime_season = '".$record[ 'season' ]."'";
-                     $result3 = mysqli_query( $connect3, $query);
+                       WHERE anime_name = '" . $record[ 'rom_name' ] . "' 
+                       AND anime_season = '" . $record[ 'season' ] . "'";
+                     $result3 = mysqli_query( $connect3, $query );
                      $check = false;
-                     while($record3 = mysqli_fetch_assoc( $result3 )) {
-                        if ( $record3['epi_num'] == $i ) {
+                     while ( $record3 = mysqli_fetch_assoc( $result3 ) ) {
+                        if ( $record3[ 'epi_num' ] == $i ) {
                            echo '<button class="checkbox-btn checked"></button>';
                            $check = true;
                         }
                      }
-                     if(!$check) {
-                           echo '<button class="checkbox-btn unchecked"></button>';
+                     if ( !$check ) {
+                        echo '<button class="checkbox-btn unchecked"></button>';
                      }
                      echo '</div>';
                      echo '</div>';
