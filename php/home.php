@@ -9,7 +9,7 @@
 <?php
 session_start();   
 $IPATH = $_SERVER[ "DOCUMENT_ROOT" ] . "/PunkCloud/php/components/";
-include( $IPATH . "header.html" );
+include( $IPATH . "header.php" );
 ?>
 </head>
 <body>

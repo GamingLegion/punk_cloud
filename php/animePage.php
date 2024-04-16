@@ -9,7 +9,7 @@
 <?php
 session_start();
 $IPATH = $_SERVER[ "DOCUMENT_ROOT" ] . "/PunkCloud/php/components/";
-include( $IPATH . "header.html" );
+include( $IPATH . "header.php" );
 ?>
 </head>
 <body>
@@ -137,7 +137,7 @@ include( $IPATH . "header.html" );
                         $epi_name = 'Episode ' . $i;
                      }
                      echo '<h3 class="episode-title">' . $epi_name . '</h3>';
-                     $user = ( isset( $_SESSION[ 'user' ] ) ? $_SESSION[ 'user' ] : 'oracle' );
+                     $user = ( isset( $_SESSION[ 'user' ] ) ? $_SESSION[ 'user' ] : '' );
                      echo '<input type="hidden" name="username" value="' . $user . '">';
                      echo '<input type="hidden" name="epi_num" value="' . $i . '">';
                      echo '<input type="hidden" name="rom_name" value="' . $record[ 'rom_name' ] . '">';
