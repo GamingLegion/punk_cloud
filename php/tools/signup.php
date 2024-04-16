@@ -1,4 +1,5 @@
 <?php
+session_start();
 $connect = mysqli_connect( 'localhost', 'root', 'theallseeingeyes', 'punkcloud' );
 $connect2 = mysqli_connect( 'localhost', 'root', 'theallseeingeyes', 'punkcloud_users' );
 
@@ -20,9 +21,11 @@ while ( $record = mysqli_fetch_assoc( $result ) ) {
    }
 }
 if ( $check ) {
+   $_SESSION[ 'user' ] = $username;
+   
    date_default_timezone_set( 'America/New_York' );
    $ins_date = date( "Y-m-d H:i:s" );
-   mysqli_query( $connect, "INSERT INTO user(id, ins_date, username, email, password) VALUES ('NULL', '$ins_date', $username', '$email', '$password');" );
+   mysqli_query( $connect, "INSERT INTO users(id, ins_date, username, email, password) VALUES ('NULL', '$ins_date', '$username', '$email', '$password');" );
    
    $sql = "CREATE TABLE $username (
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
