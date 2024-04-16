@@ -21,7 +21,8 @@ include( $IPATH . "header.html" );
    $connect = mysqli_connect( 'localhost', 'root', 'theallseeingeyes', 'punkcloud' );
    $result = mysqli_query( $connect, 'Select eng_name, rom_name, image, series FROM anime_shows ORDER BY ins_date DESC' );
 
-   while ( $record = mysqli_fetch_assoc( $result ) ) {
+   for($i = 0; $i < 9; $i++) {
+      $record = mysqli_fetch_assoc( $result );
       echo '<div class="aniCard" id="card">';
       echo '<div id="thumbnail">';
       echo '<img src="../images/anime/' . $record[ 'image' ] . '" alt="' . $record[ 'eng_name' ] . '">';
@@ -42,9 +43,10 @@ include( $IPATH . "header.html" );
 <div class="new_added">
    <?php
    $connect = mysqli_connect( 'localhost', 'root', 'theallseeingeyes', 'punkcloud' );
-   $result = mysqli_query( $connect, 'Select eng_name, rom_name, image FROM anime_shows ORDER BY upd_date DESC' );
+   $result = mysqli_query( $connect, 'Select eng_name, rom_name, image, series FROM anime_shows ORDER BY upd_date DESC' );
 
-   while ( $record = mysqli_fetch_assoc( $result ) ) {
+   for($i = 0; $i < 9; $i++) {
+      $record = mysqli_fetch_assoc( $result );
       echo '<div class="aniCard" id="card">';
       echo '<div id="thumbnail">';
       echo '<img src="../images/anime/' . $record[ 'image' ] . '" alt="' . $record[ 'eng_name' ] . '">';
