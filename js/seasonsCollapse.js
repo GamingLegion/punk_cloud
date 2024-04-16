@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
             episodeItems.forEach(function (item, index) {
                setTimeout(function () {
                   item.classList.toggle("hidden");
-               }, index * 25); // Adjust the delay time (in milliseconds) as needed
+               }, index * 25);
             });
          });
       });
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
       episodeItems.forEach(function (item, index) {
          setTimeout(function () {
             item.classList.toggle("hidden");
-         }, index * 25); // Adjust the delay time (in milliseconds) as needed
+         }, index * 25);
       });
    }
 });
