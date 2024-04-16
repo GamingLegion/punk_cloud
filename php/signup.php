@@ -30,6 +30,5 @@
    </form>
    <a href="login.php">Login</a>
 </div>
-<script src="../js/signup.js"></script>
 </body>
 </html>

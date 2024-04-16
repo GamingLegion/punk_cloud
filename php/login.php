@@ -25,5 +25,6 @@
       <p id="error-msg"></p>
    </form>
    <a href="signup.php">Sign Up</a> </div>
+</div>
 </body>
 </html>
