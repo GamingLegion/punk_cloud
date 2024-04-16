@@ -23,7 +23,7 @@ include( $IPATH . "header.php" );
       $record = mysqli_fetch_assoc( $result );
       echo '<div class="aniCard" id="card">';
       echo '<div id="thumbnail">';
-      echo '<img src="../images/anime/' . $record[ 'image' ] . '" alt="' . $record[ 'eng_name' ] . '">';
+      echo '<img src="../images/arts/anime/' . $record[ 'image' ] . '" alt="' . $record[ 'eng_name' ] . '">';
       echo '<div class="title">';
       if ( $record[ 'eng_name' ] != NULL ) {
          echo '<p title="' . $record[ 'series' ] . '">' . $record[ 'eng_name' ] . '</p>';
@@ -47,7 +47,7 @@ include( $IPATH . "header.php" );
       $record = mysqli_fetch_assoc( $result );
       echo '<div class="aniCard" id="card">';
       echo '<div id="thumbnail">';
-      echo '<img src="../images/anime/' . $record[ 'image' ] . '" alt="' . $record[ 'eng_name' ] . '">';
+      echo '<img src="../images/arts/anime/' . $record[ 'image' ] . '" alt="' . $record[ 'eng_name' ] . '">';
       echo '<div class="title">';
       if ( $record[ 'eng_name' ] != NULL ) {
          echo '<p title="' . $record[ 'series' ] . '">' . $record[ 'eng_name' ] . '</p>';
