@@ -28,7 +28,7 @@ function updateField(fieldName, newValue) {
    };
 
    var xhr = new XMLHttpRequest();
-   xhr.open('POST', '../php/tools/editModel.php', true);
+   xhr.open('POST', '../php/tools/editAnime.php', true);
    xhr.setRequestHeader('Content-Type', 'application/json');
    xhr.onreadystatechange = function () {
       if (xhr.readyState === 4 && xhr.status === 200) {
