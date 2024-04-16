@@ -4,13 +4,13 @@
    display: inline-block;
    border: 2px solid #ccc;
    margin: 7px 9px;
-   width: 200px;
-   height: 280px;
+   width: 185px;
+   height: 255px;
    overflow: hidden;
 }
 #thumbnail {
    position: relative;
-   height: 280px;
+   height: 100%;
    overflow: hidden;
 }
 #thumbnail img {
