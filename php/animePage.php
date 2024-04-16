@@ -137,26 +137,27 @@ include( $IPATH . "header.php" );
                         $epi_name = 'Episode ' . $i;
                      }
                      echo '<h3 class="episode-title">' . $epi_name . '</h3>';
-                     $user = ( isset( $_SESSION[ 'user' ] ) ? $_SESSION[ 'user' ] : '' );
-                     echo '<input type="hidden" name="username" value="' . $user . '">';
-                     echo '<input type="hidden" name="epi_num" value="' . $i . '">';
-                     echo '<input type="hidden" name="rom_name" value="' . $record[ 'rom_name' ] . '">';
-                     echo '<input type="hidden" name="season" value="' . $record[ 'season' ] . '">';
+                     if ( isset( $_SESSION[ 'user' ] ) ) {
+                        echo '<input type="hidden" name="username" value="' . $_SESSION[ 'user' ] . '">';
+                        echo '<input type="hidden" name="epi_num" value="' . $i . '">';
+                        echo '<input type="hidden" name="rom_name" value="' . $record[ 'rom_name' ] . '">';
+                        echo '<input type="hidden" name="season" value="' . $record[ 'season' ] . '">';
 
-                     $query = "SELECT epi_num 
-                       FROM $user
-                       WHERE anime_name = '" . $record[ 'rom_name' ] . "' 
-                       AND anime_season = '" . $record[ 'season' ] . "'";
-                     $result3 = mysqli_query( $connect3, $query );
-                     $check = false;
-                     while ( $record3 = mysqli_fetch_assoc( $result3 ) ) {
-                        if ( $record3[ 'epi_num' ] == $i ) {
-                           echo '<button class="checkbox-btn checked"></button>';
-                           $check = true;
+                        $query = "SELECT epi_num 
+                          FROM " . $_SESSION[ 'user' ] . "
+                          WHERE anime_name = '" . $record[ 'rom_name' ] . "' 
+                          AND anime_season = '" . $record[ 'season' ] . "'";
+                        $result3 = mysqli_query( $connect3, $query );
+                        $check = false;
+                        while ( $record3 = mysqli_fetch_assoc( $result3 ) ) {
+                           if ( $record3[ 'epi_num' ] == $i ) {
+                              echo '<button class="checkbox-btn checked"></button>';
+                              $check = true;
+                           }
                         }
-                     }
-                     if ( !$check ) {
-                        echo '<button class="checkbox-btn unchecked"></button>';
+                        if ( !$check ) {
+                           echo '<button class="checkbox-btn unchecked"></button>';
+                        }
                      }
                      echo '</div>';
                      echo '</div>';
@@ -169,8 +170,13 @@ include( $IPATH . "header.php" );
             mysqli_close( $connect );
             mysqli_close( $connect2 );
             mysqli_close( $connect3 );
+
+            if ( isset( $_SESSION[ 'user' ] ) ) {
+               if ( $_SESSION[ 'user' ] === 'oracle' ) {
+                  echo '<script src="../js/editAnime.js"></script>';
+               }
+            }
             ?>
-            <script src="../js/editAnime.js"></script> 
             <script src="../js/epiCheck.js"></script> 
          </div>
       </div>
