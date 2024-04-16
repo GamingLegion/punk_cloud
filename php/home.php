@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css" href="../css/home.css">
 <link rel="stylesheet" type="text/css" href="../css/card.css">
 <?php
-session_start();   
+session_start();
 $IPATH = $_SERVER[ "DOCUMENT_ROOT" ] . "/PunkCloud/php/components/";
 include( $IPATH . "header.php" );
 ?>
