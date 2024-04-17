@@ -1,0 +1,34 @@
+/* CSS Document */
+.overlay {
+   position: fixed;
+   bottom: 0;
+   left: 50%;
+   transform: translateX(-50%) translateY(100%);
+   width: 65%;
+   height: 0;
+   background-color: rgba(0, 0, 0, 0.99);
+   overflow-y: auto;
+   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+   z-index: 999;
+   opacity: 0;
+   pointer-events: none;
+}
+.overlay.active {
+   height: 75%;
+   transform: translateX(-50%) translateY(-12.5%);
+   opacity: 1;
+   pointer-events: auto;
+}
+#overlayImg {
+   height: 40%;
+   overflow-y: hidden;
+}
+#overlayImg img {
+   position: relative;
+   width: 100%;
+   bottom: calc((100% - 40%) / 2);
+}
+.overlay-content {
+   padding: 20px;
+   color: white;
+}

@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css" href="../css/animePage.css">
 <link rel="stylesheet" type="text/css" href="../css/seasons.css">
+<link rel="stylesheet" type="text/css" href="../css/episodeOverlay.css">
 <title>Anime Page</title>
 <?php
 session_start();
@@ -114,7 +115,7 @@ include( $IPATH . "header.php" );
                   echo '</div>';
                   echo '</div>';
 
-                  $result2 = mysqli_query( $connect2, "SELECT name 
+                  $result2 = mysqli_query( $connect2, "SELECT name, thumbnail
                   FROM anime_shows 
                   WHERE anime_series = '" . $name . "' 
                   AND anime_season = '" . $record[ 'season' ] . "' 
@@ -124,9 +125,11 @@ include( $IPATH . "header.php" );
                      $record2 = mysqli_fetch_assoc( $result2 );
                      echo '<div class="episode hidden">';
                      echo '<div class="episode-thumbnail">';
-                     $ei = $record[ 'image' ];
-                     $ei = substr( $ei, 0, strlen( $ei ) - 4 );
-                     echo '<img src="../images/episodes/anime/' . $ei . '/' . $i . '.jpg" alt="Episode ' . $i . '">';
+                     $thumbnail = 'default.jpg';
+                     if(isset($record2['thumbnail'])) {
+                        $thumbnail = $record2['thumbnail'];
+                     }
+                     echo '<img src="../images/episodes/anime/'.$thumbnail.'" alt="Episode ' . $i . '">';
                      echo '</div>';
                      echo '<div class="episode-details">';
                      echo '<div class="episode-info">';
@@ -168,6 +171,12 @@ include( $IPATH . "header.php" );
                      echo '</div>';
                   }
                   echo '</div>';
+                  echo '<div id="episodeOverlay" class="overlay">';
+                  echo '<div id=overlayImg>';
+                  echo '<img>';
+                  echo '</div>';
+                  echo '<p class="overlay-content" id="title"></p>';
+                  echo '</div>';
                   echo '</div>';
                }
             }
@@ -182,6 +191,7 @@ include( $IPATH . "header.php" );
             }
             ?>
             <script src="../js/epiCheck.js"></script> 
+            <script src="../js/episodeOverlay.js"></script> 
          </div>
       </div>
       <script src="../js/seasonsCollapse.js"></script> 
