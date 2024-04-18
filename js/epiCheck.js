@@ -1,41 +1,50 @@
 // JavaScript Document
-var collapsibles = document.querySelectorAll('#collapsible');
-collapsibles.forEach(function (div, index) {
+var collapsibles = document.querySelectorAll('.collapsible');
+collapsibles.forEach(function (div) {
    var season = div.querySelector('input').value;
-   var sectBtn = document.querySelectorAll('#sectionCheck')[index];
-   var epis = div.querySelectorAll('.episode-info');
+   var sectBtn = div.querySelector('#sectionCheck');
+   var epis = div.querySelectorAll('.episode');
 
-   sectBtn.onclick = function () {
-      epis.forEach(function (epi) {
+   sectBtn.addEventListener('click', function () {
+      epis.forEach(function (epi, index) {
          var user = epi.querySelectorAll("input")[0].value;
          var epi_name = epi.querySelector("h3").textContent;
          var epi_num = epi.querySelectorAll("input")[1].value;
          var rom_name = epi.querySelectorAll("input")[2].value;
-         setTimeout(check(user, epi_name, epi_num, rom_name, season), index * 25);
+         setTimeout(function() {
+            check(user, epi_name, epi_num, rom_name, season);
+         }, index * 25);
       });
 
       // Toggle class for section checkbox
-      if (sectBtn.classList.contains('unchecked')) {
-         sectBtn.classList.remove('unchecked');
-         sectBtn.classList.add('checked');
-      } else {
-         sectBtn.classList.remove('checked');
-         sectBtn.classList.add('unchecked');
-      }
-   };
+      sectBtn.classList.toggle('unchecked');
+      sectBtn.classList.toggle('checked');
+   });
 
-   epis.forEach(function (div2) {
-      var user = div2.querySelectorAll("input")[0].value;
-      var epi_name = div2.querySelector("h3").textContent;
-      var epi_num = div2.querySelectorAll("input")[1].value;
-      var rom_name = div2.querySelectorAll("input")[2].value;
-      var button = div2.querySelector('button');
-      button.onclick = function () {
+   epis.forEach(function (epi) {
+      var user = epi.querySelector("input[name='username']").value;
+      var epi_name = epi.querySelector("h3").textContent;
+      var epi_num = epi.querySelector("input[name='epi_num']").value;
+      var rom_name = epi.querySelector("input[name='rom_name']").value;
+      var button = epi.querySelector('button');
+      button.addEventListener('click', function () {
          check(user, epi_name, epi_num, rom_name, season);
-      };
+      });
    });
 });
 
+
+var overlay = document.querySelector('#episodeOverlay');
+var button = overlay.querySelector('.overlayCheck');
+button.addEventListener('click', function () {
+   var user = overlay.querySelector("input[name='user']").value;
+   var epi_name = overlay.querySelector("#title").textContent;
+   var epi_num = overlay.querySelector("input[name='epi_num']").value;
+   var rom_name = overlay.querySelector("input[name='anime_name']").value;
+   var season = overlay.querySelector("input[name='anime_season']").value;
+
+   check(user, epi_name, epi_num, rom_name, season);
+});
 
 function check(user, epi_name, epi_num, rom_name, season) {
    var data = {
@@ -44,25 +53,24 @@ function check(user, epi_name, epi_num, rom_name, season) {
       rom_name: rom_name,
       season: season
    };
-
+   
    var xhr = new XMLHttpRequest();
    xhr.open('POST', '../php/tools/epiCheck.php', true);
    xhr.setRequestHeader('Content-Type', 'application/json');
    xhr.onreadystatechange = function () {
       if (xhr.readyState === 4 && xhr.status === 200) {
-         var epi = document.querySelectorAll('.episode-info');
+         var button = document.querySelector('.overlayCheck');
+         button.classList.toggle('unchecked');
+         button.classList.toggle('checked');
+         
+         var epi = document.querySelectorAll('.episode');
          epi.forEach(function (div) {
-            var en = div.querySelector("h3").textContent;
-            var button = div.querySelector('button');
+            var name = div.querySelector("h3").textContent;
+            var button = div.querySelector('.checkbox-btn');
 
-            if (en === epi_name) {
-               if (button.classList.contains('unchecked')) {
-                  button.classList.remove('unchecked');
-                  button.classList.add('checked');
-               } else {
-                  button.classList.remove('checked');
-                  button.classList.add('unchecked');
-               }
+            if (name === epi_name) {
+               button.classList.toggle('unchecked');
+               button.classList.toggle('checked');
             }
          });
       }

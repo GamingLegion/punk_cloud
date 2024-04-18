@@ -178,53 +178,18 @@ include( $IPATH . "header.php" );
                      } else {
                         echo '<input type="hidden" name="username" value="">';
                      }
-                        echo '<input type="hidden" name="epi_num" value="' . $i . '">';
-                        echo '<input type="hidden" name="rom_name" value="' . $record[ 'rom_name' ] . '">';
+                     echo '<input type="hidden" name="epi_num" value="' . $i . '">';
+                     echo '<input type="hidden" name="rom_name" value="' . $record[ 'rom_name' ] . '">';
                      $rel_date = '';
-                     if(isset($record2[ 'release_date' ])) {
+                     if ( isset( $record2[ 'release_date' ] ) ) {
                         $rel_date = new DateTime( $record2[ 'release_date' ] );
                         $rel_date = $rel_date->format( 'F j, Y' );
                      }
-                        echo '<input type="hidden" name="release_date" value="' . $rel_date . '">';
+                     echo '<input type="hidden" name="release_date" value="' . $rel_date . '">';
                      echo '</div>';
                      echo '</div>';
                      echo '</div>';
                   }
-                  echo '</div>';
-                  echo '<div id="episodeOverlay" class="">';
-                  echo '<input type="hidden" name="anime_name" value="">';
-                  echo '<input type="hidden" name="anime_season" value="">';
-                  echo '<input type="hidden" name="epi_num" value="">';
-                  echo '<div id=overlayImg>';
-                  echo '<img>';
-                  echo '</div>';
-                  echo '<div id="titleLine">';
-                  echo '<p class="overlay-content" id="title"></p>';
-                  if ( isset( $_SESSION[ 'user' ] ) ) {
-                     $query = "SELECT epi_num 
-                          FROM " . $_SESSION[ 'user' ] . "
-                          WHERE anime_name = '" . $record[ 'rom_name' ] . "' 
-                          AND anime_season = '" . $record[ 'season' ] . "'";
-                     $result3 = mysqli_query( $connect3, $query );
-                     $check = false;
-                     while ( $record3 = mysqli_fetch_assoc( $result3 ) ) {
-                        if ( $record3[ 'epi_num' ] == $i ) {
-                           echo '<button class="overlayCheck checked"></button>';
-                           $check = true;
-                        }
-                     }
-                     if ( !$check ) {
-                        echo '<button class="overlayCheck unchecked"></button>';
-                     }
-                  }
-                  echo '</div>';
-                  echo '<div id="episode-release-date">';
-                  echo '<p>Release Date:</p>';
-                  echo '<p id="release_date">N/A</p>';
-                  echo '</div>';
-                  echo '<div id="episode-description">';
-                  echo '<p>Description:</p>';
-                  echo '<p id="description">N/A</p>';
                   echo '</div>';
                   echo '</div>';
                   echo '</div>';
@@ -241,13 +206,44 @@ include( $IPATH . "header.php" );
                }
             }
             ?>
-            <script src="../js/epiCheck.js"></script> 
-            <script src="../js/episodeOverlay.js"></script> 
          </div>
       </div>
       <script src="../js/seasonsCollapse.js"></script> 
    </div>
 </div>
 </div>
+</div>
+</div>
+<?php
+echo '<div id="episodeOverlay">';
+echo '<input type="hidden" name="anime_name" value="">';
+echo '<input type="hidden" name="anime_season" value="">';
+echo '<input type="hidden" name="epi_num" value="">';
+if ( isset( $_SESSION[ 'user' ] ) ) {
+   echo '<input type="hidden" name="user" value="' . $_SESSION[ 'user' ] . '">';
+} else {
+   echo '<input type="hidden" name="user" value="">';
+}
+echo '<div id=overlayImg>';
+echo '<img>';
+echo '</div>';
+echo '<div id="titleLine">';
+echo '<p class="overlay-content" id="title"></p>';
+if ( isset( $_SESSION[ 'user' ] ) ) {
+   echo '<button class="overlayCheck"></button>';
+}
+echo '</div>';
+echo '<div id="episode-release-date">';
+echo '<p>Release Date:</p>';
+echo '<p id="release_date">N/A</p>';
+echo '</div>';
+echo '<div id="episode-description">';
+echo '<p>Description:</p>';
+echo '<p id="description">N/A</p>';
+echo '</div>';
+echo '</div>';
+?>
+<script src="../js/episodeOverlay.js"></script>
+<script src="../js/epiCheck.js"></script>
 </body>
 </html>
