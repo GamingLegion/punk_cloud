@@ -62,7 +62,18 @@ include( $IPATH . "header.php" );
                if ( $record[ 'season' ] !== NULL ) {
                   echo '<div class="collapsible">';
                   echo '<button class="collapsible-btn"><strong>' . $record[ 'season' ] . '</strong></button>';
+                  $query = "SELECT epi_num 
+                          FROM " . $_SESSION[ 'user' ] . "
+                          WHERE anime_name = '" . $record[ 'rom_name' ] . "' 
+                          AND anime_season = '" . $record[ 'season' ] . "'";
+                  $result3 = mysqli_query( $connect3, $query );
+                  if ( mysqli_num_rows( $result3 ) == $record[ 'epi_num' ] ) {
+                     echo '<button class="checkbox-btn checked" id="sectionCheck"></button>';
+                  } else {
+                     echo '<button class="checkbox-btn unchecked" id="sectionCheck"></button>';
+                  }
                   echo '<div id="collapsible">';
+                  echo '<input type="hidden" value="' . $record[ 'season' ] . '">';
                   echo '<div class="anime-description">';
 
                   echo '<img src="../images/arts/anime/' . $record[ 'image' ] . '" id="image">';
@@ -126,13 +137,13 @@ include( $IPATH . "header.php" );
                      echo '<div class="episode hidden">';
                      echo '<div class="episode-thumbnail">';
                      $thumbnail = 'default.jpg';
-                     if(isset($record2['thumbnail'])) {
-                        $thumbnail = $record2['thumbnail'];
+                     if ( isset( $record2[ 'thumbnail' ] ) ) {
+                        $thumbnail = $record2[ 'thumbnail' ];
                      }
-                     echo '<img src="../images/episodes/anime/'.$thumbnail.'" alt="Episode ' . $i . '">';
+                     echo '<img src="../images/episodes/anime/' . $thumbnail . '" alt="Episode ' . $i . '">';
                      echo '</div>';
                      echo '<div class="episode-details">';
-                     echo '<div class="episode-info">';
+                     echo '<div class="episode-info" id="' . $record[ 'season' ] . '">';
                      $epi_name = '';
                      if ( !is_null( $record2 ) ) {
                         if ( $record2[ 'name' ] !== NULL ) {
@@ -148,7 +159,6 @@ include( $IPATH . "header.php" );
                         echo '<input type="hidden" name="username" value="' . $_SESSION[ 'user' ] . '">';
                         echo '<input type="hidden" name="epi_num" value="' . $i . '">';
                         echo '<input type="hidden" name="rom_name" value="' . $record[ 'rom_name' ] . '">';
-                        echo '<input type="hidden" name="season" value="' . $record[ 'season' ] . '">';
 
                         $query = "SELECT epi_num 
                           FROM " . $_SESSION[ 'user' ] . "
@@ -175,7 +185,28 @@ include( $IPATH . "header.php" );
                   echo '<div id=overlayImg>';
                   echo '<img>';
                   echo '</div>';
+                  echo '<div id="titleLine">';
                   echo '<p class="overlay-content" id="title"></p>';
+                        $query = "SELECT epi_num 
+                          FROM " . $_SESSION[ 'user' ] . "
+                          WHERE anime_name = '" . $record[ 'rom_name' ] . "' 
+                          AND anime_season = '" . $record[ 'season' ] . "'";
+                        $result3 = mysqli_query( $connect3, $query );
+                        $check = false;
+                        while ( $record3 = mysqli_fetch_assoc( $result3 ) ) {
+                           if ( $record3[ 'epi_num' ] == $i ) {
+                              echo '<button class="overlayCheck checked"></button>';
+                              $check = true;
+                           }
+                        }
+                        if ( !$check ) {
+                           echo '<button class="overlayCheck unchecked"></button>';
+                        }
+                  echo '</div>';
+                  echo '<div id="episode-description">';
+                  echo '<p>Description:</p>';
+                  echo '<p id="description">N/A</p>';
+                  echo '</div>';
                   echo '</div>';
                   echo '</div>';
                }

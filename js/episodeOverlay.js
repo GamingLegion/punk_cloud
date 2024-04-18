@@ -4,11 +4,11 @@ var episodeName = '';
 
 document.addEventListener("DOMContentLoaded", function () {
    var overlay = document.getElementById("episodeOverlay");
-   var episodeElements = document.querySelectorAll(".episode");
+   var episodes = document.querySelectorAll(".episode");
 
    document.addEventListener("click", function (event) {
       var showing = false;
-      episodeElements.forEach(function (episode) {
+      episodes.forEach(function (episode) {
          if (episode.contains(event.target)) {
             showing = true;
          }
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
    });
 
-   episodeElements.forEach(function (episode) {
+   episodes.forEach(function (episode) {
       episode.addEventListener("click", function () {
          thumbnailImg = episode.querySelector(".episode-thumbnail").querySelector("img").src;
          episodeName = episode.querySelector("h3").textContent;

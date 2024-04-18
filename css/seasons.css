@@ -25,6 +25,10 @@
 .collapsible-btn:hover {
    background-color: #51406B;
 }
+#sectionCheck {
+   position: absolute;
+   margin: 8px -50px;
+}
 .anime-description {
    display: none;
    padding: 10px;
