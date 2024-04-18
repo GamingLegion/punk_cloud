@@ -1,5 +1,5 @@
 /* CSS Document */
-.overlay {
+#episodeOverlay {
    position: fixed;
    bottom: 0;
    left: 50%;
@@ -13,11 +13,14 @@
    opacity: 0;
    pointer-events: none;
 }
-.overlay.active {
+#episodeOverlay.active {
    height: 75%;
    transform: translateX(-50%) translateY(-12.5%);
    opacity: 1;
    pointer-events: auto;
+}
+.epiOverInfo {
+   height: 100%;
 }
 #overlayImg {
    height: 40%;
@@ -55,9 +58,19 @@
    background-image: url("../images/icons/checked.png");
 }
 #episode-description {
+   height: 30%;
    color: white;
    font-size: 20px;
-   height: 30%;
    overflow-y: auto;
    padding: 0 20px;
+}
+#episode-release-date {
+   display: flex;
+   color: white;
+   font-size: 20px;
+   overflow-y: auto;
+   padding-left: 20px;
+}
+#episode-release-date #release_date {
+   padding-left: 20px;
 }

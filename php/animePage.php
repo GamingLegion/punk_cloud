@@ -62,15 +62,17 @@ include( $IPATH . "header.php" );
                if ( $record[ 'season' ] !== NULL ) {
                   echo '<div class="collapsible">';
                   echo '<button class="collapsible-btn"><strong>' . $record[ 'season' ] . '</strong></button>';
-                  $query = "SELECT epi_num 
+                  if ( isset( $_SESSION[ 'user' ] ) ) {
+                     $query = "SELECT epi_num 
                           FROM " . $_SESSION[ 'user' ] . "
                           WHERE anime_name = '" . $record[ 'rom_name' ] . "' 
                           AND anime_season = '" . $record[ 'season' ] . "'";
-                  $result3 = mysqli_query( $connect3, $query );
-                  if ( mysqli_num_rows( $result3 ) == $record[ 'epi_num' ] ) {
-                     echo '<button class="checkbox-btn checked" id="sectionCheck"></button>';
-                  } else {
-                     echo '<button class="checkbox-btn unchecked" id="sectionCheck"></button>';
+                     $result3 = mysqli_query( $connect3, $query );
+                     if ( mysqli_num_rows( $result3 ) == $record[ 'epi_num' ] ) {
+                        echo '<button class="checkbox-btn checked" id="sectionCheck"></button>';
+                     } else {
+                        echo '<button class="checkbox-btn unchecked" id="sectionCheck"></button>';
+                     }
                   }
                   echo '<div id="collapsible">';
                   echo '<input type="hidden" value="' . $record[ 'season' ] . '">';
@@ -126,7 +128,7 @@ include( $IPATH . "header.php" );
                   echo '</div>';
                   echo '</div>';
 
-                  $result2 = mysqli_query( $connect2, "SELECT name, thumbnail
+                  $result2 = mysqli_query( $connect2, "SELECT name, thumbnail, release_date
                   FROM anime_shows 
                   WHERE anime_series = '" . $name . "' 
                   AND anime_season = '" . $record[ 'season' ] . "' 
@@ -157,8 +159,6 @@ include( $IPATH . "header.php" );
                      echo '<h3 class="episode-title">' . $epi_name . '</h3>';
                      if ( isset( $_SESSION[ 'user' ] ) ) {
                         echo '<input type="hidden" name="username" value="' . $_SESSION[ 'user' ] . '">';
-                        echo '<input type="hidden" name="epi_num" value="' . $i . '">';
-                        echo '<input type="hidden" name="rom_name" value="' . $record[ 'rom_name' ] . '">';
 
                         $query = "SELECT epi_num 
                           FROM " . $_SESSION[ 'user' ] . "
@@ -175,33 +175,52 @@ include( $IPATH . "header.php" );
                         if ( !$check ) {
                            echo '<button class="checkbox-btn unchecked"></button>';
                         }
+                     } else {
+                        echo '<input type="hidden" name="username" value="">';
                      }
+                        echo '<input type="hidden" name="epi_num" value="' . $i . '">';
+                        echo '<input type="hidden" name="rom_name" value="' . $record[ 'rom_name' ] . '">';
+                     $rel_date = '';
+                     if(isset($record2[ 'release_date' ])) {
+                        $rel_date = new DateTime( $record2[ 'release_date' ] );
+                        $rel_date = $rel_date->format( 'F j, Y' );
+                     }
+                        echo '<input type="hidden" name="release_date" value="' . $rel_date . '">';
                      echo '</div>';
                      echo '</div>';
                      echo '</div>';
                   }
                   echo '</div>';
-                  echo '<div id="episodeOverlay" class="overlay">';
+                  echo '<div id="episodeOverlay" class="">';
+                  echo '<input type="hidden" name="anime_name" value="">';
+                  echo '<input type="hidden" name="anime_season" value="">';
+                  echo '<input type="hidden" name="epi_num" value="">';
                   echo '<div id=overlayImg>';
                   echo '<img>';
                   echo '</div>';
                   echo '<div id="titleLine">';
                   echo '<p class="overlay-content" id="title"></p>';
-                        $query = "SELECT epi_num 
+                  if ( isset( $_SESSION[ 'user' ] ) ) {
+                     $query = "SELECT epi_num 
                           FROM " . $_SESSION[ 'user' ] . "
                           WHERE anime_name = '" . $record[ 'rom_name' ] . "' 
                           AND anime_season = '" . $record[ 'season' ] . "'";
-                        $result3 = mysqli_query( $connect3, $query );
-                        $check = false;
-                        while ( $record3 = mysqli_fetch_assoc( $result3 ) ) {
-                           if ( $record3[ 'epi_num' ] == $i ) {
-                              echo '<button class="overlayCheck checked"></button>';
-                              $check = true;
-                           }
+                     $result3 = mysqli_query( $connect3, $query );
+                     $check = false;
+                     while ( $record3 = mysqli_fetch_assoc( $result3 ) ) {
+                        if ( $record3[ 'epi_num' ] == $i ) {
+                           echo '<button class="overlayCheck checked"></button>';
+                           $check = true;
                         }
-                        if ( !$check ) {
-                           echo '<button class="overlayCheck unchecked"></button>';
-                        }
+                     }
+                     if ( !$check ) {
+                        echo '<button class="overlayCheck unchecked"></button>';
+                     }
+                  }
+                  echo '</div>';
+                  echo '<div id="episode-release-date">';
+                  echo '<p>Release Date:</p>';
+                  echo '<p id="release_date">N/A</p>';
                   echo '</div>';
                   echo '<div id="episode-description">';
                   echo '<p>Description:</p>';
@@ -218,6 +237,7 @@ include( $IPATH . "header.php" );
             if ( isset( $_SESSION[ 'user' ] ) ) {
                if ( $_SESSION[ 'user' ] === 'oracle' ) {
                   echo '<script src="../js/editAnime.js"></script>';
+                  echo '<script src="../js/editAnimeEpi.js"></script>';
                }
             }
             ?>
