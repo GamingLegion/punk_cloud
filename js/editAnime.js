@@ -7,10 +7,10 @@ infoLines.forEach(function (infoLine) {
    editButton.id = 'editBtn';
    editButton.textContent = 'Edit';
    editButton.onclick = function () {
-      var newValue= prompt('Enter new value for ' + secondParagraph.id, secondParagraph.textContent);
-         if (newValue !== null) {
-            updateField(secondParagraph.id, newValue);
-         }
+      var newValue = prompt('Enter new value for ' + firstParagraph.textContent, secondParagraph.textContent);
+      if (newValue !== null) {
+         updateField(secondParagraph.id, newValue);
+      }
    };
 
    infoLine.insertBefore(editButton, firstParagraph);
@@ -33,13 +33,7 @@ function updateField(fieldName, newValue) {
    xhr.onreadystatechange = function () {
       if (xhr.readyState === 4 && xhr.status === 200) {
          var field = document.getElementById(fieldName);
-         if (fieldName === 'height_ft') {
-            field.textContent = newValue + "'";
-         } else if (fieldName === 'height_in') {
-            field.textContent = newValue + '"';
-         } else {
-            field.textContent = newValue;
-         }
+         field.textContent = newValue;
       }
    };
    xhr.send(JSON.stringify(data));
