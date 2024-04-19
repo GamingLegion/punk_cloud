@@ -80,6 +80,10 @@ include( $IPATH . "header.php" );
 
                   echo '<img src="../images/arts/anime/' . $record[ 'image' ] . '" id="image">';
                   echo '<div class="info_line">';
+                  echo '<a><strong>Name:</strong></a>';
+                  echo '<a class="info" id="anime_name">' . $record[ 'rom_name' ] . '</a>';
+                  echo '</div>';
+                  echo '<div class="info_line">';
                   echo '<a><strong>Start Date:</strong></a>';
                   if ( $record[ 'start_date' ] !== NULL ) {
                      $start_date = new DateTime( $record[ 'start_date' ] );
@@ -89,7 +93,7 @@ include( $IPATH . "header.php" );
                      echo '<a class="info" id="start_date"></a>';
                   }
                   echo '</div>';
-                  echo '<div class="info_line"">';
+                  echo '<div class="info_line">';
                   echo '<a><strong>End Date:</strong></a>';
                   if ( $record[ 'end_date' ] !== NULL ) {
                      $end_date = new DateTime( $record[ 'end_date' ] );
@@ -166,6 +170,7 @@ include( $IPATH . "header.php" );
                           AND anime_season = '" . $record[ 'season' ] . "'";
                         $result3 = mysqli_query( $connect3, $query );
                         $check = false;
+                        echo '<div>';
                         while ( $record3 = mysqli_fetch_assoc( $result3 ) ) {
                            if ( $record3[ 'epi_num' ] == $i ) {
                               echo '<button class="checkbox-btn checked"></button>';
@@ -175,6 +180,7 @@ include( $IPATH . "header.php" );
                         if ( !$check ) {
                            echo '<button class="checkbox-btn unchecked"></button>';
                         }
+                        echo '</div>';
                      } else {
                         echo '<input type="hidden" name="username" value="">';
                      }
@@ -198,13 +204,6 @@ include( $IPATH . "header.php" );
             mysqli_close( $connect );
             mysqli_close( $connect2 );
             mysqli_close( $connect3 );
-
-            if ( isset( $_SESSION[ 'user' ] ) ) {
-               if ( $_SESSION[ 'user' ] === 'oracle' ) {
-                  echo '<script src="../js/editAnime.js"></script>';
-                  echo '<script src="../js/editAnimeEpi.js"></script>';
-               }
-            }
             ?>
          </div>
       </div>
@@ -242,8 +241,14 @@ echo '<p>Description:</p>';
 echo '<p id="description">N/A</p>';
 echo '</div>';
 echo '</div>';
+if ( isset( $_SESSION[ 'user' ] ) ) {
+   if ( $_SESSION[ 'user' ] === 'oracle' ) {
+      echo '<script src="../js/editAnime.js"></script>';
+      echo '<script src="../js/editAnimeEpi.js"></script>';
+   }
+}
 ?>
-<script src="../js/episodeOverlay.js"></script>
+<script src="../js/episodeOverlay.js"></script> 
 <script src="../js/epiCheck.js"></script>
 </body>
 </html>
