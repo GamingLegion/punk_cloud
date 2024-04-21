@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css" href="../css/animePage.css">
-<link rel="stylesheet" type="text/css" href="../css/seasons.css">
+<link rel="stylesheet" type="text/css" href="../css/collapsable.css">
+<link rel="stylesheet" type="text/css" href="../css/episode.css">
 <link rel="stylesheet" type="text/css" href="../css/episodeOverlay.css">
 <title>Anime Page</title>
 <?php
@@ -241,12 +242,12 @@ include( $IPATH . "header.php" );
                         echo '<div>';
                         while ( $record3 = mysqli_fetch_assoc( $result3 ) ) {
                            if ( $record3[ 'epi_num' ] == $i ) {
-                              echo '<button class="checkbox-btn checked"></button>';
+                              echo '<button class="checkbox-btn checked" onclick="openPopup(' . $i . ')"></button>';
                               $check = true;
                            }
                         }
                         if ( !$check ) {
-                           echo '<button class="checkbox-btn unchecked"></button>';
+                           echo '<button class="checkbox-btn unchecked" onclick="openPopup(' . $i . ')"></button>';
                         }
                         echo '</div>';
                      } else {
@@ -260,6 +261,14 @@ include( $IPATH . "header.php" );
                         $rel_date = $rel_date->format( 'F j, Y' );
                      }
                      echo '<input type="hidden" name="release_date" value="' . $rel_date . '">';
+                     echo '</div>';
+                     echo '</div>';
+                     echo '<div id="popupContainer" class="popupContainer">';
+                     echo '<div class="popup" onclick="closePopup(' . $i . ')">';
+                     echo '<br>';
+                     echo '<button class="popupBtn" onclick="optionSelected(1, ' . $i . ')">Watched Again</button>';
+                     echo '<button class="popupBtn" onclick="optionSelected(2, ' . $i . ')">Watched not Again</button>';
+                     echo '<button class="popupBtn" onclick="optionSelected(3, ' . $i . ')">Not Watched</button>';
                      echo '</div>';
                      echo '</div>';
                      echo '</div>';
@@ -276,6 +285,7 @@ include( $IPATH . "header.php" );
          </div>
       </div>
       <script src="../js/seasonsCollapse.js"></script> 
+      <script src="../js/incPopup.js"></script> 
    </div>
 </div>
 </div>

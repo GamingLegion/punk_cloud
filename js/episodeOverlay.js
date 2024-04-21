@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
    document.addEventListener("click", function (event) {
       var showing = false;
       episodes.forEach(function (episode) {
-         if (episode.contains(event.target) && !event.target.matches('.checkbox-btn')) {
+         if (episode.contains(event.target) && !event.target.matches('.checkbox-btn') && !event.target.matches('.popup') && !event.target.matches('.popupBtn')) {
             showing = true;
          }
       });

@@ -12,7 +12,7 @@ collapsibles.forEach(function (div) {
          var epi_num = epi.querySelectorAll("input")[1].value;
          var rom_name = epi.querySelectorAll("input")[2].value;
          setTimeout(function() {
-            check(user, epi_name, epi_num, rom_name, season);
+            epiCheck(user, epi_name, epi_num, rom_name, season);
          }, index * 25);
       });
 
@@ -28,7 +28,7 @@ collapsibles.forEach(function (div) {
       var rom_name = epi.querySelector("input[name='rom_name']").value;
       var button = epi.querySelector('button');
       button.addEventListener('click', function () {
-         check(user, epi_name, epi_num, rom_name, season);
+         epiCheck(user, epi_name, epi_num, rom_name, season);
       });
    });
 });
@@ -43,10 +43,10 @@ button.addEventListener('click', function () {
    var rom_name = overlay.querySelector("input[name='anime_name']").value;
    var season = overlay.querySelector("input[name='anime_season']").value;
 
-   check(user, epi_name, epi_num, rom_name, season);
+   epiCheck(user, epi_name, epi_num, rom_name, season);
 });
 
-function check(user, epi_name, epi_num, rom_name, season) {
+function epiCheck(user, epi_name, epi_num, rom_name, season) {
    var data = {
       user: user,
       epi_num: epi_num,
