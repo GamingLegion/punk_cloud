@@ -47,6 +47,10 @@ include( $IPATH . "header.php" );
             ?>
             <script src="../js/titleOverflow.js"></script> 
          </div>
+         <div class="rankings">
+            <div class="overScore"> <a></a> </div>
+            <div class="overRank"> </div>
+         </div>
       </div>
       <div class="anime-body">
          <div class="seasons">
@@ -56,7 +60,7 @@ include( $IPATH . "header.php" );
             $connect3 = mysqli_connect( 'localhost', 'root', 'theallseeingeyes', 'punkcloud_users' );
 
             $name = isset( $_GET[ 'link' ] ) ? $_GET[ 'link' ] : 'default';
-            $result = mysqli_query( $connect, "SELECT rom_name, image, series, season, epi_num, start_date, end_date, air_season, brodcast, producers, licensors, studios FROM anime_shows WHERE series = '" . $name . "' ORDER BY season" );
+            $result = mysqli_query( $connect, "SELECT rom_name, image, series, season, epi_num, start_date, end_date, air_season, brodcast, producers, licensors, studios, addedScore, numOfRanks, addedWatch FROM anime_shows WHERE series = '" . $name . "' ORDER BY season" );
 
             while ( $record = mysqli_fetch_assoc( $result ) ) {
                if ( $record[ 'season' ] !== NULL ) {
@@ -76,13 +80,76 @@ include( $IPATH . "header.php" );
                   }
                   echo '<div id="collapsible">';
                   echo '<input type="hidden" value="' . $record[ 'season' ] . '">';
+                  echo '<div class="anime-left">';
                   echo '<div class="anime-description">';
-
                   echo '<img src="../images/arts/anime/' . $record[ 'image' ] . '" id="image">';
-                  echo '<div class="info_line">';
-                  echo '<a><strong>Name:</strong></a>';
-                  echo '<a class="info" id="anime_name">' . $record[ 'rom_name' ] . '</a>';
+                  echo '<div class="info_line" style="text-align: center;">';
+                  echo '<a><strong></strong></a>';
+                  echo '<a class="info" id="season_name">' . $record[ 'rom_name' ] . '</a>';
                   echo '</div>';
+                  echo '</div>';
+
+                  $score = 0;
+                  $popularity = 0;
+                  if ( isset( $record[ 'addedScore' ] ) && isset( $record[ 'numOfRanks' ] ) ) {
+                     if ( $record[ 'numOfRanks' ] > 0 ) {
+                        $score = $record[ 'addedScore' ] / $record[ 'numOfRanks' ];
+                        $score = number_format( $score, 2 );
+                     }
+                  }
+                  if ( isset( $record[ 'addedWatch' ] ) ) {
+                     $popularity = $record[ 'addedWatch' ];
+                  }
+                  echo '<div class="anime-description">';
+                  echo '<div class="i_l">';
+                  echo '<a><strong>Season Score:</strong></a>';
+                  echo '<a class="info" id="season_score">' . $score . ' / 10</a>';
+                  echo '</div>';
+                  echo '<div class="i_l">';
+                  echo '<a><strong>Season Popularity:</strong></a>';
+                  echo '<a class="info" id="season_popularity">#' . $popularity . '</a>';
+
+                  if ( isset( $_SESSION[ 'user' ] ) ) {
+                     $result3 = mysqli_query( $connect3, "SELECT season_rank FROM " . $_SESSION[ 'user' ] . " WHERE anime_name = '" . $record[ 'rom_name' ] . "'" );
+                     $record3 = mysqli_fetch_assoc( $result3 );
+                     $rank = isset( $record3[ 'season_rank' ] ) ? $record3[ 'season_rank' ] : "Select Score";
+                     echo '<br><br>';
+                     echo '<div class="i_l" style="display: flex;">';
+                     echo '<a><strong>User Score:</strong></a>';
+                     echo '<div class="dropdown">';
+                     echo '<select name="user_score">';
+                     echo '<option value="Select Score">Select Score</option>';
+
+                     $options = array(
+                        "10" => "(10) God Tier",
+                        "9" => "(9) Insane",
+                        "8" => "(8) Amazing",
+                        "7" => "(7) Great",
+                        "6" => "(6) Good",
+                        "5" => "(5) Mid",
+                        "4" => "(4) Bad",
+                        "3" => "(3) Poor",
+                        "2" => "(2) Terrible",
+                        "1" => "(1) Abysmal",
+                        "0" => "(0) Dear Lord"
+                     );
+
+                     foreach ( $options as $value => $label ) {
+                        if ( $rank == $value ) {
+                           echo '<option value="' . $value . '" selected>' . $label . '</option>';
+                        } else {
+                           echo '<option value="' . $value . '">' . $label . '</option>';
+                        }
+                     }
+                     echo '</select>';
+                     echo '</div>';
+                     echo '</div>';
+                  }
+                  echo '</div>';
+                  echo '</div>';
+
+                  echo '<button class="season_info">Show Season Info</button>';
+                  echo '<div class="anime-description" style="display: none;">';
                   echo '<div class="info_line">';
                   echo '<a><strong>Start Date:</strong></a>';
                   if ( $record[ 'start_date' ] !== NULL ) {
@@ -129,6 +196,7 @@ include( $IPATH . "header.php" );
                   echo '<div class="info_line">';
                   echo '<a><strong>Studio:</strong></a>';
                   echo '<a class="info" id="studios">' . $record[ 'studios' ] . '</a>';
+                  echo '</div>';
                   echo '</div>';
                   echo '</div>';
 
@@ -249,6 +317,7 @@ if ( isset( $_SESSION[ 'user' ] ) ) {
 }
 ?>
 <script src="../js/episodeOverlay.js"></script> 
-<script src="../js/epiCheck.js"></script>
+<script src="../js/epiCheck.js"></script> 
+<script src="../js/changeRank.js"></script>
 </body>
 </html>

@@ -29,26 +29,64 @@
    position: absolute;
    margin: 8px -50px;
 }
-.anime-description {
+.anime-left {
    display: none;
+   padding: 10px;
+   width: 55%;
+   margin-right: 20px;
+   text-align: center;
+}
+.anime-description {
    padding: 10px;
    border-radius: 20px;
    background-color: #9C89B8;
    border: 2px solid #BBAECE;
    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-   width: 55%;
-   margin: 20px 20px auto 0;
+   margin: 0 20px 10px 0;
+   text-align: left;
 }
 .anime-description img {
    display: flex;
    margin: 0 auto;
 }
-.info_line a {
+.info_line a, .i_l a {
    display: inline-block;
    margin: 10px 0;
 }
-#anime_name {
+#season_name {
    display: inline;
+}
+.season_info {
+   background-color: #9C89B8;
+   border: none;
+   padding: 10px 20px;
+   font-size: 20px;
+   cursor: pointer;
+   outline: none;
+   border-radius: 25px;
+   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+   transition: all 0.3s ease;
+}
+.dropdown {
+   display: flex;
+   flex: 1;
+   position: relative;
+}
+.dropdown select {
+   width: 100%;
+   padding: 10px;
+   border: 1px solid #222425;
+   border-radius: 5px;
+   color: white;
+   background-color: #222425;
+   appearance: none;
+}
+.dropdown::after {
+   content: '\25BC';
+   position: absolute;
+   top: calc(50% - 6px);
+   right: 10px;
+   color: #888;
 }
 #prods {
    display: inline;
@@ -61,7 +99,7 @@
 .info_line button {
    margin-right: 5px;
 }
-.info_line strong {
+.info_line strong, .i_l strong {
    width: 100px;
    font-size: 100%;
    margin-right: 5px;

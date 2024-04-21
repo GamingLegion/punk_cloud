@@ -33,7 +33,8 @@ if ( $check ) {
     ins_date DATETIME,
     epi_num SMALLINT(4) NOT NULL,
     anime_name VARCHAR(255),
-    anime_season VARCHAR(255)
+    anime_season VARCHAR(255),
+    season_rank TINYINT(4)
     )";
    mysqli_query($connect2, $sql);
    header( "Location: http://localhost/PunkCloud/php/home.php" );
