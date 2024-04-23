@@ -273,7 +273,7 @@ include( $IPATH . "header.php" );
                           WHERE anime_name = '" . $record[ 'rom_name' ] . "' 
                           AND anime_season = '" . $record[ 'season' ] . "'";
                         $result3 = mysqli_query( $connect3, $query );
-                        echo '<div class="check" onclick="incrementCheck(this);">';
+                        echo '<div class="check" onclick="incrementCheck(this, '.$number.');">';
                         $watched = 0;
                         while ( $record3 = mysqli_fetch_assoc( $result3 ) ) {
                            if ( $record3[ 'epi_num' ] == $i ) {
@@ -354,7 +354,7 @@ if ( isset( $_SESSION[ 'user' ] ) ) {
    }
 }
 ?>
-<script src="../js/episodeOverlay.js"></script> 
+<script src="../js/episodeOverlay.js"></script>
 <script src="../js/epiCheck.js"></script>
 </body>
 </html>

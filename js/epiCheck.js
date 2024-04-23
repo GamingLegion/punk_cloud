@@ -44,7 +44,6 @@ function sectionClick(button, number, rom_name, season) {
 
 function epiCheck(button, epi_num, rom_name, season) {
    var buttonbtn = button.querySelector("button");
-   var buttontxt = button.querySelector("p");
 
    var data = {
       epi_num: epi_num,
@@ -141,10 +140,10 @@ function checkboxText(incdec, buttonbtn, buttontxt) {
    }
 }
 
-function incrementCheck(button) {
+function incrementCheck(button, collapse) {
    var buttonbtn = button.querySelector("button");
    if (buttonbtn.classList.contains("checked")) {
-      openPopup(button, buttonbtn.getAttribute('data-epiNum'));
+      openPopup(button, collapse, buttonbtn.getAttribute('data-epiNum'));
    } else {
       epiCheck(button, buttonbtn.getAttribute('data-epiNum'), buttonbtn.getAttribute('data-romName'), buttonbtn.getAttribute('data-season'));
    }
@@ -159,16 +158,16 @@ function incrementSCheck(button) {
    }
 }
 
-function openPopup(button, index) {
-   document.querySelectorAll("#popupContainer")[index - 1].style.display = "block";
+function openPopup(button, collapse, index) {
+   document.querySelectorAll("#collapsible")[collapse - 1].querySelectorAll("#popupContainer")[index - 1].style.display = "block";
 }
 
 function openSPopup(button, index) {
    document.querySelectorAll("#SpopupContainer")[index - 1].style.display = "block";
 }
 
-function closePopup(index) {
-   document.querySelectorAll("#popupContainer")[index - 1].style.display = "none";
+function closePopup(collapse, index) {
+   document.querySelectorAll("#collapsible")[collapse - 1].querySelectorAll("#popupContainer")[index - 1].style.display = "none";
 }
 
 function closeSPopup(index) {
@@ -190,7 +189,7 @@ function optionSelected(option, epiNum, collapseIndex) {
       buttontxt.style.margin = '-3px -28px';
       epiCheck(button, buttonbtn.getAttribute('data-epiNum'), buttonbtn.getAttribute('data-romName'), buttonbtn.getAttribute('data-season'));
    }
-   closePopup(epiNum);
+   closePopup(collapseIndex, epiNum);
 }
 
 function SoptionSelected(option, collapseIndex) {
