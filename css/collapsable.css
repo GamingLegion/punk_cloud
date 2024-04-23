@@ -10,6 +10,10 @@
 #collapsible {
    display: flex;
 }
+.collapsible-btn-wrapper {
+   position: relative;
+   width: 100%;
+}
 .collapsible-btn {
    width: 100%;
    background-color: #9C89B8;
@@ -25,9 +29,38 @@
 .collapsible-btn:hover {
    background-color: #51406B;
 }
-#sectionCheck {
+.section-check-wrapper {
    position: absolute;
-   margin: 8px -50px;
+   display: inline-flex;
+   margin: 9px -48px;
+}
+.section-check-wrapper p {
+   margin: -3px -29px;
+   font-size: 30px;
+   cursor: pointer;
+}
+.SpopupContainer {
+   display: none;
+   position: absolute;
+   left: 79%;
+   margin: -30px -5px;
+}
+.Spopup {
+   background-color: #353839;
+   border: 1px solid #434748;
+   padding: 3px;
+   border-radius: 5px;
+   display: flex;
+   flex-direction: column;
+}
+.Spopup button {
+   margin: 3px 0;
+   background-color: #9C89B8;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+.Spopup button:hover {
+   background-color: #51406B;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.75);
 }
 .anime-left {
    display: none;

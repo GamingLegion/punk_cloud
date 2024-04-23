@@ -29,7 +29,7 @@
 #overlayImg img {
    position: relative;
    width: 100%;
-   bottom: calc((100% - 40%) / 2);
+   bottom: calc((100% - 50%) / 2);
 }
 #titleLine {
    display: flex;

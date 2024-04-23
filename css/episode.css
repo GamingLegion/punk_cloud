@@ -59,6 +59,13 @@
 .checkbox-btn.checked {
    background-image: url("../images/icons/checked.png");
 }
+.episode p {
+   display: inline-block;
+   position: absolute;
+   margin: -3px -28px;
+   font-size: 30px;
+   cursor: pointer;
+}
 .popupContainer {
    display: none;
 }

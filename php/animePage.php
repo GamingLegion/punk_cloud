@@ -63,22 +63,50 @@ include( $IPATH . "header.php" );
             $name = isset( $_GET[ 'link' ] ) ? $_GET[ 'link' ] : 'default';
             $result = mysqli_query( $connect, "SELECT rom_name, image, series, season, epi_num, start_date, end_date, air_season, brodcast, producers, licensors, studios, addedScore, numOfRanks, addedWatch FROM anime_shows WHERE series = '" . $name . "' ORDER BY season" );
 
+            $number = 0;
             while ( $record = mysqli_fetch_assoc( $result ) ) {
+               $number++;
                if ( $record[ 'season' ] !== NULL ) {
-                  echo '<div class="collapsible">';
+                  echo '<div class="collapsible" data-value="' . $number . '">';
+                  echo '<div class="collapsible-btn-wrapper">';
                   echo '<button class="collapsible-btn"><strong>' . $record[ 'season' ] . '</strong></button>';
                   if ( isset( $_SESSION[ 'user' ] ) ) {
-                     $query = "SELECT epi_num 
+                     echo '<div class="section-check-wrapper" data-value="' . $number . '" onclick="incrementSCheck(this);">';
+                     $query = "SELECT epi_num, watched 
                           FROM " . $_SESSION[ 'user' ] . "
                           WHERE anime_name = '" . $record[ 'rom_name' ] . "' 
                           AND anime_season = '" . $record[ 'season' ] . "'";
                      $result3 = mysqli_query( $connect3, $query );
                      if ( mysqli_num_rows( $result3 ) == $record[ 'epi_num' ] ) {
-                        echo '<button class="checkbox-btn checked" id="sectionCheck"></button>';
+                        echo '<button class="checkbox-btn checked" id="sectionCheck" data-romName="' . $record[ 'rom_name' ] . '" data-season="' . $record[ 'season' ] . '"></button>';
                      } else {
-                        echo '<button class="checkbox-btn unchecked" id="sectionCheck"></button>';
+                        echo '<button class="checkbox-btn unchecked" id="sectionCheck" data-romName="' . $record[ 'rom_name' ] . '" data-season="' . $record[ 'season' ] . '"></button>';
                      }
+                     $maxWatch = 0;
+                     while ( $record3 = mysqli_fetch_assoc( $result3 ) ) {
+                        if ( $maxWatch < $record3[ 'watched' ] ) {
+                           $maxWatch = $record3[ 'watched' ];
+                        }
+                     }
+                     if ( $maxWatch <= 1 ) {
+                        echo '<p class="checkbox-text">&#10003;</p>';
+                     } else if ( $maxWatch < 10 ) {
+                        echo '<p class="checkbox-text" style="font-size: 25px; margin: 3px -30px;">x' . $maxWatch . '</p>';
+                     } else if ( $maxWatch < 100 ) {
+                        echo '<p class="checkbox-text" style="font-size: 18px; margin: 7px -30px;">x' . $maxWatch . '</p>';
+                     } else if ( $maxWatch < 1000 ) {
+                        echo '<p class="checkbox-text" style="font-size: 13px; margin: 9px -30px;">x' . $maxWatch . '</p>';
+                     }
+                     echo '</div>';
                   }
+                  echo '</div>';
+                  echo '<div id="SpopupContainer" class="SpopupContainer">';
+                  echo '<div class="Spopup">';
+                  echo '<button class="SpopupBtn" onclick="SoptionSelected(1, ' . $number . ');">Watched Again</button>';
+                  echo '<button class="SpopupBtn" onclick="SoptionSelected(2, ' . $number . ');">Watched not Again</button>';
+                  echo '<button class="SpopupBtn" onclick="SoptionSelected(3, ' . $number . ');">Not Watched</button>';
+                  echo '</div>';
+                  echo '</div>';
                   echo '<div id="collapsible">';
                   echo '<input type="hidden" value="' . $record[ 'season' ] . '">';
                   echo '<div class="anime-left">';
@@ -118,7 +146,7 @@ include( $IPATH . "header.php" );
                      echo '<div class="i_l" style="display: flex;">';
                      echo '<a><strong>User Score:</strong></a>';
                      echo '<div class="dropdown">';
-                     echo '<select name="user_score">';
+                     echo '<select name="user_score" onchange="updateRank(\'' . $record[ 'rom_name' ] . '\', this);">';
                      echo '<option value="Select Score">Select Score</option>';
 
                      $options = array(
@@ -209,16 +237,11 @@ include( $IPATH . "header.php" );
                   echo '<div class="episode-section">';
                   for ( $i = 1; $i <= $record[ 'epi_num' ]; $i++ ) {
                      $record2 = mysqli_fetch_assoc( $result2 );
-                     echo '<div class="episode hidden">';
-                     echo '<div class="episode-thumbnail">';
                      $thumbnail = 'default.jpg';
                      if ( isset( $record2[ 'thumbnail' ] ) ) {
                         $thumbnail = $record2[ 'thumbnail' ];
                      }
-                     echo '<img src="../images/episodes/anime/' . $thumbnail . '" alt="Episode ' . $i . '">';
-                     echo '</div>';
-                     echo '<div class="episode-details">';
-                     echo '<div class="episode-info" id="' . $record[ 'season' ] . '">';
+
                      $epi_name = '';
                      if ( !is_null( $record2 ) ) {
                         if ( $record2[ 'name' ] !== NULL ) {
@@ -229,46 +252,57 @@ include( $IPATH . "header.php" );
                      } else {
                         $epi_name = 'Episode ' . $i;
                      }
-                     echo '<h3 class="episode-title">' . $epi_name . '</h3>';
-                     if ( isset( $_SESSION[ 'user' ] ) ) {
-                        echo '<input type="hidden" name="username" value="' . $_SESSION[ 'user' ] . '">';
 
-                        $query = "SELECT epi_num 
-                          FROM " . $_SESSION[ 'user' ] . "
-                          WHERE anime_name = '" . $record[ 'rom_name' ] . "' 
-                          AND anime_season = '" . $record[ 'season' ] . "'";
-                        $result3 = mysqli_query( $connect3, $query );
-                        $check = false;
-                        echo '<div>';
-                        while ( $record3 = mysqli_fetch_assoc( $result3 ) ) {
-                           if ( $record3[ 'epi_num' ] == $i ) {
-                              echo '<button class="checkbox-btn checked" onclick="openPopup(' . $i . ')"></button>';
-                              $check = true;
-                           }
-                        }
-                        if ( !$check ) {
-                           echo '<button class="checkbox-btn unchecked" onclick="openPopup(' . $i . ')"></button>';
-                        }
-                        echo '</div>';
-                     } else {
-                        echo '<input type="hidden" name="username" value="">';
-                     }
-                     echo '<input type="hidden" name="epi_num" value="' . $i . '">';
-                     echo '<input type="hidden" name="rom_name" value="' . $record[ 'rom_name' ] . '">';
                      $rel_date = '';
                      if ( isset( $record2[ 'release_date' ] ) ) {
                         $rel_date = new DateTime( $record2[ 'release_date' ] );
                         $rel_date = $rel_date->format( 'F j, Y' );
                      }
+
+                     echo '<div class="episode hidden" data-epiNum="' . $i . '" data-romName="' . $record[ 'rom_name' ] . '" data-season="' . $record[ 'season' ] . '" data-thumbnail="../images/episodes/anime/' . $thumbnail . '" data-epiName="' . $epi_name . '" data-relDate="' . $rel_date . '" onclick="showOverlay(this);">';
+
+                     echo '<div class="episode-thumbnail">';
+                     echo '<img src="../images/episodes/anime/' . $thumbnail . '" alt="Episode ' . $i . '">';
+                     echo '</div>';
+                     echo '<div class="episode-details">';
+                     echo '<div class="episode-info" id="' . $record[ 'season' ] . '">';
+                     echo '<h3 class="episode-title">' . $epi_name . '</h3>';
+                     if ( isset( $_SESSION[ 'user' ] ) ) {
+                        $query = "SELECT epi_num, watched 
+                          FROM " . $_SESSION[ 'user' ] . "
+                          WHERE anime_name = '" . $record[ 'rom_name' ] . "' 
+                          AND anime_season = '" . $record[ 'season' ] . "'";
+                        $result3 = mysqli_query( $connect3, $query );
+                        echo '<div class="check" onclick="incrementCheck(this);">';
+                        $watched = 0;
+                        while ( $record3 = mysqli_fetch_assoc( $result3 ) ) {
+                           if ( $record3[ 'epi_num' ] == $i ) {
+                              echo '<button class="checkbox-btn checked" data-epiNum="' . $i . '" data-romName="' . $record[ 'rom_name' ] . '" data-season="' . $record[ 'season' ] . '"></button>';
+                              $watched = $record3[ 'watched' ];
+                           }
+                        }
+                        if ( $watched === 0 ) {
+                           echo '<button class="checkbox-btn unchecked" data-epiNum="' . $i . '" data-romName="' . $record[ 'rom_name' ] . '" data-season="' . $record[ 'season' ] . '"></button>';
+                        }
+                        if ( $watched <= 1 ) {
+                           echo '<p class="checkbox-text">&#10003;</p>';
+                        } else if ( $watched < 10 ) {
+                           echo '<p class="checkbox-text" style="font-size: 25px; margin: 3px -30px;">x' . $watched . '</p>';
+                        } else if ( $watched < 100 ) {
+                           echo '<p class="checkbox-text" style="font-size: 18px; margin: 7px -30px;">x' . $watched . '</p>';
+                        } else if ( $watched < 1000 ) {
+                           echo '<p class="checkbox-text" style="font-size: 13px; margin: 9px -30px;">x' . $watched . '</p>';
+                        }
+                        echo '</div>';
+                     }
                      echo '<input type="hidden" name="release_date" value="' . $rel_date . '">';
                      echo '</div>';
                      echo '</div>';
                      echo '<div id="popupContainer" class="popupContainer">';
-                     echo '<div class="popup" onclick="closePopup(' . $i . ')">';
-                     echo '<br>';
-                     echo '<button class="popupBtn" onclick="optionSelected(1, ' . $i . ')">Watched Again</button>';
-                     echo '<button class="popupBtn" onclick="optionSelected(2, ' . $i . ')">Watched not Again</button>';
-                     echo '<button class="popupBtn" onclick="optionSelected(3, ' . $i . ')">Not Watched</button>';
+                     echo '<div class="popup">';
+                     echo '<button class="popupBtn" onclick="optionSelected(1, ' . $i . ', ' . $number . ');">Watched Again</button>';
+                     echo '<button class="popupBtn" onclick="optionSelected(2, ' . $i . ', ' . $number . ');">Watched not Again</button>';
+                     echo '<button class="popupBtn" onclick="optionSelected(3, ' . $i . ', ' . $number . ');">Not Watched</button>';
                      echo '</div>';
                      echo '</div>';
                      echo '</div>';
@@ -285,7 +319,6 @@ include( $IPATH . "header.php" );
          </div>
       </div>
       <script src="../js/seasonsCollapse.js"></script> 
-      <script src="../js/incPopup.js"></script> 
    </div>
 </div>
 </div>
@@ -296,11 +329,6 @@ echo '<div id="episodeOverlay">';
 echo '<input type="hidden" name="anime_name" value="">';
 echo '<input type="hidden" name="anime_season" value="">';
 echo '<input type="hidden" name="epi_num" value="">';
-if ( isset( $_SESSION[ 'user' ] ) ) {
-   echo '<input type="hidden" name="user" value="' . $_SESSION[ 'user' ] . '">';
-} else {
-   echo '<input type="hidden" name="user" value="">';
-}
 echo '<div id=overlayImg>';
 echo '<img>';
 echo '</div>';
@@ -327,7 +355,6 @@ if ( isset( $_SESSION[ 'user' ] ) ) {
 }
 ?>
 <script src="../js/episodeOverlay.js"></script> 
-<script src="../js/epiCheck.js"></script> 
-<script src="../js/changeRank.js"></script>
+<script src="../js/epiCheck.js"></script>
 </body>
 </html>

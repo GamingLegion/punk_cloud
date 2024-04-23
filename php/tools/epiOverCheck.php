@@ -5,7 +5,7 @@ $data = json_decode( file_get_contents( 'php://input' ), true );
 
 date_default_timezone_set( 'America/New_York' );
 $ins_date = date( "Y-m-d H:i:s" );
-$user = $data[ 'user' ];
+$user = $_SESSION['user'];
 $i = $data[ 'epi_num' ];
 $rom_name = $data[ 'rom_name' ];
 $season = $data[ 'season' ];

@@ -29,12 +29,13 @@ if ( $check ) {
    mysqli_query( $connect, "UPDATE users SET icon = 'default.png' WHERE username = '$username'" );
    
    $sql = "CREATE TABLE $username (
-    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    id INT(255) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     ins_date DATETIME,
-    epi_num SMALLINT(4) NOT NULL,
+    epi_num SMALLINT(8) UNSIGNED,
     anime_name VARCHAR(255),
     anime_season VARCHAR(255),
-    season_rank TINYINT(4)
+    season_rank TINYINT(2) UNSIGNED,
+    watched SMALLINT(4) UNSIGNED DEFAULT 1
     )";
    mysqli_query($connect2, $sql);
    header( "Location: http://localhost/PunkCloud/php/home.php" );

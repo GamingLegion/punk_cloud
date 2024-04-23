@@ -4,7 +4,7 @@ $connect = mysqli_connect( 'localhost', 'root', 'theallseeingeyes', 'punkcloud_u
 $connect2 = mysqli_connect( 'localhost', 'root', 'theallseeingeyes', 'punkcloud' );
 $data = json_decode( file_get_contents( 'php://input' ), true );
 
-$user = $data[ 'user' ];
+$user = $_SESSION['user'];
 $season = $data[ 'season' ];
 $rank = $data[ 'rank' ];
 
