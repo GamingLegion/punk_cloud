@@ -13,6 +13,6 @@ if ( $field == 'start_date' || $field == 'end_date' ) {
    $value = date( "Y-m-d", strtotime( $value ) );;
 }
 
-mysqli_query( $connect, "UPDATE anime_shows SET $field = '$value', upd_date = '$upd_date' WHERE rom_name = '$name' AND season = '$season'" );
+mysqli_query( $connect, "UPDATE anime SET $field = '$value', upd_date = '$upd_date' WHERE rom_name = '$name' AND season = '$season'" );
 mysqli_close( $connect );
 ?>

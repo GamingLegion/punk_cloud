@@ -14,12 +14,12 @@ if ( $field == 'release_date' ) {
    $value = date( "Y-m-d", strtotime( $value ) );;
 }
 if($value == '') {
-mysqli_query( $connect, "UPDATE anime_shows 
+mysqli_query( $connect, "UPDATE anime
                         SET $field = NULL
                         WHERE name = '$name' 
                         OR (anime_name = '$anime_name' AND anime_season = '$anime_season' AND epi_num = $epi_num)" );
 } else {
-mysqli_query( $connect, "UPDATE anime_shows 
+mysqli_query( $connect, "UPDATE anime 
                         SET $field = '$value'
                         WHERE name = '$name' 
                         OR (anime_name = '$anime_name' AND anime_season = '$anime_season' AND epi_num = $epi_num)" );

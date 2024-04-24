@@ -29,13 +29,13 @@ if ( mysqli_num_rows( $result ) > 0 ) {
          $result = mysqli_query( $connect, "SELECT id FROM $user WHERE epi_num = $i AND anime_name = '$rom_name' AND anime_season = '$season'" );
          $record = mysqli_fetch_assoc( $result );
          if ( mysqli_num_rows( $result ) < 1 ) {
-            $result2 = mysqli_query( $connect2, "SELECT id, addedScore, numOfRanks, addedWatch FROM anime_shows WHERE rom_name = '$rom_name' AND season = '$season'" );
+            $result2 = mysqli_query( $connect2, "SELECT id, addedScore, numOfRanks, addedWatch FROM anime WHERE rom_name = '$rom_name' AND season = '$season'" );
             $record2 = mysqli_fetch_assoc( $result2 );
             $score = ( isset( $record2[ 'addedScore' ] ) ? $record2[ 'addedScore' ] : 0 ) - $rank;
             $rankNum = ( isset( $record2[ 'numOfRanks' ] ) ? $record2[ 'numOfRanks' ] : 0 ) - 1;
             $watchNum = ( isset( $record2[ 'addedWatch' ] ) ? $record2[ 'addedWatch' ] : 0 ) - 1;
 
-            mysqli_query( $connect2, "UPDATE anime_shows SET addedScore = $score, numOfRanks = $rankNum, addedWatch = $watchNum WHERE id = ".$record2['id']);
+            mysqli_query( $connect2, "UPDATE anime SET addedScore = $score, numOfRanks = $rankNum, addedWatch = $watchNum WHERE id = ".$record2['id']);
          }
       }
    }

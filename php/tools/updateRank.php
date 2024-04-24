@@ -20,7 +20,7 @@ if ( isset( $record[ 'anime_name' ] ) ) {
       mysqli_query( $connect, "UPDATE $user SET season_rank = NULL WHERE anime_name = '$season'" );
    }
 
-   $result2 = mysqli_query( $connect2, "SELECT addedScore, numOfRanks FROM anime_shows WHERE rom_name = '$season'" );
+   $result2 = mysqli_query( $connect2, "SELECT addedScore, numOfRanks FROM anime WHERE rom_name = '$season'" );
    $record2 = mysqli_fetch_assoc( $result2 );
    $score = ( isset( $record2[ 'addedScore' ] ) ) ? $record2[ 'addedScore' ] : 0;
    $score -= $old_rank;
@@ -34,7 +34,7 @@ if ( isset( $record[ 'anime_name' ] ) ) {
       $num++;
    }
 
-   mysqli_query( $connect2, "UPDATE anime_shows SET addedScore = $score, numOfRanks = $num WHERE rom_name = '$season'" );
+   mysqli_query( $connect2, "UPDATE anime SET addedScore = $score, numOfRanks = $num WHERE rom_name = '$season'" );
 }
 
 mysqli_close( $connect );

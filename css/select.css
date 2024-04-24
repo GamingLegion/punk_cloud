@@ -1,0 +1,26 @@
+/* Add any custom CSS styles here */
+.select2-selection__choice {
+   display: flex;
+   align-items: center;
+   padding-right: 5px;
+}
+.select2-selection__choice__remove {
+   margin-left: 5px;
+   margin-right: 5px;
+   cursor: pointer;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__rendered {
+   display: flex;
+   flex-wrap: wrap;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+   background-color: #007bff;
+   color: black;
+   border: none;
+   border-radius: 20px;
+   padding: 3px 10px;
+   margin: 2px;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+   color: red;
+}

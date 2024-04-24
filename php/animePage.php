@@ -22,7 +22,7 @@ include( $IPATH . "header.php" );
             <?php
             $connect = mysqli_connect( 'localhost', 'root', 'theallseeingeyes', 'punkcloud' );
             $name = isset( $_GET[ 'link' ] ) ? $_GET[ 'link' ] : 'default';
-            $result = mysqli_query( $connect, "SELECT image FROM anime_shows WHERE rom_name='" . $name . "'" );
+            $result = mysqli_query( $connect, "SELECT image FROM anime WHERE rom_name='" . $name . "'" );
             $record = mysqli_fetch_assoc( $result );
 
             echo '<img src="../images/arts/anime/' . $record[ 'image' ] . '" id="image">';
@@ -33,7 +33,7 @@ include( $IPATH . "header.php" );
             <?php
             $connect = mysqli_connect( 'localhost', 'root', 'theallseeingeyes', 'punkcloud' );
             $name = isset( $_GET[ 'link' ] ) ? $_GET[ 'link' ] : 'default';
-            $result = mysqli_query( $connect, "SELECT eng_name, rom_name FROM anime_shows WHERE rom_name='" . $name . "'" );
+            $result = mysqli_query( $connect, "SELECT eng_name, rom_name FROM anime WHERE rom_name='" . $name . "'" );
             $record = mysqli_fetch_assoc( $result );
 
             echo '<div class="anime-name">';
@@ -61,7 +61,7 @@ include( $IPATH . "header.php" );
             $connect3 = mysqli_connect( 'localhost', 'root', 'theallseeingeyes', 'punkcloud_users' );
 
             $name = isset( $_GET[ 'link' ] ) ? $_GET[ 'link' ] : 'default';
-            $result = mysqli_query( $connect, "SELECT rom_name, image, series, season, epi_num, start_date, end_date, air_season, brodcast, producers, licensors, studios, addedScore, numOfRanks, addedWatch, mangaChaps, lnChaps, wnChaps FROM anime_shows WHERE series = '" . $name . "' ORDER BY season" );
+            $result = mysqli_query( $connect, "SELECT rom_name, image, series, season, epi_num, start_date, end_date, air_season, brodcast, producers, licensors, studios, addedScore, numOfRanks, addedWatch, mangaChaps, lnChaps, wnChaps FROM anime WHERE series = '" . $name . "' ORDER BY season" );
 
             $number = 0;
             while ( $record = mysqli_fetch_assoc( $result ) ) {
@@ -127,7 +127,7 @@ include( $IPATH . "header.php" );
                   }
                   $popularity = '-';
                   if ( isset( $record[ 'addedWatch' ] ) && $record[ 'addedWatch' ] > 0 ) {
-                     $resTemp = mysqli_query( $connect, "SELECT addedWatch FROM anime_shows ORDER BY addedWatch DESC, rom_name ASC" );
+                     $resTemp = mysqli_query( $connect, "SELECT addedWatch FROM anime ORDER BY addedWatch DESC, rom_name ASC" );
                      $iTemp = 0;
                      while ( $recTemp = mysqli_fetch_assoc( $resTemp ) ) {
                         $iTemp++;
@@ -272,7 +272,7 @@ include( $IPATH . "header.php" );
                   echo '</div>';
 
                   $result2 = mysqli_query( $connect2, "SELECT name, thumbnail, release_date
-                  FROM anime_shows 
+                  FROM anime 
                   WHERE anime_series = '" . $name . "' 
                   AND anime_season = '" . $record[ 'season' ] . "' 
                   ORDER BY epi_num" );

@@ -17,7 +17,7 @@ include( $IPATH . "header.php" );
 <div class="new_added">
    <?php
    $connect = mysqli_connect( 'localhost', 'root', 'theallseeingeyes', 'punkcloud' );
-   $result = mysqli_query( $connect, 'Select eng_name, rom_name, image, series FROM anime_shows ORDER BY ins_date DESC' );
+   $result = mysqli_query( $connect, 'Select eng_name, rom_name, image, series FROM anime ORDER BY ins_date DESC' );
 
    for ( $i = 0; $i < 9; $i++ ) {
       $record = mysqli_fetch_assoc( $result );
@@ -41,7 +41,7 @@ include( $IPATH . "header.php" );
 <div class="new_added">
    <?php
    $connect = mysqli_connect( 'localhost', 'root', 'theallseeingeyes', 'punkcloud' );
-   $result = mysqli_query( $connect, 'Select eng_name, rom_name, image, series FROM anime_shows ORDER BY upd_date DESC' );
+   $result = mysqli_query( $connect, 'Select eng_name, rom_name, image, series FROM anime ORDER BY upd_date DESC' );
 
    for ( $i = 0; $i < 9; $i++ ) {
       $record = mysqli_fetch_assoc( $result );
