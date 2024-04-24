@@ -114,7 +114,7 @@ include( $IPATH . "header.php" );
                   echo '<img src="../images/arts/anime/' . $record[ 'image' ] . '" id="image">';
                   echo '<div class="info_line" style="text-align: center;">';
                   echo '<a><strong></strong></a>';
-                  echo '<a class="info" id="season_name" data-season="'.$record[ 'season' ].'">' . $record[ 'rom_name' ] . '</a>';
+                  echo '<a class="info" id="season_name" data-season="' . $record[ 'season' ] . '">' . $record[ 'rom_name' ] . '</a>';
                   echo '</div>';
                   echo '</div>';
 
@@ -185,6 +185,7 @@ include( $IPATH . "header.php" );
                   echo '</div>';
                   echo '</div>';
 
+                  
                   echo '<button class="season_info">Show Season Info</button>';
                   echo '<div class="anime-description" style="display: none;">';
                   echo '<div class="info_line">';
@@ -194,7 +195,7 @@ include( $IPATH . "header.php" );
                      $start_date = new DateTime( $record[ 'start_date' ] );
                      $start_date = $start_date->format( 'F j, Y' );
                   }
-                  echo '<a class="info" id="start_date" data-season="'.$record[ 'season' ].'">' . $start_date . '</a>';
+                  echo '<a class="info" id="start_date" data-season="' . $record[ 'season' ] . '">' . $start_date . '</a>';
                   echo '</div>';
                   echo '<div class="info_line">';
                   echo '<a><strong>End Date:</strong></a>';
@@ -203,34 +204,34 @@ include( $IPATH . "header.php" );
                      $end_date = new DateTime( $record[ 'end_date' ] );
                      $end_date = $end_date->format( 'F j, Y' );
                   }
-                  echo '<a class="info" id="end_date" data-season="'.$record[ 'season' ].'">' . $end_date . '</a>';
+                  echo '<a class="info" id="end_date" data-season="' . $record[ 'season' ] . '">' . $end_date . '</a>';
                   echo '</div>';
                   echo '<div class="info_line">';
                   echo '<a><strong>Air Season:</strong></a>';
-                  echo '<a class="info" id="air_season" data-season="'.$record[ 'season' ].'">' . $record[ 'air_season' ] . '</a>';
+                  echo '<a class="info" id="air_season" data-season="' . $record[ 'season' ] . '">' . $record[ 'air_season' ] . '</a>';
                   echo '</div>';
                   echo '<div class="info_line">';
                   echo '<a><strong>Brodcast:</strong></a>';
-                  echo '<a class="info" id="brodcsat" data-season="'.$record[ 'season' ].'">' . $record[ 'brodcast' ] . '</a>';
+                  echo '<a class="info" id="brodcsat" data-season="' . $record[ 'season' ] . '">' . $record[ 'brodcast' ] . '</a>';
                   echo '</div>';
                   echo '<div class="info_line" id="prods">';
                   echo '<a><strong>Producer(s):</strong></a>';
                   $prods = $record[ 'producers' ];
                   if ( $prods !== NULL ) {
                      while ( strpos( $prods, ',' ) !== false ) {
-                        echo '<a class="info" id="producers" data-season="'.$record[ 'season' ].'">' . substr( $prods, 0, strpos( $prods, ',' ) + 2 ) . '</a>';
+                        echo '<a class="info" id="producers" data-season="' . $record[ 'season' ] . '">' . substr( $prods, 0, strpos( $prods, ',' ) + 2 ) . '</a>';
                         $prods = substr( $prods, strpos( $prods, ',' ) + 2 );
                      }
                   }
-                  echo '<a class="info" id="producers" data-season="'.$record[ 'season' ].'">' . $prods . '</a>';
+                  echo '<a class="info" id="producers" data-season="' . $record[ 'season' ] . '">' . $prods . '</a>';
                   echo '</div>';
                   echo '<div class="info_line">';
                   echo '<a><strong>Licensor(s):</strong></a>';
-                  echo '<a class="info" id="licensors" data-season="'.$record[ 'season' ].'">' . $record[ 'licensors' ] . '' . '</a>';
+                  echo '<a class="info" id="licensors" data-season="' . $record[ 'season' ] . '">' . $record[ 'licensors' ] . '' . '</a>';
                   echo '</div>';
                   echo '<div class="info_line">';
                   echo '<a><strong>Studio:</strong></a>';
-                  echo '<a class="info" id="studios" data-season="'.$record[ 'season' ].'">' . $record[ 'studios' ] . '</a>';
+                  echo '<a class="info" id="studios" data-season="' . $record[ 'season' ] . '">' . $record[ 'studios' ] . '</a>';
                   echo '</div>';
                   if ( isset( $_SESSION[ 'user' ] ) && $_SESSION[ 'user' ] === 'oracle' ) {
                      $mCs = isset( $record[ 'mangaChaps' ] ) ? $record[ 'mangaChaps' ] : '-';
@@ -238,15 +239,15 @@ include( $IPATH . "header.php" );
                      $wnCs = isset( $record[ 'wnChaps' ] ) ? $record[ 'wnChaps' ] : '-';
                      echo '<div class="info_line">';
                      echo '<a><strong>Manga Chapters:</strong></a>';
-                     echo '<a class="info" id="mangaChaps" data-season="'.$record[ 'season' ].'">' . $mCs . '</a>';
+                     echo '<a class="info" id="mangaChaps" data-season="' . $record[ 'season' ] . '">' . $mCs . '</a>';
                      echo '</div>';
                      echo '<div class="info_line">';
                      echo '<a><strong>Light Novel Chapters:</strong></a>';
-                     echo '<a class="info" id="lnChaps" data-season="'.$record[ 'season' ].'">' . $lnCs . '</a>';
+                     echo '<a class="info" id="lnChaps" data-season="' . $record[ 'season' ] . '">' . $lnCs . '</a>';
                      echo '</div>';
                      echo '<div class="info_line">';
                      echo '<a><strong>Web Novel Chapters:</strong></a>';
-                     echo '<a class="info" id="wnChaps" data-season="'.$record[ 'season' ].'">' . $wnCs . '</a>';
+                     echo '<a class="info" id="wnChaps" data-season="' . $record[ 'season' ] . '">' . $wnCs . '</a>';
                      echo '</div>';
                   } else {
                      if ( isset( $record[ 'mangaChaps' ] ) && $record[ 'mangaChaps' ] > 0 ) {

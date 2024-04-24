@@ -36,12 +36,16 @@ document.addEventListener("DOMContentLoaded", function () {
       });
    } else if (collapsibles.length === 1) {
       var left = document.querySelector(".anime-left");
-      var info = document.querySelector(".season_info");
+      var btn = document.querySelector("button.season_info");
+      var info = document.querySelectorAll(".anime-description");
       var episodeSection = document.querySelector(".episode-section");
       var episodeItems = episodeSection.querySelectorAll(".episode");
 
       left.style.display = "block";
-      info.style.display = "block";
+      btn.style.display = "none";
+      info.forEach(function(i) {
+         i.style.display = "block";
+      });
       episodeSection.style.display = "block";
 
       episodeItems.forEach(function (item, index) {
