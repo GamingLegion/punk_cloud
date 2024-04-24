@@ -61,7 +61,7 @@ include( $IPATH . "header.php" );
             $connect3 = mysqli_connect( 'localhost', 'root', 'theallseeingeyes', 'punkcloud_users' );
 
             $name = isset( $_GET[ 'link' ] ) ? $_GET[ 'link' ] : 'default';
-            $result = mysqli_query( $connect, "SELECT rom_name, image, series, season, epi_num, start_date, end_date, air_season, brodcast, producers, licensors, studios, addedScore, numOfRanks, addedWatch FROM anime_shows WHERE series = '" . $name . "' ORDER BY season" );
+            $result = mysqli_query( $connect, "SELECT rom_name, image, series, season, epi_num, start_date, end_date, air_season, brodcast, producers, licensors, studios, addedScore, numOfRanks, addedWatch, mangaChaps, lnChaps, wnChaps FROM anime_shows WHERE series = '" . $name . "' ORDER BY season" );
 
             $number = 0;
             while ( $record = mysqli_fetch_assoc( $result ) ) {
@@ -114,20 +114,28 @@ include( $IPATH . "header.php" );
                   echo '<img src="../images/arts/anime/' . $record[ 'image' ] . '" id="image">';
                   echo '<div class="info_line" style="text-align: center;">';
                   echo '<a><strong></strong></a>';
-                  echo '<a class="info" id="season_name">' . $record[ 'rom_name' ] . '</a>';
+                  echo '<a class="info" id="season_name" data-season="'.$record[ 'season' ].'">' . $record[ 'rom_name' ] . '</a>';
                   echo '</div>';
                   echo '</div>';
 
-                  $score = 0;
-                  $popularity = 0;
+                  $score = '-';
                   if ( isset( $record[ 'addedScore' ] ) && isset( $record[ 'numOfRanks' ] ) ) {
                      if ( $record[ 'numOfRanks' ] > 0 ) {
                         $score = $record[ 'addedScore' ] / $record[ 'numOfRanks' ];
                         $score = number_format( $score, 2 );
                      }
                   }
-                  if ( isset( $record[ 'addedWatch' ] ) ) {
-                     $popularity = $record[ 'addedWatch' ];
+                  $popularity = '-';
+                  if ( isset( $record[ 'addedWatch' ] ) && $record[ 'addedWatch' ] > 0 ) {
+                     $resTemp = mysqli_query( $connect, "SELECT addedWatch FROM anime_shows ORDER BY addedWatch DESC, rom_name ASC" );
+                     $iTemp = 0;
+                     while ( $recTemp = mysqli_fetch_assoc( $resTemp ) ) {
+                        $iTemp++;
+                        if ( $recTemp[ 'addedWatch' ] === $record[ 'addedWatch' ] ) {
+                           $popularity = $iTemp;
+                           break;
+                        }
+                     }
                   }
                   echo '<div class="anime-description">';
                   echo '<div class="i_l">';
@@ -181,51 +189,85 @@ include( $IPATH . "header.php" );
                   echo '<div class="anime-description" style="display: none;">';
                   echo '<div class="info_line">';
                   echo '<a><strong>Start Date:</strong></a>';
+                  $start_date = '';
                   if ( $record[ 'start_date' ] !== NULL ) {
                      $start_date = new DateTime( $record[ 'start_date' ] );
                      $start_date = $start_date->format( 'F j, Y' );
-                     echo '<a class="info" id="start_date">' . $start_date . '</a>';
-                  } else {
-                     echo '<a class="info" id="start_date"></a>';
                   }
+                  echo '<a class="info" id="start_date" data-season="'.$record[ 'season' ].'">' . $start_date . '</a>';
                   echo '</div>';
                   echo '<div class="info_line">';
                   echo '<a><strong>End Date:</strong></a>';
+                  $end_date = '';
                   if ( $record[ 'end_date' ] !== NULL ) {
                      $end_date = new DateTime( $record[ 'end_date' ] );
                      $end_date = $end_date->format( 'F j, Y' );
-                     echo '<a class="info" id="end_date">' . $end_date . '</a>';
-                  } else {
-                     echo '<a class="info" id="end_date"></a>';
                   }
+                  echo '<a class="info" id="end_date" data-season="'.$record[ 'season' ].'">' . $end_date . '</a>';
                   echo '</div>';
                   echo '<div class="info_line">';
                   echo '<a><strong>Air Season:</strong></a>';
-                  echo '<a class="info" id="air_season">' . $record[ 'air_season' ] . '</a>';
+                  echo '<a class="info" id="air_season" data-season="'.$record[ 'season' ].'">' . $record[ 'air_season' ] . '</a>';
                   echo '</div>';
                   echo '<div class="info_line">';
                   echo '<a><strong>Brodcast:</strong></a>';
-                  echo '<a class="info" id="brodcsat">' . $record[ 'brodcast' ] . '</a>';
+                  echo '<a class="info" id="brodcsat" data-season="'.$record[ 'season' ].'">' . $record[ 'brodcast' ] . '</a>';
                   echo '</div>';
                   echo '<div class="info_line" id="prods">';
                   echo '<a><strong>Producer(s):</strong></a>';
                   $prods = $record[ 'producers' ];
                   if ( $prods !== NULL ) {
                      while ( strpos( $prods, ',' ) !== false ) {
-                        echo '<a class="info" id="producers">' . substr( $prods, 0, strpos( $prods, ',' ) + 2 ) . '</a>';
+                        echo '<a class="info" id="producers" data-season="'.$record[ 'season' ].'">' . substr( $prods, 0, strpos( $prods, ',' ) + 2 ) . '</a>';
                         $prods = substr( $prods, strpos( $prods, ',' ) + 2 );
                      }
                   }
-                  echo '<a class="info" id="producers">' . $prods . '</a>';
+                  echo '<a class="info" id="producers" data-season="'.$record[ 'season' ].'">' . $prods . '</a>';
                   echo '</div>';
                   echo '<div class="info_line">';
                   echo '<a><strong>Licensor(s):</strong></a>';
-                  echo '<a class="info" id="licensors">' . $record[ 'licensors' ] . '' . '</a>';
+                  echo '<a class="info" id="licensors" data-season="'.$record[ 'season' ].'">' . $record[ 'licensors' ] . '' . '</a>';
                   echo '</div>';
                   echo '<div class="info_line">';
                   echo '<a><strong>Studio:</strong></a>';
-                  echo '<a class="info" id="studios">' . $record[ 'studios' ] . '</a>';
+                  echo '<a class="info" id="studios" data-season="'.$record[ 'season' ].'">' . $record[ 'studios' ] . '</a>';
                   echo '</div>';
+                  if ( isset( $_SESSION[ 'user' ] ) && $_SESSION[ 'user' ] === 'oracle' ) {
+                     $mCs = isset( $record[ 'mangaChaps' ] ) ? $record[ 'mangaChaps' ] : '-';
+                     $lnCs = isset( $record[ 'lnChaps' ] ) ? $record[ 'lnChaps' ] : '-';
+                     $wnCs = isset( $record[ 'wnChaps' ] ) ? $record[ 'wnChaps' ] : '-';
+                     echo '<div class="info_line">';
+                     echo '<a><strong>Manga Chapters:</strong></a>';
+                     echo '<a class="info" id="mangaChaps" data-season="'.$record[ 'season' ].'">' . $mCs . '</a>';
+                     echo '</div>';
+                     echo '<div class="info_line">';
+                     echo '<a><strong>Light Novel Chapters:</strong></a>';
+                     echo '<a class="info" id="lnChaps" data-season="'.$record[ 'season' ].'">' . $lnCs . '</a>';
+                     echo '</div>';
+                     echo '<div class="info_line">';
+                     echo '<a><strong>Web Novel Chapters:</strong></a>';
+                     echo '<a class="info" id="wnChaps" data-season="'.$record[ 'season' ].'">' . $wnCs . '</a>';
+                     echo '</div>';
+                  } else {
+                     if ( isset( $record[ 'mangaChaps' ] ) && $record[ 'mangaChaps' ] > 0 ) {
+                        echo '<div class="info_line">';
+                        echo '<a><strong>Manga Chapters:</strong></a>';
+                        echo '<a class="info" id="mangaChaps">Chs ' . $record[ 'mangaChaps' ] . '</a>';
+                        echo '</div>';
+                     }
+                     if ( isset( $record[ 'lnChaps' ] ) && $record[ 'lnChaps' ] > 0 ) {
+                        echo '<div class="info_line">';
+                        echo '<a><strong>Light Novel Chapters:</strong></a>';
+                        echo '<a class="info" id="lnChaps">Chs ' . $record[ 'lnChaps' ] . '</a>';
+                        echo '</div>';
+                     }
+                     if ( isset( $record[ 'wnChaps' ] ) && $record[ 'wnChaps' ] > 0 ) {
+                        echo '<div class="info_line">';
+                        echo '<a><strong>Web Novel Chapters:</strong></a>';
+                        echo '<a class="info" id="wnChaps">Chs ' . $record[ 'wnChaps' ] . '</a>';
+                        echo '</div>';
+                     }
+                  }
                   echo '</div>';
                   echo '</div>';
 
@@ -273,7 +315,7 @@ include( $IPATH . "header.php" );
                           WHERE anime_name = '" . $record[ 'rom_name' ] . "' 
                           AND anime_season = '" . $record[ 'season' ] . "'";
                         $result3 = mysqli_query( $connect3, $query );
-                        echo '<div class="check" onclick="incrementCheck(this, '.$number.');">';
+                        echo '<div class="check" onclick="incrementCheck(this, ' . $number . ');">';
                         $watched = 0;
                         while ( $record3 = mysqli_fetch_assoc( $result3 ) ) {
                            if ( $record3[ 'epi_num' ] == $i ) {
@@ -354,7 +396,7 @@ if ( isset( $_SESSION[ 'user' ] ) ) {
    }
 }
 ?>
-<script src="../js/episodeOverlay.js"></script>
+<script src="../js/episodeOverlay.js"></script> 
 <script src="../js/epiCheck.js"></script>
 </body>
 </html>

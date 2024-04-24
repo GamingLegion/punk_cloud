@@ -2,27 +2,28 @@
 var infoLines = document.querySelectorAll('.info_line');
 infoLines.forEach(function (infoLine) {
    var firstParagraph = infoLine.querySelector('a');
-   var secondParagraph = infoLine.querySelectorAll('a')[1];
+   var secondParagraph = infoLine.querySelector('.info');
    var editButton = document.createElement('button');
    editButton.id = 'editBtn';
    editButton.textContent = 'Edit';
    editButton.onclick = function () {
       var newValue = prompt('Enter new value for ' + firstParagraph.textContent, secondParagraph.textContent);
       if (newValue !== null) {
-         updateField(secondParagraph.id, newValue);
+         updateField(secondParagraph.id, secondParagraph.getAttribute("data-season"),  newValue);
       }
    };
 
    infoLine.insertBefore(editButton, firstParagraph);
 });
 
-function updateField(fieldName, newValue) {
+function updateField(fieldName, season, newValue) {
    var name = window.location.href;
    name = decodeURIComponent(name);
    name = name.substring(name.lastIndexOf('=') + 1);
 
    var data = {
       name: name,
+      season: season,
       field: fieldName,
       value: newValue
    };
