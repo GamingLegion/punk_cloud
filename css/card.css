@@ -4,7 +4,7 @@
    display: inline-block;
    border: 2px solid #ccc;
    margin: 7px 9px;
-   width: 185px;
+   min-width: 185px;
    height: 255px;
    overflow: hidden;
 }

@@ -1,7 +1,7 @@
 /* CSS Document */
 .new_added {
    display: flex;
-   flex-wrap: wrap;
+   overflow-x: hidden;
 }
 h1 {
    color: white;
