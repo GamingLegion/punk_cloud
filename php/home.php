@@ -1,5 +1,5 @@
 <!doctype html>
-<html style="background-color: #222425">
+<html lang="en" style="background-color: #222425">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">

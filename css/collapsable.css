@@ -39,28 +39,11 @@
    font-size: 30px;
    cursor: pointer;
 }
-.SpopupContainer {
+.popupContainer[data-val="c"] {
    display: none;
    position: absolute;
    left: 79%;
    margin: -30px -5px;
-}
-.Spopup {
-   background-color: #353839;
-   border: 1px solid #434748;
-   padding: 3px;
-   border-radius: 5px;
-   display: flex;
-   flex-direction: column;
-}
-.Spopup button {
-   margin: 3px 0;
-   background-color: #9C89B8;
-   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-.Spopup button:hover {
-   background-color: #51406B;
-   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.75);
 }
 .anime-left {
    display: none;

@@ -71,7 +71,7 @@ include( $IPATH . "header.php" );
                   echo '<div class="collapsible-btn-wrapper">';
                   echo '<button class="collapsible-btn"><strong>' . $record[ 'season' ] . '</strong></button>';
                   if ( isset( $_SESSION[ 'user' ] ) ) {
-                     echo '<div class="section-check-wrapper" data-value="' . $number . '" onclick="incrementSCheck(this);">';
+                     echo '<div class="section-check-wrapper" data-value="' . $number . '" onclick="incrementCheck(this);">';
                      $query = "SELECT epi_num, watched 
                           FROM " . $_SESSION[ 'user' ] . "
                           WHERE anime_name = '" . $record[ 'rom_name' ] . "' 
@@ -82,29 +82,29 @@ include( $IPATH . "header.php" );
                      } else {
                         echo '<button class="checkbox-btn unchecked" id="sectionCheck" data-romName="' . $record[ 'rom_name' ] . '" data-season="' . $record[ 'season' ] . '"></button>';
                      }
-                     $maxWatch = 0;
+                     $minWatch = 0;
                      while ( $record3 = mysqli_fetch_assoc( $result3 ) ) {
-                        if ( $maxWatch < $record3[ 'watched' ] ) {
-                           $maxWatch = $record3[ 'watched' ];
+                        if ( $minWatch > $record3[ 'watched' ] ) {
+                           $minWatch = $record3[ 'watched' ];
                         }
                      }
-                     if ( $maxWatch <= 1 ) {
+                     if ( $minWatch <= 1 ) {
                         echo '<p class="checkbox-text">&#10003;</p>';
-                     } else if ( $maxWatch < 10 ) {
-                        echo '<p class="checkbox-text" style="font-size: 25px; margin: 3px -30px;">x' . $maxWatch . '</p>';
-                     } else if ( $maxWatch < 100 ) {
-                        echo '<p class="checkbox-text" style="font-size: 18px; margin: 7px -30px;">x' . $maxWatch . '</p>';
-                     } else if ( $maxWatch < 1000 ) {
-                        echo '<p class="checkbox-text" style="font-size: 13px; margin: 9px -30px;">x' . $maxWatch . '</p>';
+                     } else if ( $minWatch < 10 ) {
+                        echo '<p class="checkbox-text" style="font-size: 25px; margin: 3px -30px;">x' . $minWatch . '</p>';
+                     } else if ( $minWatch < 100 ) {
+                        echo '<p class="checkbox-text" style="font-size: 18px; margin: 7px -30px;">x' . $minWatch . '</p>';
+                     } else if ( $minWatch < 1000 ) {
+                        echo '<p class="checkbox-text" style="font-size: 13px; margin: 9px -30px;">x' . $minWatch . '</p>';
                      }
                      echo '</div>';
                   }
                   echo '</div>';
-                  echo '<div id="SpopupContainer" class="SpopupContainer">';
-                  echo '<div class="Spopup">';
-                  echo '<button class="SpopupBtn" onclick="SoptionSelected(1, ' . $number . ');">Watched Again</button>';
-                  echo '<button class="SpopupBtn" onclick="SoptionSelected(2, ' . $number . ');">Watched not Again</button>';
-                  echo '<button class="SpopupBtn" onclick="SoptionSelected(3, ' . $number . ');">Not Watched</button>';
+                  echo '<div id="popupContainer" class="popupContainer" data-val="c">';
+                  echo '<div class="popup">';
+                  echo '<button class="popupBtn" onclick="SoptionSelected(1,' . $number . ');">Watched Again</button>';
+                  echo '<button class="popupBtn" onclick="SoptionSelected(2, ' . $number . ');">Watched not Again</button>';
+                  echo '<button class="popupBtn" onclick="SoptionSelected(3, ' . $number . ');">Not Watched</button>';
                   echo '</div>';
                   echo '</div>';
                   echo '<div id="collapsible">';
@@ -185,7 +185,7 @@ include( $IPATH . "header.php" );
                   echo '</div>';
                   echo '</div>';
 
-                  
+
                   echo '<button class="season_info">Show Season Info</button>';
                   echo '<div class="anime-description" style="display: none;">';
                   echo '<div class="info_line">';
@@ -341,13 +341,23 @@ include( $IPATH . "header.php" );
                      echo '<input type="hidden" name="release_date" value="' . $rel_date . '">';
                      echo '</div>';
                      echo '</div>';
-                     echo '<div id="popupContainer" class="popupContainer">';
+                     echo '<div id="popupContainer" class="popupContainer" data-val="a">';
+                     echo '<div class="popup">';
+                     echo '<button class="popupBtn" onclick="optionSelected(4, ' . $i . ', ' . $number . ');">Check Previous?</button>';
+                     echo '</div>';
+                     echo '</div>';
+                     echo '<div id="popupContainer" class="popupContainer" data-val="b">';
                      echo '<div class="popup">';
                      echo '<button class="popupBtn" onclick="optionSelected(1, ' . $i . ', ' . $number . ');">Watched Again</button>';
                      echo '<button class="popupBtn" onclick="optionSelected(2, ' . $i . ', ' . $number . ');">Watched not Again</button>';
                      echo '<button class="popupBtn" onclick="optionSelected(3, ' . $i . ', ' . $number . ');">Not Watched</button>';
                      echo '</div>';
                      echo '</div>';
+                     echo '</div>';
+                  }
+                  if ( isset( $_SESSION[ 'user' ] ) && $_SESSION[ 'user' ] == 'oracle' ) {
+                     echo '<div class="addEpisode" data-epiNum="' . $record[ 'epi_num' ] + 1 . '" data-val="' . $number . '" onclick="addEpisode(this);">';
+                     echo '<p>+</p>';
                      echo '</div>';
                   }
                   echo '</div>';
@@ -362,6 +372,7 @@ include( $IPATH . "header.php" );
          </div>
       </div>
       <script src="../js/seasonsCollapse.js"></script> 
+      <script src="../js/addEpi.js"></script> 
    </div>
 </div>
 </div>

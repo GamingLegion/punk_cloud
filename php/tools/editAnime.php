@@ -1,6 +1,6 @@
 <?php
-$data = json_decode( file_get_contents( 'php://input' ), true );
 $connect = mysqli_connect( 'localhost', 'root', 'theallseeingeyes', 'punkcloud' );
+$data = json_decode( file_get_contents( 'php://input' ), true );
 
 date_default_timezone_set( 'America/New_York' );
 $upd_date = date( "Y-m-d H:i:s" );

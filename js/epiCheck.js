@@ -11,36 +11,12 @@ button.addEventListener('click', function () {
 
 document.addEventListener("click", function (event) {
    var popups = document.querySelectorAll(".popupContainer");
-   var spopups = document.querySelectorAll(".SpopupContainer");
-   var showing = -1;
-   popups.forEach(function (pop, index) {
+   popups.forEach(function (pop) {
       if (pop.style.display === "block" && !event.target.matches('.checkbox-text') && !event.target.matches('.popup') && !event.target.matches('.popupBtn')) {
-         showing = index;
+         closePopup();
       }
    });
-   spopups.forEach(function (pop, index) {
-      if (pop.style.display === "block" && !event.target.matches('.checkbox-text') && !event.target.matches('.Spopup') && !event.target.matches('.SpopupBtn')) {
-         showing = index;
-      }
-   });
-
-   if (showing != -1) {
-      closePopup(showing + 1);
-      closeSPopup(showing + 1);
-   }
 });
-
-function sectionClick(button, number, rom_name, season) {
-   var epis = document.querySelectorAll('div.collapsible[data-value]')[number - 1].querySelectorAll('.episode');
-   epis.forEach(function (epi, index) {
-      var epi_num = epi.getAttribute('data-epiNum');
-      setTimeout(function () {
-         epiCheck(epi.querySelector(".checkbox-btn"), epi_num, rom_name, season);
-      }, index * 25);
-   });
-   button.classList.toggle('unchecked');
-   button.classList.toggle('checked');
-}
 
 function epiCheck(button, epi_num, rom_name, season) {
    var buttonbtn = button.querySelector("button");
@@ -66,6 +42,34 @@ function epiCheck(button, epi_num, rom_name, season) {
       }
    };
    xhr.send(JSON.stringify(data));
+}
+
+function epiCheck2(check, button, epi_num, rom_name, season) {
+   var buttonbtn = button.querySelector("button");
+
+   var data = {
+      epi_num: epi_num,
+      rom_name: rom_name,
+      season: season
+   };
+
+   if (check !== buttonbtn.classList.contains('checked')) {
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', '../php/tools/epiCheck.php', true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.onreadystatechange = function () {
+         if (xhr.readyState === 4 && xhr.status === 200) {
+            if (!buttonbtn.classList.contains("overlayCheck")) {
+               var btn = document.querySelector('.overlayCheck');
+               btn.classList.remove('checked');
+               btn.classList.add('unchecked');
+            }
+            buttonbtn.classList.toggle('unchecked');
+            buttonbtn.classList.toggle('checked');
+         }
+      };
+      xhr.send(JSON.stringify(data));
+   }
 }
 
 function epiIncDec(incdec, button, epi_num, rom_name, season) {
@@ -142,36 +146,41 @@ function checkboxText(incdec, buttonbtn, buttontxt) {
 
 function incrementCheck(button, collapse) {
    var buttonbtn = button.querySelector("button");
-   if (buttonbtn.classList.contains("checked")) {
-      openPopup(button, collapse, buttonbtn.getAttribute('data-epiNum'));
+   if (!button.classList.contains("section-check-wrapper")) {
+      if (buttonbtn.classList.contains("unchecked")) {
+         epiCheck(button, buttonbtn.getAttribute('data-epiNum'), buttonbtn.getAttribute('data-romName'), buttonbtn.getAttribute('data-season'));
+         var index = buttonbtn.getAttribute("data-epiNum");
+         if (index > 1) {
+            var prevEpi = document.querySelectorAll('div.collapsible[data-value]')[collapse - 1].querySelectorAll("div.episode[data-epiNum]")[index - 2].querySelector(".checkbox-btn");
+            if (prevEpi.classList.contains("unchecked")) {
+               openPopup(button, collapse, buttonbtn.getAttribute('data-epiNum'), 'a');
+            }
+         }
+      } else {
+         openPopup(button, collapse, buttonbtn.getAttribute('data-epiNum'), 'b');
+      }
    } else {
-      epiCheck(button, buttonbtn.getAttribute('data-epiNum'), buttonbtn.getAttribute('data-romName'), buttonbtn.getAttribute('data-season'));
+      if (buttonbtn.classList.contains("checked")) {
+         openPopup(button, button.getAttribute('data-value'), 0, 'c');
+      } else {
+         SoptionSelected(3, button.getAttribute('data-value'));
+      }
    }
 }
 
-function incrementSCheck(button) {
-   var buttonbtn = button.querySelector("button");
-   if (buttonbtn.classList.contains("checked")) {
-      openSPopup(button, button.getAttribute('data-value'));
+function openPopup(button, collapse, index, ab) {
+   if (ab !== 'c') {
+      document.querySelectorAll("#collapsible")[collapse - 1].querySelectorAll('#popupContainer[data-val="' + ab + '"]')[index - 1].style.display = "block";
    } else {
-      SoptionSelected(3, button.getAttribute('data-value'));
+      document.querySelectorAll('#popupContainer[data-val="c"]')[collapse - 1].style.display = "block";
    }
 }
 
-function openPopup(button, collapse, index) {
-   document.querySelectorAll("#collapsible")[collapse - 1].querySelectorAll("#popupContainer")[index - 1].style.display = "block";
-}
-
-function openSPopup(button, index) {
-   document.querySelectorAll("#SpopupContainer")[index - 1].style.display = "block";
-}
-
-function closePopup(collapse, index) {
-   document.querySelectorAll("#collapsible")[collapse - 1].querySelectorAll("#popupContainer")[index - 1].style.display = "none";
-}
-
-function closeSPopup(index) {
-   document.querySelectorAll("#SpopupContainer")[index - 1].style.display = "none";
+function closePopup() {
+   var popups = document.querySelectorAll('#popupContainer');
+   popups.forEach(function (pop) {
+      pop.style.display = "none";
+   });
 }
 
 function optionSelected(option, epiNum, collapseIndex) {
@@ -183,13 +192,27 @@ function optionSelected(option, epiNum, collapseIndex) {
       epiIncDec(0, button, buttonbtn.getAttribute('data-epiNum'), buttonbtn.getAttribute('data-romName'), buttonbtn.getAttribute('data-season'));
    } else if (option === 2) {
       epiIncDec(1, button, buttonbtn.getAttribute('data-epiNum'), buttonbtn.getAttribute('data-romName'), buttonbtn.getAttribute('data-season'));
-   } else {
+   } else if (option === 3) {
       buttontxt.innerHTML = "&#10003;";
       buttontxt.style.fontSize = '30px';
       buttontxt.style.margin = '-3px -28px';
       epiCheck(button, buttonbtn.getAttribute('data-epiNum'), buttonbtn.getAttribute('data-romName'), buttonbtn.getAttribute('data-season'));
+   } else if (option === 4) {
+      checkPrev(collapseIndex, epiNum);
    }
-   closePopup(collapseIndex, epiNum);
+   closePopup();
+}
+
+function checkPrev(collapseIndex, epiNum) {
+   var episodes = document.querySelectorAll('div.collapsible[data-value]')[collapseIndex - 1].querySelectorAll("div.episode[data-epiNum]");
+   episodes.forEach(function (epi) {
+      var btn = epi.querySelector(".checkbox-btn");
+      if (btn.getAttribute("data-epiNum") < epiNum && btn.classList.contains("unchecked")) {
+         setTimeout(function () {
+            epiCheck(epi, btn.getAttribute('data-epiNum'), btn.getAttribute('data-romName'), btn.getAttribute('data-season'));
+         }, btn.getAttribute("data-epiNum") * 25);
+      }
+   });
 }
 
 function SoptionSelected(option, collapseIndex) {
@@ -224,11 +247,11 @@ function SoptionSelected(option, collapseIndex) {
          buttontxt.style.fontSize = '30px';
          buttontxt.style.margin = '-3px -28px';
          setTimeout(function () {
-            epiCheck(button, buttonbtn.getAttribute('data-epiNum'), buttonbtn.getAttribute('data-romName'), buttonbtn.getAttribute('data-season'));
+            epiCheck2(sbuttonbtn.classList.contains("checked"), button, buttonbtn.getAttribute('data-epiNum'), buttonbtn.getAttribute('data-romName'), buttonbtn.getAttribute('data-season'));
          }, index * 25);
       }
    });
-   closeSPopup(collapseIndex);
+   closePopup();
 }
 
 function updateRank(season, rank) {

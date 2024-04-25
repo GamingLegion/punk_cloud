@@ -11,7 +11,7 @@
    opacity: 0;
    pointer-events: none;
 }
-.episode {
+.episode, .addEpisode {
    display: flex;
    align-items: center;
    width: 100%;
@@ -66,7 +66,7 @@
    font-size: 30px;
    cursor: pointer;
 }
-.popupContainer {
+.popupContainer[data-val="a"], .popupContainer[data-val="b"] {
    display: none;
 }
 .popup {
@@ -86,4 +86,9 @@
 .popup button:hover {
    background-color: #51406B;
    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.75);
+}
+.addEpisode p {
+   margin: 0 50%;
+   color: white;
+   font-size: 30px;
 }
