@@ -43,19 +43,19 @@
    color: black;
    font-size: 25px;
 }
-.overlayCheck {
+#episodeOverlay .check {
+   display: flex;
    width: 35px;
    height: 35px;
    border-radius: 50%;
-   border: 2px solid #000;
    cursor: pointer;
    background-position: center;
 }
-.overlayCheck.unchecked {
-   background-image: url("../images/icons/unchecked.png");
-}
-.overlayCheck.checked {
-   background-image: url("../images/icons/checked.png");
+#episodeOverlay .check p {
+   color: black;
+   position: absolute;
+   margin: -3px 7px;
+   font-size: 30px;
 }
 #episode-description {
    height: 30%;

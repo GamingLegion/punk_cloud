@@ -272,34 +272,30 @@ include( $IPATH . "header.php" );
                   echo '</div>';
                   echo '</div>';
 
-                  $result2 = mysqli_query( $connect2, "SELECT name, thumbnail, release_date
-                  FROM anime 
-                  WHERE anime_series = '" . $name . "' 
-                  AND anime_season = '" . $record[ 'season' ] . "' 
-                  ORDER BY epi_num" );
                   echo '<div class="episode-section">';
                   for ( $i = 1; $i <= $record[ 'epi_num' ]; $i++ ) {
-                     $record2 = mysqli_fetch_assoc( $result2 );
+                     $result2 = mysqli_query( $connect2, "SELECT name, thumbnail, release_date
+                     FROM anime 
+                     WHERE anime_series = '" . $name . "' 
+                     AND anime_season = '" . $record[ 'season' ] . "' 
+                     AND epi_num = $i" );
+
                      $thumbnail = 'default.jpg';
-                     if ( isset( $record2[ 'thumbnail' ] ) ) {
-                        $thumbnail = $record2[ 'thumbnail' ];
-                     }
-
-                     $epi_name = '';
-                     if ( !is_null( $record2 ) ) {
-                        if ( $record2[ 'name' ] !== NULL ) {
-                           $epi_name = $record2[ 'name' ];
-                        } else {
-                           $epi_name = 'Episode ' . $i;
-                        }
-                     } else {
-                        $epi_name = 'Episode ' . $i;
-                     }
-
+                     $epi_name = 'Episode ' . $i;
                      $rel_date = '';
-                     if ( isset( $record2[ 'release_date' ] ) ) {
-                        $rel_date = new DateTime( $record2[ 'release_date' ] );
-                        $rel_date = $rel_date->format( 'F j, Y' );
+
+                     if ( mysqli_num_rows( $result2 ) > 0 ) {
+                        $record2 = mysqli_fetch_assoc( $result2 );
+                        if ( isset( $record2[ 'thumbnail' ] ) ) {
+                           $thumbnail = $record2[ 'thumbnail' ];
+                        }
+                        if ( !is_null( $record2 ) && $record2[ 'name' ] !== NULL ) {
+                           $epi_name = $record2[ 'name' ];
+                        }
+                        if ( isset( $record2[ 'release_date' ] ) ) {
+                           $rel_date = new DateTime( $record2[ 'release_date' ] );
+                           $rel_date = $rel_date->format( 'F j, Y' );
+                        }
                      }
 
                      echo '<div class="episode hidden" data-epiNum="' . $i . '" data-romName="' . $record[ 'rom_name' ] . '" data-season="' . $record[ 'season' ] . '" data-thumbnail="../images/episodes/anime/' . $thumbnail . '" data-epiName="' . $epi_name . '" data-relDate="' . $rel_date . '" onclick="showOverlay(this);">';
@@ -380,16 +376,23 @@ include( $IPATH . "header.php" );
 </div>
 <?php
 echo '<div id="episodeOverlay">';
-echo '<input type="hidden" name="anime_name" value="">';
-echo '<input type="hidden" name="anime_season" value="">';
-echo '<input type="hidden" name="epi_num" value="">';
 echo '<div id=overlayImg>';
 echo '<img>';
 echo '</div>';
 echo '<div id="titleLine">';
 echo '<p class="overlay-content" id="title"></p>';
 if ( isset( $_SESSION[ 'user' ] ) ) {
-   echo '<button class="overlayCheck"></button>';
+   echo '<div class="check" onclick="incCheck(this)">';
+   echo '<button class="checkbox-btn unchecked" id="over"></button>';
+   echo '<p class="checkbox-text">&#10003;</p>';
+   echo '</div>';
+   echo '<div id="popupContainer" class="popupContainer" style="position: absolute; display: none; left: 89%; margin-top: 50px;">';
+   echo '<div class="popup">';
+   echo '<button class="popupBtn" onclick="optSel(1);">Watched Again</button>';
+   echo '<button class="popupBtn" onclick="optSel(2);">Watched not Again</button>';
+   echo '<button class="popupBtn" onclick="optSel(3);">Not Watched</button>';
+   echo '</div>';
+   echo '</div>';
 }
 echo '</div>';
 echo '<div id="episode-release-date">';
