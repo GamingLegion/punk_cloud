@@ -9,14 +9,14 @@ infoLines.forEach(function (infoLine) {
    editButton.onclick = function () {
       var newValue = prompt('Enter new value for ' + firstParagraph.textContent, secondParagraph.textContent);
       if (newValue !== null) {
-         updateField(secondParagraph.id, secondParagraph.getAttribute("data-season"),  newValue);
+         updateField(secondParagraph, secondParagraph.id, secondParagraph.getAttribute("data-season"),  newValue);
       }
    };
 
    infoLine.insertBefore(editButton, firstParagraph);
 });
 
-function updateField(fieldName, season, newValue) {
+function updateField(line, fieldName, season, newValue) {
    var name = window.location.href;
    name = decodeURIComponent(name);
    name = name.substring(name.lastIndexOf('=') + 1);
@@ -33,8 +33,7 @@ function updateField(fieldName, season, newValue) {
    xhr.setRequestHeader('Content-Type', 'application/json');
    xhr.onreadystatechange = function () {
       if (xhr.readyState === 4 && xhr.status === 200) {
-         var field = document.getElementById(fieldName);
-         field.textContent = newValue;
+         line.textContent = newValue;
       }
    };
    xhr.send(JSON.stringify(data));

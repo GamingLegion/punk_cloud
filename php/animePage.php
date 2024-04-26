@@ -39,7 +39,7 @@ include( $IPATH . "header.php" );
             echo '<div class="anime-name">';
             echo '<p class="rom_name">' . $record[ 'rom_name' ] . '</p>';
             echo '</div>';
-            if ( $record[ 'eng_name' ] !== NULL ) {
+            if ( isset($record[ 'eng_name' ] )) {
                echo '<div class="anime-name">';
                echo '<p class="eng_name">' . $record[ 'eng_name' ] . '</p>';
                echo '</div>';
@@ -399,10 +399,10 @@ echo '<div id="episode-release-date">';
 echo '<p>Release Date:</p>';
 echo '<p id="release_date">N/A</p>';
 echo '</div>';
-echo '<div id="episode-description">';
-echo '<p>Description:</p>';
-echo '<p id="description">N/A</p>';
-echo '</div>';
+//echo '<div id="episode-description">';
+//echo '<p>Description:</p>';
+//echo '<p id="description">N/A</p>';
+//echo '</div>';
 echo '</div>';
 if ( isset( $_SESSION[ 'user' ] ) ) {
    if ( $_SESSION[ 'user' ] === 'oracle' ) {
