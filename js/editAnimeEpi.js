@@ -1,54 +1,56 @@
 //JavaScript Document
-var overlay = document.querySelectorAll("#episodeOverlay")
-overlay.forEach(function (over) {
-   var overlayImg = over.querySelector("#overlayImg");
-   var title = over.querySelector("#titleLine");
-   var relDate = over.querySelector("#episode-release-date");
-   //var desc = over.querySelector("#description");
+var overlay = document.querySelector("#episodeOverlay")
+var img = overlay.querySelector("#overlayImg");
+var title = overlay.querySelector("#titleLine");
+var relDate = overlay.querySelector("#episode-release-date");
+//var desc = over.querySelector("#description");
 
-   var editBtn1 = document.createElement('button');
-   editBtn1.id = 'editBtn';
-   editBtn1.textContent = 'Edit Thumbnail';
-   editBtn1.onclick = function () {
-      var newValue = prompt('Enter new path for thumbnail', overlayImg.querySelector('img').src);
-      if (newValue !== null) {
-         updateOverField(title.querySelector('p').textContent, 'thumbnail', newValue, 'overlayImg', over.querySelectorAll("input"));
-      }
-   };
-   over.insertBefore(editBtn1, overlayImg);
+var epiName = title.querySelector('p').textContent;
+var checkbox = title.querySelector(".checkbox-btn");
 
-   var editBtn2 = document.createElement('button');
-   editBtn2.id = 'editBtn';
-   editBtn2.textContent = 'Edit';
-   editBtn2.onclick = function () {
-      var newValue = prompt('Enter new value for episode name', title.querySelector('p').textContent);
-      if (newValue !== null) {
-         updateOverField(title.querySelector('p').textContent, 'name', newValue, 'title', over.querySelectorAll("input"));
-      }
-   };
-   over.insertBefore(editBtn2, title);
+var editBtn1 = document.createElement('button');
+editBtn1.id = 'editBtn';
+editBtn1.textContent = 'Edit Thumbnail';
+editBtn1.onclick = function () {
+   var newValue = prompt('Enter new path for thumbnail', img.querySelector('img').src);
+   if (newValue !== null) {
+      updateOverField(epiName, 'thumbnail', newValue, 'overlayImg', checkbox);
+   }
+};
+overlay.insertBefore(editBtn1, img);
 
-   var editBtn3 = document.createElement('button');
-   editBtn3.id = 'editBtn';
-   editBtn3.textContent = 'Edit';
-   editBtn3.onclick = function () {
-      var newValue = prompt('Enter new value for release date', relDate.querySelectorAll('p')[1].textContent);
-      if (newValue !== null) {
-         updateOverField(title.querySelector('p').textContent, 'release_date', newValue, 'release_date', over.querySelectorAll("input"));
-      }
-   };
-   over.insertBefore(editBtn3, relDate);
-});
+var editBtn2 = document.createElement('button');
+editBtn2.id = 'editBtn';
+editBtn2.textContent = 'Edit Title';
+editBtn2.onclick = function () {
+   var newValue = prompt('Enter new value for episode name', epiName);
+   if (newValue !== null) {
+      updateOverField(epiName, 'name', newValue, 'title', checkbox);
+   }
+};
+overlay.insertBefore(editBtn2, title);
 
-function updateOverField(epiName, pmaColName, newValue, fieldName, inputs) {
+var editBtn3 = document.createElement('button');
+editBtn3.id = 'editBtn';
+editBtn3.textContent = 'Edit Release Date';
+editBtn3.onclick = function () {
+   var newValue = prompt('Enter new value for release date', relDate.querySelectorAll('p')[1].textContent);
+   if (newValue !== null) {
+      updateOverField(epiName, 'release_date', newValue, 'release_date', checkbox);
+   }
+};
+overlay.insertBefore(editBtn3, relDate);
+
+
+function updateOverField(epiName, pmaColName, newValue, fieldName, button) {
    var data = {
       name: epiName,
       field: pmaColName,
       value: newValue,
-      
-      anime_name: inputs[0].value,
-      anime_season: inputs[1].value,
-      epi_num: inputs[2].value
+
+      anime_name: button.dataset.romname,
+      anime_season: button.dataset.season,
+      epi_num: button.dataset.epinum
    };
 
    var xhr = new XMLHttpRequest();
