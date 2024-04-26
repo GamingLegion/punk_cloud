@@ -23,7 +23,7 @@ function showOverlay(episode) {
    overlay.querySelector("#overlayImg").querySelector("img").src = episode.dataset.thumbnail;
    overlay.querySelector("#title").textContent = episode.dataset.epiname;
    overlay.querySelector("#release_date").textContent = episode.dataset.reldate;
-   overlay.querySelector("#description").textContent = episode.dataset.epiname;
+   //overlay.querySelector("#description").textContent = episode.dataset.epiname;
    if (overlay.querySelectorAll(".checkbox-btn").length === 1) {
       var overCheck = overlay.querySelector(".checkbox-btn");
       var overText = overlay.querySelector(".checkbox-text");
