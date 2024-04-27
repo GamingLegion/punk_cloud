@@ -259,22 +259,18 @@ include( $IPATH . "header.php" );
                   echo '</div>';
                   echo '<div class="episode-details">';
                   echo '<div class="episode-info" id="' . $record[ 'season' ] . '">';
-                  //echo '<p>(E' . $totalEpiCount . ')</p>'; 
-                  echo '<h3 class="episode-title">'. $epi_name . '</h3>';
+                  echo '<h3 class="episode-title">(E' . $totalEpiCount . ') '. $epi_name . '</h3>';
                   if ( isset( $_SESSION[ 'user' ] ) ) {
-                     $query = "SELECT epi_num, watched 
+                     $query3 = "SELECT watched 
                           FROM " . $_SESSION[ 'user' ] . "
                           WHERE anime_name = '" . $record[ 'rom_name' ] . "' 
-                          AND anime_season = '" . $record[ 'season' ] . "'";
-                     $result3 = mysqli_query( $connect3, $query );
+                          AND anime_season = '" . $record[ 'season' ] . "'
+                          AND epi_num = $i";
+                     $result3 = mysqli_query( $connect3, $query3 );
+                     $row3 = mysqli_fetch_assoc( $result3 );
+                     $watched = isset($row3[ 'watched' ]) ? $row3[ 'watched' ] : 0;
+                     
                      echo '<div class="check" onclick="incrementCheck(this, ' . $number . ');">';
-                     $watched = 0;
-                     while ( $row3 = mysqli_fetch_assoc( $result3 ) ) {
-                        if ( $row3[ 'epi_num' ] == $i ) {
-                           $watched = $row3[ 'watched' ];
-                           break;
-                        }
-                     }
                      echo '<button class="checkbox-btn ' . ( ( $watched > 0 ) ? "checked" : "unchecked" ) . '" data-epiNum="' . $i . '" data-romName="' . $record[ 'rom_name' ] . '" data-season="' . $record[ 'season' ] . '"></button>';
                      mysqli_free_result( $result3 );
 
