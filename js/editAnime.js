@@ -1,42 +1,60 @@
 //JavaScript Document
-var infoLines = document.querySelectorAll('.info_line');
-infoLines.forEach(function (infoLine) {
-   var firstParagraph = infoLine.querySelector('a');
-   var secondParagraph = infoLine.querySelector('.info');
-   var editButton = document.createElement('button');
-   editButton.id = 'editBtn';
-   editButton.textContent = 'Edit';
-   editButton.onclick = function () {
-      var newValue = prompt('Enter new value for ' + firstParagraph.textContent, secondParagraph.textContent);
-      if (newValue !== null) {
-         updateField(secondParagraph, secondParagraph.id, secondParagraph.dataset.season,  newValue);
-      }
-   };
-
-   infoLine.insertBefore(editButton, firstParagraph);
-});
 var collapses = document.querySelectorAll(".collapsible");
-collapses.forEach(function(collapse) {
+collapses.forEach(function (collapse) {
+   var infoLines = collapse.querySelectorAll('.info_line');
+   infoLines.forEach(function (infoLine) {
+      var firstParagraph = infoLine.querySelector('a');
+      var secondParagraph = infoLine.querySelector('.info');
+
+      var editButton = document.createElement('button');
+      editButton.id = 'editBtn';
+      editButton.textContent = 'Edit';
+      editButton.onclick = function () {
+         var newValue = prompt('Enter new value for ' + firstParagraph.textContent, secondParagraph.textContent);
+         if (newValue !== null) {
+            updateField(collapse, secondParagraph, secondParagraph.id, secondParagraph.dataset.season, newValue);
+         }
+      };
+
+      infoLine.insertBefore(editButton, firstParagraph);
+   });
+});
+collapses.forEach(function (collapse) {
    var imgDiv = collapse.querySelector(".imgDiv");
    var img = imgDiv.querySelector("img");
+
    var editButton = document.createElement('button');
    editButton.id = 'editBtn';
    editButton.textContent = 'Edit';
    editButton.onclick = function () {
       var newValue = prompt('Enter new value for image path');
       if (newValue !== null) {
-         updateField(img, "image", img.dataset.season,  newValue);
+         updateField(collapse, img, "image", img.dataset.season, newValue);
       }
    };
 
    imgDiv.insertBefore(editButton, img);
 });
+collapses.forEach(function (collapse) {
+   var btnWrap = collapse.querySelector(".collapsible-btn-wrapper");
+   var txt = btnWrap.querySelector("strong");
 
-function updateField(line, fieldName, season, newValue) {
-   var name = window.location.href;
-   name = decodeURIComponent(name);
-   name = name.substring(name.lastIndexOf('=') + 1);
+   var editButton = document.createElement('button');
+   editButton.id = 'editBtn';
+   editButton.textContent = 'Edit';
+   editButton.onclick = function () {
+      var newValue = prompt('Enter new value for season/arc name', txt.textContent);
+      if (newValue !== null) {
+         updateField(collapse, txt, "season", txt.textContent, newValue);
+      }
+   };
 
+   btnWrap.insertBefore(editButton, btnWrap.querySelector(".collapsible-btn"));
+});
+
+function updateField(collapse, line, fieldName, season, newValue) {
+   var name = collapse.querySelector(".checkbox-btn").dataset.romname;
+   
    var data = {
       name: name,
       season: season,
@@ -49,7 +67,7 @@ function updateField(line, fieldName, season, newValue) {
    xhr.setRequestHeader('Content-Type', 'application/json');
    xhr.onreadystatechange = function () {
       if (xhr.readyState === 4 && xhr.status === 200) {
-         if(fieldName === "image") {
+         if (fieldName === "image") {
             line.src = "http://localhost/PunkCloud/images/arts/anime/" + newValue;
          } else {
             line.textContent = newValue;
