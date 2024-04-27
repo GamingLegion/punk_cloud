@@ -29,7 +29,7 @@ collapses.forEach(function (collapse) {
    editButton.onclick = function () {
       var newValue = prompt('Enter new value for image path');
       if (newValue !== null) {
-         updateField(collapse, img, "image", img.dataset.season, newValue);
+         updateField(collapse, img, img.id, img.dataset.season, newValue);
       }
    };
 
@@ -37,7 +37,7 @@ collapses.forEach(function (collapse) {
 });
 collapses.forEach(function (collapse) {
    var btnWrap = collapse.querySelector(".collapsible-btn-wrapper");
-   var txt = btnWrap.querySelector("strong");
+   var txt = btnWrap.querySelector(".season_name");
 
    var editButton = document.createElement('button');
    editButton.id = 'editBtn';
@@ -52,27 +52,67 @@ collapses.forEach(function (collapse) {
    btnWrap.insertBefore(editButton, btnWrap.querySelector(".collapsible-btn"));
 });
 
-function updateField(collapse, line, fieldName, season, newValue) {
-   var name = collapse.querySelector(".checkbox-btn").dataset.romname;
-   
-   var data = {
-      name: name,
-      season: season,
-      field: fieldName,
-      value: newValue
-   };
+var seasons = document.querySelector(".seasons");
+var col = document.querySelector(".collapsible");
+var checkbox = document.createElement('input');
+checkbox.type = 'checkbox';
+seasons.insertBefore(checkbox, col);
 
-   var xhr = new XMLHttpRequest();
-   xhr.open('POST', '../php/tools/editAnime.php', true);
-   xhr.setRequestHeader('Content-Type', 'application/json');
-   xhr.onreadystatechange = function () {
-      if (xhr.readyState === 4 && xhr.status === 200) {
-         if (fieldName === "image") {
-            line.src = "http://localhost/PunkCloud/images/arts/anime/" + newValue;
-         } else {
-            line.textContent = newValue;
+function updateField(collapse, line, fieldName, season, newValue) {
+   var sN = [];
+   var sS = [];
+   var lines = [];
+   var cb = document.querySelector("input[type=checkbox]");
+   
+   if (cb.checked) {
+      collapses.forEach(function (col, index) {
+         sN[index] = col.querySelector(".checkbox-btn").dataset.romname;
+         sS[index] = col.querySelector(".season_name").textContent;
+
+         if (line.classList.contains("info")) {
+            var infoLines = col.querySelectorAll('.info_line');
+            infoLines.forEach(function (infoLine) {
+               var secondParagraph = infoLine.querySelector('.info');
+               if (secondParagraph.id === fieldName) {
+                  lines[index] = secondParagraph;
+               }
+            });
+         } else if (line.id === "image") {
+            var imgDiv = col.querySelector(".imgDiv");
+            lines[index] = imgDiv.querySelector("img");
+         } else if (line.classList.contains("season_name")) {
+            var btnWrap = collapse.querySelector(".collapsible-btn-wrapper");
+            lines[index] = btnWrap.querySelector(".season_name");
          }
-      }
-   };
-   xhr.send(JSON.stringify(data));
+      });
+   } else {
+      sN[0] = collapse.querySelector(".checkbox-btn").dataset.romname;
+      sS[0] = collapse.querySelector(".season_name").textContent;
+      lines[0] = line;
+   }
+   
+   for (var i = 0; i < lines.length; i++) {
+      (function (i) {
+         var data = {
+            name: sN[i],
+            season: sS[i],
+            field: fieldName,
+            value: newValue
+         };
+
+         var xhr = new XMLHttpRequest();
+         xhr.open('POST', '../php/tools/editAnime.php', true);
+         xhr.setRequestHeader('Content-Type', 'application/json');
+         xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+               if (fieldName === "image") {
+                  lines[i].src = "http://localhost/PunkCloud/images/arts/anime/" + newValue;
+               } else {
+                  lines[i].textContent = newValue;
+               }
+            }
+         };
+         xhr.send(JSON.stringify(data));
+      })(i);
+   }
 }
