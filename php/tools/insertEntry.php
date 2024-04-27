@@ -7,7 +7,7 @@ if ( isset( $_POST[ 'submit' ] ) ) {
    $ins_date = date( "Y-m-d H:i:s" );
    $rom_name = $_POST[ 'rom_name' ];
    $eng_name = ( $_POST[ 'eng_name' ] !== "" ) ? $_POST[ 'eng_name' ] : NULL;
-   $image = ( $_POST[ 'image' ] !== "" ) ? $_POST[ 'image' ] : 'deafult.png';
+   $image = ( $_POST[ 'image' ] !== "" ) ? $_POST[ 'image' ] : 'default.png';
    $epis = ( $_POST[ 'epis' ] !== "" ) ? $_POST[ 'epis' ] : 0;
    $series = $_POST[ 'series' ];
    $season = $_POST[ 'season' ];
@@ -16,7 +16,7 @@ if ( isset( $_POST[ 'submit' ] ) ) {
    $rom_name = str_replace( "\"", "\"", $rom_name );
    mysqli_query( $connect, "INSERT INTO anime(id, ins_date, upd_date, rom_name, image, epi_num, series, season) VALUES ('NULL', '$ins_date', '$ins_date', '$rom_name', '$image', '$epis', '$series', '$season');" );
 
-   if ( $eng_name !== NULL ) {
+   if ( $eng_name !== NULL && $eng_name !== "" ) {
       $eng_name = str_replace( "'", "\'", $eng_name );
       $eng_name = str_replace( "\"", "\"", $eng_name );
       mysqli_query( $connect, "UPDATE anime SET eng_name = '$eng_name' WHERE rom_name = '$rom_name'" );
