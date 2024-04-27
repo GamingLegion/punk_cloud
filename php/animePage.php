@@ -203,15 +203,15 @@ include( $IPATH . "header.php" );
                if ( $_SESSION[ 'user' ] === 'oracle' ) {
                   echo '<div class="info_line">';
                   echo '<a><strong>Manga Chapters:</strong></a>';
-                  echo '<a class="info" id="mangaChaps" data-season="' . $record[ 'season' ] . '">' . isset( $record[ 'mangaChaps' ] ) ? $record[ 'mangaChaps' ] : '-' . '</a>';
+                  echo '<a class="info" id="mangaChaps" data-season="' . $record[ 'season' ] . '">' . $record[ 'mangaChaps' ] . '</a>';
                   echo '</div>';
                   echo '<div class="info_line">';
                   echo '<a><strong>Light Novel Chapters:</strong></a>';
-                  echo '<a class="info" id="lnChaps" data-season="' . $record[ 'season' ] . '">' . isset( $record[ 'lnChaps' ] ) ? $record[ 'lnChaps' ] : '-' . '</a>';
+                  echo '<a class="info" id="lnChaps" data-season="' . $record[ 'season' ] . '">' . $record[ 'lnChaps' ] . '</a>';
                   echo '</div>';
                   echo '<div class="info_line">';
                   echo '<a><strong>Web Novel Chapters:</strong></a>';
-                  echo '<a class="info" id="wnChaps" data-season="' . $record[ 'season' ] . '">' . isset( $record[ 'wnChaps' ] ) ? $record[ 'wnChaps' ] : '-' . '</a>';
+                  echo '<a class="info" id="wnChaps" data-season="' . $record[ 'season' ] . '">' . $record[ 'wnChaps' ] . '</a>';
                   echo '</div>';
                } else {
                   if ( isset( $record[ 'mangaChaps' ] ) && $record[ 'mangaChaps' ] > 0 ) {
@@ -259,7 +259,7 @@ include( $IPATH . "header.php" );
                   echo '</div>';
                   echo '<div class="episode-details">';
                   echo '<div class="episode-info" id="' . $record[ 'season' ] . '">';
-                  echo '<h3 class="episode-title">(E' . $totalEpiCount . ') '. $epi_name . '</h3>';
+                  echo '<h3 class="episode-title">(E' . $totalEpiCount . ') ' . $epi_name . '</h3>';
                   if ( isset( $_SESSION[ 'user' ] ) ) {
                      $query3 = "SELECT watched 
                           FROM " . $_SESSION[ 'user' ] . "
@@ -268,8 +268,8 @@ include( $IPATH . "header.php" );
                           AND epi_num = $i";
                      $result3 = mysqli_query( $connect3, $query3 );
                      $row3 = mysqli_fetch_assoc( $result3 );
-                     $watched = isset($row3[ 'watched' ]) ? $row3[ 'watched' ] : 0;
-                     
+                     $watched = isset( $row3[ 'watched' ] ) ? $row3[ 'watched' ] : 0;
+
                      echo '<div class="check" onclick="incrementCheck(this, ' . $number . ');">';
                      echo '<button class="checkbox-btn ' . ( ( $watched > 0 ) ? "checked" : "unchecked" ) . '" data-epiNum="' . $i . '" data-romName="' . $record[ 'rom_name' ] . '" data-season="' . $record[ 'season' ] . '"></button>';
                      mysqli_free_result( $result3 );
