@@ -16,6 +16,7 @@
 }
 .collapsible-btn {
    width: 100%;
+   min-height: 55px;
    background-color: #9C89B8;
    border: none;
    padding: 10px 20px;
