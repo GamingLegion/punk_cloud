@@ -61,7 +61,7 @@ include( $IPATH . "header.php" );
             $connect3 = mysqli_connect( 'localhost', 'root', 'theallseeingeyes', 'punkcloud_users' );
 
             $name = isset( $_GET[ 'link' ] ) ? $_GET[ 'link' ] : 'default';
-            $query = "SELECT rom_name, image, series, season, epi_num, start_date, end_date, air_season, brodcast, producers, licensors, studios, addedScore, numOfRanks, addedWatch, mangaChaps, lnChaps, wnChaps FROM anime WHERE series = '" . $name . "' ORDER BY season";
+            $query = "SELECT rom_name, image, series, season, epi_num, start_date, end_date, air_season, broadcast, producers, licensors, studios, addedScore, numOfRanks, addedWatch, mangaChaps, lnChaps, wnChaps FROM anime WHERE series = '" . $name . "' ORDER BY season";
             $result = mysqli_query( $connect, $query );
             $totalEpiCount = 0;
 
@@ -70,7 +70,7 @@ include( $IPATH . "header.php" );
                $number++;
                echo '<div class="collapsible" data-value="' . $number . '">';
                echo '<div class="collapsible-btn-wrapper">';
-               echo '<button class="collapsible-btn"><strong>' . $record[ 'season' ] . '</strong></button>';
+               echo '<button class="collapsible-btn"><strong class="season_name">' . $record[ 'season' ] . '</strong></button>';
 
                if ( isset( $_SESSION[ 'user' ] ) ) {
                   $query3 = "SELECT epi_num, watched 
@@ -185,8 +185,8 @@ include( $IPATH . "header.php" );
                echo '<a class="info" id="air_season" data-season="' . $record[ 'season' ] . '">' . $record[ 'air_season' ] . '</a>';
                echo '</div>';
                echo '<div class="info_line">';
-               echo '<a><strong>Brodcast:</strong></a>';
-               echo '<a class="info" id="brodcsat" data-season="' . $record[ 'season' ] . '">' . $record[ 'brodcast' ] . '</a>';
+               echo '<a><strong>Broadcast:</strong></a>';
+               echo '<a class="info" id="broadcast" data-season="' . $record[ 'season' ] . '">' . $record[ 'broadcast' ] . '</a>';
                echo '</div>';
                echo '<div class="info_line" id="prods">';
                echo '<a><strong>Producer(s):</strong></a>';
