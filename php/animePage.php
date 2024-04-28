@@ -21,7 +21,7 @@ include( $IPATH . "header.php" );
          <?php
          $connect = mysqli_connect( 'localhost', 'root', 'theallseeingeyes', 'punkcloud' );
          $name = isset( $_GET[ 'link' ] ) ? $_GET[ 'link' ] : 'default';
-         $result = mysqli_query( $connect, "SELECT eng_name, rom_name, image FROM anime WHERE rom_name='" . $name . "'" );
+         $result = mysqli_query( $connect, "SELECT eng_name, rom_name, image, source, genres, demographic FROM anime WHERE rom_name='" . $name . "'" );
          $record = mysqli_fetch_assoc( $result );
 
          echo '<div class="anime-image">';
@@ -37,12 +37,67 @@ include( $IPATH . "header.php" );
             echo '</div>';
          }
          echo '<script src="../js/titleOverflow.js"></script>';
-         
-         mysqli_data_seek( $result, 0 );
-         echo '<div class="rankings">';
-         echo '<div class="overScore">';
+
+         $result2 = mysqli_query( $connect, "SELECT addedScore, numOfRanks FROM anime WHERE series = '" . $name . "'" );
+         $score = 0;
+         $ranks = 0;
+         $maxRanks = 0;
+         while ( $record2 = mysqli_fetch_assoc( $result2 ) ) {
+            $score += $record2[ 'addedScore' ];
+            $ranks += $record2[ 'numOfRanks' ];
+            $maxRanks = max( $maxRanks, $record2[ 'numOfRanks' ] );
+         }
+         mysqli_free_result( $result2 );
+
+         $result2 = mysqli_query( $connect, "SELECT series, addedWatch FROM anime" );
+         $map = [];
+         while ( $record2 = mysqli_fetch_assoc( $result2 ) ) {
+            if ( isset( $map[ $record2[ 'series' ] ] ) ) {
+               $map[ $record2[ 'series' ] ] = max( $map[ $record2[ 'series' ] ], $record2[ 'addedWatch' ] );
+            } else {
+               $map[ $record2[ 'series' ] ] = $record2[ 'addedWatch' ];
+            }
+         }
+         mysqli_free_result( $result );
+         arsort( $map );
+         $rank = 1;
+         $val = 0;
+         foreach ( $map as $key => $value ) {
+            if ( $value === $map[ $name ] ) {
+               $val = $value;
+               break;
+            }
+            $rank++;
+         }
+
+         echo '<div class="anime_header_info_wrapper">';
+         echo '<div class="anime_header_info">';
+         echo '<div class="i_l">';
+         echo '<a><strong>Anime Score:</strong></a>';
+         echo '<a>' . (($ranks > 0) ? ( $score / $ranks ) : '-') . ' / 10</a>';
+         echo '<a class="num">(' . $maxRanks . ' ranked)</a>';
          echo '</div>';
-         echo '<div class="overRank">';
+         echo '<div class="i_l">';
+         echo '<a><strong>Anime Popularity:</strong></a>';
+         echo '<a>#' . $rank . '</a>';
+         echo '<a class="num">(' . $val . ' watched)</a>';
+         echo '</div>';
+         echo '</div>';
+         echo '<div class="anime_header_info">';
+         echo '<div class="info_line">';
+         echo '<a><strong>Source:</strong></a>';
+         echo '<a class="info" id="source">' . $record[ 'source' ] . '</a>';
+         echo '</div>';
+         echo '<div class="info_line">';
+         echo '<a><strong>Genres:</strong></a>';
+         echo '<a class="info" id="genres">' . $record[ 'genres' ] . '</a>';
+         echo '</div>';
+         echo '<div class="info_line">';
+         echo '<a><strong>Demographic:</strong></a>';
+         echo '<a class="info" id="demographic">' . $record[ 'demographic' ] . '</a>';
+         echo '</div>';
+         echo '</div>';
+         echo '<div>';
          echo '</div>';
          echo '</div>';
          mysqli_close( $connect );
@@ -138,6 +193,7 @@ include( $IPATH . "header.php" );
                }
                $rank++;
             }
+            mysqli_free_result( $result4 );
             echo '<a class="info" id="season_popularity">#' . $rank . '</a>';
             echo '<a class="num">(' . $record[ 'addedWatch' ] . ' watched)</a>';
             echo '</div>';
@@ -208,7 +264,7 @@ include( $IPATH . "header.php" );
             echo '<a><strong>Studio:</strong></a>';
             echo '<a class="info" id="studios" data-season="' . $record[ 'season' ] . '">' . $record[ 'studios' ] . '</a>';
             echo '</div>';
-            if ( $_SESSION[ 'user' ] === 'oracle' ) {
+            if ( isset($_SESSION[ 'user' ]) && $_SESSION[ 'user' ] === 'oracle' ) {
                echo '<div class="info_line">';
                echo '<a><strong>Manga Chapters:</strong></a>';
                echo '<a class="info" id="mangaChaps" data-season="' . $record[ 'season' ] . '">' . $record[ 'mangaChaps' ] . '</a>';
