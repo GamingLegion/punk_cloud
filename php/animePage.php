@@ -22,20 +22,12 @@ include( $IPATH . "header.php" );
             <?php
             $connect = mysqli_connect( 'localhost', 'root', 'theallseeingeyes', 'punkcloud' );
             $name = isset( $_GET[ 'link' ] ) ? $_GET[ 'link' ] : 'default';
-            $result = mysqli_query( $connect, "SELECT image FROM anime WHERE rom_name='" . $name . "'" );
+            $result = mysqli_query( $connect, "SELECT eng_name, rom_name, image FROM anime WHERE rom_name='" . $name . "'" );
             $record = mysqli_fetch_assoc( $result );
 
             echo '<img src="../images/arts/anime/' . $record[ 'image' ] . '" id="image">';
-            mysqli_close( $connect );
-            ?>
-         </div>
-         <div class="anime-names">
-            <?php
-            $connect = mysqli_connect( 'localhost', 'root', 'theallseeingeyes', 'punkcloud' );
-            $name = isset( $_GET[ 'link' ] ) ? $_GET[ 'link' ] : 'default';
-            $result = mysqli_query( $connect, "SELECT eng_name, rom_name FROM anime WHERE rom_name='" . $name . "'" );
-            $record = mysqli_fetch_assoc( $result );
-
+            echo '</div>';
+            echo '<div class="anime-names">';
             echo '<div class="anime-name">';
             echo '<p class="rom_name">' . $record[ 'rom_name' ] . '</p>';
             echo '</div>';
@@ -137,11 +129,11 @@ include( $IPATH . "header.php" );
                $result4 = mysqli_query( $connect, $query4 );
                $rank = 1;
                while ( $record4 = mysqli_fetch_assoc( $result4 ) ) {
-                     if($record4['addedWatch'] === $record['addedWatch']) {
-                        break; 
-                     }
-                     $rank++;
+                  if ( $record4[ 'addedWatch' ] === $record[ 'addedWatch' ] ) {
+                     break;
                   }
+                  $rank++;
+               }
                echo '<a class="info" id="season_popularity">#' . $rank . '</a>';
                echo '<a class="num">(' . $record[ 'addedWatch' ] . ' watched)</a>';
                echo '</div>';
