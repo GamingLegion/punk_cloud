@@ -36,7 +36,7 @@ if ( is_null( $record ) || $record[ 'id' ] === 0 ) {
       $res = mysqli_query( $connect2, "SELECT addedScore, numOfRanks, addedWatch FROM anime WHERE rom_name = '$romName'" );
       $rec = mysqli_fetch_assoc( $res );
       $score = ( ( isset( $rec[ 'addedScore' ] ) ) ? $rec[ 'addedScore' ] - $old_rank : 0 );
-      $numoranks = ( ( isset( $rec[ 'numOfRanks' ] ) ) ? $rec[ 'numOfRanks' ] - 1 : 0 );
+      $numoranks = ( ( isset( $rec[ 'numOfRanks' ] ) ) ? (isset($old_rank) ? $rec[ 'numOfRanks' ] - 1 : $rec[ 'numOfRanks' ]) : 0 );
       $watch = ( ( isset( $rec[ 'addedWatch' ] ) ) ? $rec[ 'addedWatch' ] - 1 : 0 );
       mysqli_query( $connect2, "UPDATE anime SET addedScore = $score, numOfRanks = $numoranks, addedWatch = $watch WHERE rom_name = '$romName'" );
    }
