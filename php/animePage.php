@@ -78,7 +78,7 @@ include( $IPATH . "header.php" );
                           WHERE anime_name = '" . $record[ 'rom_name' ] . "' 
                           AND anime_season = '" . $record[ 'season' ] . "'";
                   $result3 = mysqli_query( $connect3, $query3 );
-                  $minWatch = 999999;
+                  $minWatch = PHP_INT_MAX;
                   mysqli_data_seek( $result3, 0 );
 
                   echo '<div class="section-check-wrapper" data-value="' . $number . '" onclick="incrementCheck(this);">';
@@ -87,7 +87,7 @@ include( $IPATH . "header.php" );
                   while ( $record3 = mysqli_fetch_assoc( $result3 ) ) {
                      $minWatch = min( $minWatch, $record3[ 'watched' ] );
                   }
-                  $minWatch = ( $minWatch === 999999 ) ? 0 : $minWatch;
+                  $minWatch = ( $minWatch === PHP_INT_MAX ) ? 0 : $minWatch;
                   mysqli_free_result( $result3 );
 
                   if ( $minWatch <= 1 ) {
@@ -127,15 +127,28 @@ include( $IPATH . "header.php" );
                } else {
                   echo '<a class="info" id="season_score">- / 10</a>';
                }
+               echo '<a class="num">(' . $record[ 'numOfRanks' ] . ' ranked)</a>';
                echo '</div>';
                echo '<div class="i_l">';
                echo '<a><strong>Season Popularity:</strong></a>';
-               echo '<a class="info" id="season_popularity">#' . $record[ 'addedWatch' ] . '</a>';
+               $query4 = "SELECT addedWatch
+                          FROM anime
+                          ORDER BY addedWatch DESC, rom_name ASC";
+               $result4 = mysqli_query( $connect, $query4 );
+               $rank = 1;
+               while ( $record4 = mysqli_fetch_assoc( $result4 ) ) {
+                     if($record4['addedWatch'] === $record['addedWatch']) {
+                        break; 
+                     }
+                     $rank++;
+                  }
+               echo '<a class="info" id="season_popularity">#' . $rank . '</a>';
+               echo '<a class="num">(' . $record[ 'addedWatch' ] . ' watched)</a>';
+               echo '</div>';
 
                if ( isset( $_SESSION[ 'user' ] ) ) {
                   $result3 = mysqli_query( $connect3, "SELECT season_rank FROM " . $_SESSION[ 'user' ] . " WHERE anime_name = '" . $record[ 'rom_name' ] . "'" );
                   $record3 = mysqli_fetch_assoc( $result3 );
-                  echo '<br><br>';
                   echo '<div class="i_l" style="display: flex;">';
                   echo '<a><strong>User Score:</strong></a>';
                   echo '<div class="dropdown">';
@@ -165,7 +178,6 @@ include( $IPATH . "header.php" );
                   echo '</div>';
                   echo '</div>';
                }
-               echo '</div>';
                echo '</div>';
 
                echo '<button class="season_info">Show Season Info</button>';

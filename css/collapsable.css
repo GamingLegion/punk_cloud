@@ -66,7 +66,7 @@
    display: flex;
    margin: 0 auto;
 }
-.info_line a, .i_l a {
+.info_line a {
    display: inline-block;
    margin: 10px 0;
 }
@@ -106,13 +106,17 @@
    right: 10px;
    color: #888;
 }
-#prods {
-   display: inline;
-   margin: 0;
+.i_l {
+   margin: 10px 0 15px 0;
+   align-items: center;
 }
-#prods a.info {
-   padding-left: 5px;
-   margin: 0;
+.i_l a {
+   display: inline;
+}
+.num {
+   margin-left: 5px;
+   font-size: 11px;
+   color: #484848;
 }
 .info_line button {
    margin-right: 5px;
