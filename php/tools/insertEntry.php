@@ -24,13 +24,7 @@ if ( isset( $_POST[ 'submit' ] ) ) {
    if ( strpos( $season, 'Season' ) === false && strpos( $season, 'Arc' ) === false ) {
       $season = 'Season: ' . $season;
    }
-
-   if ( $epis > 0 ) {
-      for ( $i = 1; $i <= $epis; $i++ ) {
-         mysqli_query( $connect2, "INSERT INTO anime(id, ins_date, epi_num, anime_series, anime_name, anime_season) VALUES ('NULL', '$ins_date', '$i', '$series', '$rom_name', '$season');" );
-      }
-   }
-
+   
    header( "Location: http://localhost/PunkCloud/php/home.php" );
 }
 mysqli_close( $connect );
