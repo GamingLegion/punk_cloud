@@ -11,12 +11,12 @@ while ( $record = mysqli_fetch_assoc( $result ) ) {
    if ( ( $username === $record[ 'username' ] || $username === $record[ 'email' ] ) && $password === $record[ 'password' ] ) {
       $_SESSION[ 'user' ] = $record[ 'username' ];
       
-      header( "Location: http://localhost/PunkCloud/php/home.php" );
+      header( "Location: http://localhost/PunkCloud/php/pages/home.php" );
       $check = true;
    }
 }
 if(!$check) {
-   header( "Location: http://localhost/PunkCloud/php/login.php" );
+   header( "Location: http://localhost/PunkCloud/php/pages/login.php" );
 }
 mysqli_close( $connect );
 ?>

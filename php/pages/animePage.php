@@ -269,7 +269,7 @@ include( $header );
       echo '<a><strong>Studio:</strong></a>';
       echo '<a class="info" id="studios" data-season="' . $record[ 'season' ] . '">' . $record[ 'studios' ] . '</a>';
       echo '</div>';
-      if ( isset( $_SESSION[ 'user' ] ) && $_SESSION[ 'user' ] === 'oracle' ) {
+      if ( isset( $_SESSION[ 'user' ] ) && $_SESSION[ 'user' ] === $admin ) {
          echo '<div class="info_line">';
          echo '<a><strong>Manga Chapters:</strong></a>';
          echo '<a class="info" id="mangaChaps" data-season="' . $record[ 'season' ] . '">' . $record[ 'mangaChaps' ] . '</a>';
@@ -369,7 +369,7 @@ include( $header );
          echo '</div>';
          echo '</div>';
       }
-      if ( isset( $_SESSION[ 'user' ] ) && $_SESSION[ 'user' ] == 'oracle' ) {
+      if ( isset( $_SESSION[ 'user' ] ) && $_SESSION[ 'user' ] == $admin ) {
          echo '<div class="addEpisode" data-epiNum="' . $record[ 'epi_num' ] + 1 . '" data-val="' . $number . '" onclick="addEpisode(this);">';
          echo '<p>+</p>';
          echo '</div>';
@@ -435,7 +435,7 @@ echo '</div>';
 //echo '</div>';
 echo '</div>';
 if ( isset( $_SESSION[ 'user' ] ) ) {
-   if ( $_SESSION[ 'user' ] === 'oracle' ) {
+   if ( $_SESSION[ 'user' ] === $admin ) {
       echo '<script src="' . $js . 'editAnime.js"></script>';
       echo '<script src="' . $js . 'editAnimeEpi.js"></script>';
    }
