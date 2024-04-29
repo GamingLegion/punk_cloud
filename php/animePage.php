@@ -74,7 +74,7 @@ include( $IPATH . "header.php" );
          echo '<div class="anime_header_info">';
          echo '<div class="i_l">';
          echo '<a><strong>Anime Score:</strong></a>';
-         echo '<a>' . (($ranks > 0) ? ( $score / $ranks ) : '-') . ' / 10</a>';
+         echo '<a>' . ( ( $ranks > 0 ) ? ( $score / $ranks ) : '-' ) . ' / 10</a>';
          echo '<a class="num">(' . $maxRanks . ' ranked)</a>';
          echo '</div>';
          echo '<div class="i_l">';
@@ -104,6 +104,15 @@ include( $IPATH . "header.php" );
          ?>
       </div>
    </div>
+   <div class="body-section">
+      <button disabled>Seasons/Episodes</button>
+      <button>Description</button>
+      <button>Characters</button>
+      <button>Trailers</button>
+      <button>Stats</button>
+      <button>Reviews</button>
+   </div>
+   <script src="../js/body-section.js"></script>
    <div class="anime-body">
       <div class="seasons">
          <?php
@@ -264,7 +273,7 @@ include( $IPATH . "header.php" );
             echo '<a><strong>Studio:</strong></a>';
             echo '<a class="info" id="studios" data-season="' . $record[ 'season' ] . '">' . $record[ 'studios' ] . '</a>';
             echo '</div>';
-            if ( isset($_SESSION[ 'user' ]) && $_SESSION[ 'user' ] === 'oracle' ) {
+            if ( isset( $_SESSION[ 'user' ] ) && $_SESSION[ 'user' ] === 'oracle' ) {
                echo '<div class="info_line">';
                echo '<a><strong>Manga Chapters:</strong></a>';
                echo '<a class="info" id="mangaChaps" data-season="' . $record[ 'season' ] . '">' . $record[ 'mangaChaps' ] . '</a>';
@@ -378,6 +387,21 @@ include( $IPATH . "header.php" );
          mysqli_close( $connect2 );
          mysqli_close( $connect3 );
          ?>
+      </div>
+      <div class="description">
+         <p>Description</p>
+      </div>
+      <div class="characters">
+         <p>Characters</p>
+      </div>
+      <div class="trailers">
+         <p>Trailers</p>
+      </div>
+      <div class="stats">
+         <p>Dtats</p>
+      </div>
+      <div class="reviews">
+         <p>Reviews</p>
       </div>
    </div>
    <script src="../js/seasonsCollapse.js"></script> 

@@ -53,5 +53,34 @@
    background-color: #9C89B8;
    border: 2px solid #BBAECE;
    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
-   
+}
+.body-section {
+   background-color: #353839;
+   border: 1px solid #434748;
+   padding: 3px 10px;
+   border-radius: 5px;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+.body-section button {
+   margin: 3px 0;
+   padding: 10px;
+   background-color: transparent;
+   border: none;
+   cursor: pointer;
+   color: white;
+   transition: all 0.3s ease-in;
+}
+.body-section button:hover {
+   background-color: #51406B;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.75);
+   border-radius: 20px;
+}
+.body-section button:disabled {
+   color: grey;
+   background-color: #51406B;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.75);
+   border-radius: 20px;
+   cursor: default;
 }
