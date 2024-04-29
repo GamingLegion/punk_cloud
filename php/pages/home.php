@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PunkCloud Home</title>
-<link rel="stylesheet" type="text/css" href="../css/home.css">
-<link rel="stylesheet" type="text/css" href="../css/card.css">
+<link rel="stylesheet" type="text/css" href="../../css/home.css">
+<link rel="stylesheet" type="text/css" href="../../css/card.css">
 <?php
 session_start();
 $IPATH = $_SERVER[ "DOCUMENT_ROOT" ] . "/PunkCloud/php/components/";
@@ -34,7 +34,7 @@ include( $IPATH . "header.php" );
       echo '</div>';
    }
    ?>
-   <script src="../js/pageClick.js"></script> 
+   <script src="../../js/pageClick.js"></script> 
 </div>
 <h1>Recently Updated</h1>
 <div class="new_added">
@@ -57,7 +57,7 @@ include( $IPATH . "header.php" );
       echo '</div>';
    }
    ?>
-   <script src="../js/pageClick.js"></script> 
+   <script src="../../js/pageClick.js"></script> 
 </div>
 </body>
 </html>

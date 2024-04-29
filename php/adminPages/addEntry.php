@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" type="text/css" href="../css/addEntry.css">
+<link rel="stylesheet" type="text/css" href="../../css/addEntry.css">
 <title>Add Entry</title>
 <?php
 session_start();
@@ -14,7 +14,7 @@ include( $IPATH . "header.php" );
 <body>
 <div class="container">
    <h1>Add Entry</h1>
-   <form action="tools/insertEntry.php" method="post" id="form">
+   <form action="../tools/insertEntry.php" method="post" id="form">
       <div class="form-group">
          <label>Romanized Name: </label>
          <input type="text" name="rom_name" required>

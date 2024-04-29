@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Login</title>
-<link rel="stylesheet" href="../css/loginPage.css">
+<link rel="stylesheet" href="../../css/loginPage.css">
 <?php
 session_start();
 $IPATH = $_SERVER[ "DOCUMENT_ROOT" ] . "/PunkCloud/php/components/";
@@ -12,10 +12,10 @@ include( $IPATH . "header.php" );
 ?>
 </head>
 <body>
-<img src="../images/icons/vegapunk.png" alt="Vegapunk" style="position: fixed; width: 15%; margin: 100px 0px 0px 150px">
+<img src="../../images/icons/vegapunk.png" alt="Vegapunk" style="position: fixed; width: 15%; margin: 100px 0px 0px 150px">
 <div class="container">
    <h2 style="color: white;">Login</h2>
-   <form id="loginForm" action="tools/login.php" method="post">
+   <form id="loginForm" action="../tools/login.php" method="post">
       <div class="form-group">
          <label for="username" style="color: white;">User/Email:</label>
          <input type="text" id="username" name="username" required>

@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" type="text/css" href="../css/animePage.css">
-<link rel="stylesheet" type="text/css" href="../css/collapsable.css">
-<link rel="stylesheet" type="text/css" href="../css/episode.css">
-<link rel="stylesheet" type="text/css" href="../css/episodeOverlay.css">
+<link rel="stylesheet" type="text/css" href="../../css/animePage.css">
+<link rel="stylesheet" type="text/css" href="../../css/collapsable.css">
+<link rel="stylesheet" type="text/css" href="../../css/episode.css">
+<link rel="stylesheet" type="text/css" href="../../css/episodeOverlay.css">
 <title>Anime Page</title>
 <?php
 session_start();
@@ -112,7 +112,7 @@ include( $IPATH . "header.php" );
       <button id="stats">Stats</button>
       <button id="reviews">Reviews</button>
    </div>
-   <script src="../js/body-section.js"></script>
+   <script src="../../js/body-section.js"></script>
    <div class="anime-body">
       <div class="section seasons" id="seasonsSection">
          <?php
@@ -404,8 +404,8 @@ include( $IPATH . "header.php" );
          <p>Reviews</p>
       </div>
    </div>
-   <script src="../js/seasonsCollapse.js"></script> 
-   <script src="../js/addEpi.js"></script> 
+   <script src="../../js/seasonsCollapse.js"></script> 
+   <script src="../../js/addEpi.js"></script> 
 </div>
 </div>
 </div>
@@ -448,7 +448,7 @@ if ( isset( $_SESSION[ 'user' ] ) ) {
    }
 }
 ?>
-<script src="../js/episodeOverlay.js"></script> 
-<script src="../js/epiCheck.js"></script>
+<script src="../../js/episodeOverlay.js"></script> 
+<script src="../../js/epiCheck.js"></script>
 </body>
 </html>
