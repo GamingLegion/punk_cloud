@@ -105,16 +105,16 @@ include( $IPATH . "header.php" );
       </div>
    </div>
    <div class="body-section">
-      <button disabled>Seasons/Episodes</button>
-      <button>Description</button>
-      <button>Characters</button>
-      <button>Trailers</button>
-      <button>Stats</button>
-      <button>Reviews</button>
+      <button id="seasons" disabled>Seasons/Episodes</button>
+      <button id="description">Description</button>
+      <button id="characters">Characters</button>
+      <button id="trailers">Trailers</button>
+      <button id="stats">Stats</button>
+      <button id="reviews">Reviews</button>
    </div>
    <script src="../js/body-section.js"></script>
    <div class="anime-body">
-      <div class="seasons">
+      <div class="section seasons" id="seasonsSection">
          <?php
          $connect = mysqli_connect( 'localhost', 'root', 'theallseeingeyes', 'punkcloud' );
          $connect2 = mysqli_connect( 'localhost', 'root', 'theallseeingeyes', 'punkcloud_episodes' );
@@ -388,19 +388,19 @@ include( $IPATH . "header.php" );
          mysqli_close( $connect3 );
          ?>
       </div>
-      <div class="description">
+      <div class="section description" hidden>
          <p>Description</p>
       </div>
-      <div class="characters">
+      <div class="section characters" hidden>
          <p>Characters</p>
       </div>
-      <div class="trailers">
+      <div class="section trailers" hidden>
          <p>Trailers</p>
       </div>
-      <div class="stats">
-         <p>Dtats</p>
+      <div class="section stats" hidden>
+         <p>Stats</p>
       </div>
-      <div class="reviews">
+      <div class="section reviews" hidden>
          <p>Reviews</p>
       </div>
    </div>
