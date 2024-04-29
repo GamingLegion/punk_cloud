@@ -46,7 +46,6 @@
    display: flex;
    align-items: center;
    justify-content: space-between;
-   white-space: nowrap;
    margin: 30px 0 3px 20px;
    padding: 10px;
    border-radius: 20px;
@@ -70,17 +69,16 @@
    border: none;
    cursor: pointer;
    color: white;
-   transition: all 0.3s ease-in;
+   transition: all 0.5s ease-in;
 }
 .body-section button:hover {
-   background-color: #51406B;
-   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.75);
+   background-color: #6A548C;
    border-radius: 20px;
 }
 .body-section button:disabled {
    color: grey;
    background-color: #51406B;
    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.75);
-   border-radius: 20px;
+   border-radius: 25px;
    cursor: default;
 }

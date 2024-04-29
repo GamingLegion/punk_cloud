@@ -6,9 +6,8 @@ document.addEventListener('DOMContentLoaded', function () {
       button.addEventListener('click', () => {
          buttons.forEach(btn => {
             btn.disabled = false;
-            btn.style.backgroundColor = 'transparent';
-            btn.style.boxShadow = '0 0px 0px rgba(0, 0, 0, 0.0)';
          });
+         button.disabled = true;
          sections.forEach(function (sec) {
             if (!sec.classList.contains(button.id)) {
                sec.style.display = 'none';
@@ -16,10 +15,6 @@ document.addEventListener('DOMContentLoaded', function () {
                sec.style.display = 'block';
             }
          });
-
-         button.disabled = true;
-         button.style.backgroundColor = '#51406B';
-         button.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.75)';
       });
    });
 });

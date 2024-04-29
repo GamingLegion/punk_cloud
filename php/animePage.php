@@ -106,7 +106,7 @@ include( $IPATH . "header.php" );
    </div>
    <div class="body-section">
       <button id="seasons" disabled>Seasons/Episodes</button>
-      <button id="description">Description</button>
+      <button id="synopsis">Synopsis</button>
       <button id="characters">Characters</button>
       <button id="trailers">Trailers</button>
       <button id="stats">Stats</button>
@@ -388,8 +388,8 @@ include( $IPATH . "header.php" );
          mysqli_close( $connect3 );
          ?>
       </div>
-      <div class="section description" hidden>
-         <p>Description</p>
+      <div class="section synopsis" hidden>
+         <p>Synopsis</p>
       </div>
       <div class="section characters" hidden>
          <p>Characters</p>
