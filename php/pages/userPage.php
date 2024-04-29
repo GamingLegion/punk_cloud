@@ -7,16 +7,18 @@
 <title>User Page</title>
 <?php
 session_start();
-$IPATH = $_SERVER[ "DOCUMENT_ROOT" ] . "/PunkCloud/php/components/";
-include( $IPATH . "header.php" );
+include '../globalVars.php';
+include( $header );
 ?>
 </head>
 <body>
 <div class="container">
-   <form action="../tools/signout.php" method="post">
-      <div class="form-group">
-         <button type="signout">Sign Out</button>
-      </div>
+   <?php
+   echo '<form action="' . $tools . 'signout.php" method="post">';
+   ?>
+   <div class="form-group">
+      <button type="signout">Sign Out</button>
+   </div>
    </form>
 </div>
 </body>

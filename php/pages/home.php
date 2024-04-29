@@ -4,60 +4,56 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PunkCloud Home</title>
-<link rel="stylesheet" type="text/css" href="../../css/home.css">
-<link rel="stylesheet" type="text/css" href="../../css/card.css">
 <?php
 session_start();
-$IPATH = $_SERVER[ "DOCUMENT_ROOT" ] . "/PunkCloud/php/components/";
-include( $IPATH . "header.php" );
+include '../globalVars.php';
+
+echo '<link rel="stylesheet" type="text/css" href="' . $css . 'home.css">';
+echo '<link rel="stylesheet" type="text/css" href="' . $css . 'card.css">';
+include( $header );
 ?>
 </head>
 <body>
-<h1>Recently Added</h1>
-<div class="new_added">
-   <?php
-   $connect = mysqli_connect( 'localhost', 'root', 'theallseeingeyes', 'punkcloud' );
-   $result = mysqli_query( $connect, 'Select eng_name, rom_name, image, series FROM anime ORDER BY ins_date DESC LIMIT 9' );
+<?php
+echo '<h1>Recently Added</h1>';
+echo '<div class="new_added">';
+$result = mysqli_query( $connect1, 'Select eng_name, rom_name, image, series FROM anime ORDER BY ins_date DESC LIMIT 9' );
 
-   while ( $record = mysqli_fetch_assoc( $result ) ) {
-      echo '<div class="aniCard" id="card">';
-      echo '<div id="thumbnail">';
-      echo '<img src="../images/arts/anime/' . $record[ 'image' ] . '" alt="' . $record[ 'eng_name' ] . '">';
-      echo '<div class="title">';
-      if ( $record[ 'eng_name' ] != NULL ) {
-         echo '<p title="' . $record[ 'series' ] . '">' . $record[ 'eng_name' ] . '</p>';
-      } else {
-         echo '<p title="' . $record[ 'series' ] . '">' . $record[ 'rom_name' ] . '</p>';
-      }
-      echo '</div>';
-      echo '</div>';
-      echo '</div>';
+while ( $record = mysqli_fetch_assoc( $result ) ) {
+   echo '<div class="aniCard" id="card">';
+   echo '<div id="thumbnail">';
+   echo '<img src="' . $animeArts . $record[ 'image' ] . '" alt="' . $record[ 'rom_name' ] . '">';
+   echo '<div class="title">';
+   if ( $record[ 'eng_name' ] != NULL ) {
+      echo '<p title="' . $record[ 'series' ] . '">' . $record[ 'eng_name' ] . '</p>';
+   } else {
+      echo '<p title="' . $record[ 'series' ] . '">' . $record[ 'rom_name' ] . '</p>';
    }
-   ?>
-   <script src="../../js/pageClick.js"></script> 
-</div>
-<h1>Recently Updated</h1>
-<div class="new_added">
-   <?php
-   $connect = mysqli_connect( 'localhost', 'root', 'theallseeingeyes', 'punkcloud' );
-   $result = mysqli_query( $connect, 'Select eng_name, rom_name, image, series FROM anime ORDER BY upd_date DESC LIMIT 9' );
+   echo '</div>';
+   echo '</div>';
+   echo '</div>';
+}
+echo '</div>';
+echo '<h1>Recently Updated</h1>';
+echo '<div class="new_added">';
+$result = mysqli_query( $connect1, 'Select eng_name, rom_name, image, series FROM anime ORDER BY upd_date DESC LIMIT 9' );
 
-   while ( $record = mysqli_fetch_assoc( $result ) ) {
-      echo '<div class="aniCard" id="card">';
-      echo '<div id="thumbnail">';
-      echo '<img src="../images/arts/anime/' . $record[ 'image' ] . '" alt="' . $record[ 'eng_name' ] . '">';
-      echo '<div class="title">';
-      if ( $record[ 'eng_name' ] != NULL ) {
-         echo '<p title="' . $record[ 'series' ] . '">' . $record[ 'eng_name' ] . '</p>';
-      } else {
-         echo '<p title="' . $record[ 'series' ] . '">' . $record[ 'rom_name' ] . '</p>';
-      }
-      echo '</div>';
-      echo '</div>';
-      echo '</div>';
+while ( $record = mysqli_fetch_assoc( $result ) ) {
+   echo '<div class="aniCard" id="card">';
+   echo '<div id="thumbnail">';
+   echo '<img src="' . $animeArts . $record[ 'image' ] . '" alt="' . $record[ 'rom_name' ] . '">';
+   echo '<div class="title">';
+   if ( $record[ 'eng_name' ] != NULL ) {
+      echo '<p title="' . $record[ 'series' ] . '">' . $record[ 'eng_name' ] . '</p>';
+   } else {
+      echo '<p title="' . $record[ 'series' ] . '">' . $record[ 'rom_name' ] . '</p>';
    }
-   ?>
-   <script src="../../js/pageClick.js"></script> 
-</div>
+   echo '</div>';
+   echo '</div>';
+   echo '</div>';
+}
+echo '</div>';
+echo '<script src="' . $js . 'pageClick.js"></script> ';
+?>
 </body>
 </html>

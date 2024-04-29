@@ -38,9 +38,9 @@ if ( $check ) {
     watched SMALLINT(4) UNSIGNED DEFAULT 1
     )";
    mysqli_query($connect2, $sql);
-   header( "Location: http://localhost/PunkCloud/php/home.php" );
+   header( "Location: http://localhost/PunkCloud/php/pages/home.php" );
 } else {
-   header( "Location: http://localhost/PunkCloud/php/signup.php" );
+   header( "Location: http://localhost/PunkCloud/php/pages/signup.php" );
 }
 mysqli_close( $connect );
 mysqli_close( $connect2 );
