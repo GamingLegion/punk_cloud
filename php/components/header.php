@@ -24,7 +24,8 @@ echo '<link rel="stylesheet" type="text/css" href="' . $css . 'header.css">';
             <option value="cartoons" data-value="nd" disabled>Cartoons / Other Animated</option>
             </optgroup>
             <optgroup label="Books/Novels">
-            <option value="movels" data-value="nd" disabled>Novels</option>
+            <option value="novels" data-value="nd" disabled>Novels</option>
+            <option value="comics" data-value="nd" disabled>Comics</option>
             <option value="mangas" data-value="nd" disabled>Manga</option>
             <option value="manwhas" data-value="nd" disabled>Manwha</option>
             <option value="manhua" data-value="nd" disabled>Manhua</option>
