@@ -457,8 +457,8 @@ include( $header );
    <p>Reviews</p>
 </div>
 </div>
-<script src="../../js/seasonsCollapse.js"></script> 
-<script src="../../js/addEpi.js"></script>
+<script src="../../js/animePageJS/seasonsCollapse.js"></script> 
+<script src="../../js/animePageJS/addEpi.js"></script>
 </div>
 </div>
 </div>
