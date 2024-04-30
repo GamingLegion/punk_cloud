@@ -27,7 +27,7 @@ echo '<link rel="stylesheet" type="text/css" href="' . $css . 'header.css">';
             <option value="novels" data-value="nd" disabled>Novels</option>
             <option value="comics" data-value="nd" disabled>Comics</option>
             <option value="mangas" data-value="nd" disabled>Manga</option>
-            <option value="manwhas" data-value="nd" disabled>Manwha</option>
+            <option value="manhwas" data-value="nd" disabled>Manhwa</option>
             <option value="manhua" data-value="nd" disabled>Manhua</option>
             <option value="light_novels" data-value="nd" disabled>Light Novel</option>
             <option value="web_novels" data-value="nd" disabled>Web Novel</option>
