@@ -36,7 +36,7 @@ include( $header );
             echo '<p class="eng_name">' . $record[ 'eng_name' ] . '</p>';
             echo '</div>';
          }
-         echo '<script src="' . $js . 'titleOverflow.js"></script>';
+         echo '<script src="' . $apjs . 'titleOverflow.js"></script>';
 
          $result2 = mysqli_query( $connect1, "SELECT addedScore, numOfRanks FROM anime WHERE series = '" . $name . "'" );
          $score = 0;
@@ -143,7 +143,7 @@ include( $header );
       <button id="reviews">Reviews</button>
    </div>
    <?php
-   echo '<script src="' . $js . 'body-section.js"></script>';
+   echo '<script src="' . $apjs . 'body-section.js"></script>';
    echo '<div class="anime-body">';
    echo '<div class="section seasons" id="seasonsSection">';
 
@@ -496,12 +496,12 @@ echo '</div>';
 echo '</div>';
 if ( isset( $_SESSION[ 'user' ] ) ) {
    if ( $_SESSION[ 'user' ] === $admin ) {
-      echo '<script src="' . $js . 'editAnime.js"></script>';
-      echo '<script src="' . $js . 'editAnimeEpi.js"></script>';
+      echo '<script src="' . $apjs . 'editAnime.js"></script>';
+      echo '<script src="' . $apjs . 'editAnimeEpi.js"></script>';
    }
 }
-echo '<script src="' . $js . 'episodeOverlay.js"></script>';
-echo '<script src="' . $js . 'epiCheck.js"></script>';
+echo '<script src="' . $apjs . 'episodeOverlay.js"></script>';
+echo '<script src="' . $apjs . 'epiCheck.js"></script>';
 ?>
 </body>
 </html>

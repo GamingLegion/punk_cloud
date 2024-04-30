@@ -7,6 +7,7 @@ $connect3 = mysqli_connect( 'localhost', 'root', 'theallseeingeyes', 'punkcloud_
 
 $css = "/PunkCloud/css/";
 $js = "/PunkCloud/js/";
+$apjs = $js . "animePageJS/";
 $tools = "/PunkCloud/php/tools/";
 $pages = "/PunkCloud/php/pages/";
 $adminPages = "/PunkCloud/php/adminPages/";

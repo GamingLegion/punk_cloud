@@ -130,7 +130,7 @@ function epiCheck(check, button) {
    var xhr = new XMLHttpRequest();
    if (check !== 0) {
       if (check !== buttonbtn.classList.contains('checked')) {
-         xhr.open('POST', '../php/tools/epiCheck.php', true);
+         xhr.open('POST', '/PunkCloud/php/tools/epiCheck.php', true);
          xhr.setRequestHeader('Content-Type', 'application/json');
          xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
@@ -146,7 +146,7 @@ function epiCheck(check, button) {
          xhr.send(JSON.stringify(data));
       }
    } else {
-      xhr.open('POST', '../php/tools/epiCheck.php', true);
+      xhr.open('POST', '/PunkCloud/php/tools/epiCheck.php', true);
       xhr.setRequestHeader('Content-Type', 'application/json');
       xhr.onreadystatechange = function () {
          if (xhr.readyState === 4 && xhr.status === 200) {
