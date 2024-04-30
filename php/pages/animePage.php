@@ -58,7 +58,7 @@ include( $header );
                $map[ $record2[ 'series' ] ] = $record2[ 'addedWatch' ];
             }
          }
-         mysqli_free_result( $result );
+         mysqli_free_result( $result2 );
          arsort( $map );
          $rank = 1;
          $val = 0;
@@ -70,6 +70,32 @@ include( $header );
             $rank++;
          }
 
+         $result2 = mysqli_query( $connect1, "SELECT series, addedScore, numOfRanks FROM anime" );
+         $map2 = [];
+         $map3 = [];
+         while ( $record2 = mysqli_fetch_assoc( $result2 ) ) {
+            if ( isset( $map2[ $record2[ 'series' ] ] ) ) {
+               $map2[ $record2[ 'series' ] ] = max( $map2[ $record2[ 'series' ] ], $record2[ 'addedScore' ] );
+               $map3[ $record2[ 'series' ] ] = max( $map3[ $record2[ 'series' ] ], $record2[ 'numOfRanks' ] );
+            } else {
+               $map2[ $record2[ 'series' ] ] = $record2[ 'addedScore' ];
+               $map3[ $record2[ 'series' ] ] = $record2[ 'numOfRanks' ];
+            }
+         }
+         mysqli_free_result( $result2 );
+         $map4 = [];
+         foreach ( $map2 as $key => $value ) {
+            $map4[ $key ] = $map2[ $key ] / $map3[ $key ];
+         }
+         arsort( $map4 );
+         $rank2 = 1;
+         foreach ( $map4 as $key => $value ) {
+            if ( $value === $map4[ $name ] ) {
+               break;
+            }
+            $rank2++;
+         }
+
          echo '<div class="anime_header_info_wrapper">';
          echo '<div class="anime_header_info">';
          echo '<div class="i_l">';
@@ -77,6 +103,11 @@ include( $header );
          echo '<a>' . ( ( $ranks > 0 ) ? ( $score / $ranks ) : '-' ) . ' / 10</a>';
          echo '<a class="num">(' . $maxRanks . ' ranked)</a>';
          echo '</div>';
+         echo '<div class="i_l">';
+         echo '<a><strong>Anime Rank:</strong></a>';
+         echo '<a>#' . $rank2 . '</a>';
+         echo '</div>';
+         echo '<br>';
          echo '<div class="i_l">';
          echo '<a><strong>Anime Popularity:</strong></a>';
          echo '<a>#' . $rank . '</a>';
@@ -184,6 +215,35 @@ include( $header );
          echo '<a class="info" id="season_score">- / 10</a>';
       }
       echo '<a class="num">(' . $record[ 'numOfRanks' ] . ' ranked)</a>';
+      echo '</div>';
+      echo '<div class="i_l">';
+      echo '<a><strong>Season Rank:</strong></a>';
+      $result2 = mysqli_query( $connect1, "SELECT rom_name, season, addedScore, numOfRanks FROM anime" );
+      $map2 = [];
+      $map3 = [];
+      while ( $record2 = mysqli_fetch_assoc( $result2 ) ) {
+         if ( isset( $map2[ $record2[ 'rom_name' ] . ' ' . $record2[ 'season' ] ] ) ) {
+            $map2[ $record2[ 'rom_name' ] . ' ' . $record2[ 'season' ] ] = max( $map2[ $record2[ 'rom_name' ] . ' ' . $record2[ 'season' ] ], $record2[ 'addedScore' ] );
+            $map3[ $record2[ 'rom_name' ] . ' ' . $record2[ 'season' ] ] = max( $map3[ $record2[ 'rom_name' ] . ' ' . $record2[ 'season' ] ], $record2[ 'numOfRanks' ] );
+         } else {
+            $map2[ $record2[ 'rom_name' ] . ' ' . $record2[ 'season' ] ] = $record2[ 'addedScore' ];
+            $map3[ $record2[ 'rom_name' ] . ' ' . $record2[ 'season' ] ] = $record2[ 'numOfRanks' ];
+         }
+      }
+      mysqli_free_result( $result2 );
+      $map4 = [];
+      foreach ( $map2 as $key => $value ) {
+         $map4[ $key ] = $map2[ $key ] / $map3[ $key ];
+      }
+      arsort( $map4 );
+      $rank2 = 1;
+      foreach ( $map4 as $key => $value ) {
+         if ( $value === $map4[ $record['rom_name'] . ' ' . $record['season'] ] ) {
+            break;
+         }
+         $rank2++;
+      }
+      echo '<a class="info" id="season_popularity">#' . $rank2 . '</a>';
       echo '</div>';
       echo '<div class="i_l">';
       echo '<a><strong>Season Popularity:</strong></a>';
