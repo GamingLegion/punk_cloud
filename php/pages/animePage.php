@@ -85,7 +85,7 @@ include( $header );
          mysqli_free_result( $result2 );
          $map4 = [];
          foreach ( $map2 as $key => $value ) {
-            $map4[ $key ] = $map2[ $key ] / $map3[ $key ];
+            $map4[ $key ] = ($map3[ $key ] > 0) ? $map2[ $key ] / $map3[ $key ] : 0;
          }
          arsort( $map4 );
          $rank2 = 1;

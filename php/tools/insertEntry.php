@@ -1,6 +1,5 @@
 <?php
-$connect = mysqli_connect( 'localhost', 'root', 'theallseeingeyes', 'punkcloud' );
-$connect2 = mysqli_connect( 'localhost', 'root', 'theallseeingeyes', 'punkcloud_episodes' );
+include '../globalVars.php';
 
 if ( isset( $_POST[ 'submit' ] ) ) {
    date_default_timezone_set( 'America/New_York' );
@@ -14,18 +13,18 @@ if ( isset( $_POST[ 'submit' ] ) ) {
 
    $rom_name = str_replace( "'", "\'", $rom_name );
    $rom_name = str_replace( "\"", "\"", $rom_name );
-   mysqli_query( $connect, "INSERT INTO anime(id, ins_date, upd_date, rom_name, image, epi_num, series, season) VALUES ('NULL', '$ins_date', '$ins_date', '$rom_name', '$image', '$epis', '$series', '$season');" );
+   mysqli_query( $connect1, "INSERT INTO anime(id, ins_date, upd_date, rom_name, image, epi_num, series, season) VALUES ('NULL', '$ins_date', '$ins_date', '$rom_name', '$image', '$epis', '$series', '$season');" );
 
    if ( $eng_name !== NULL && $eng_name !== "" ) {
       $eng_name = str_replace( "'", "\'", $eng_name );
       $eng_name = str_replace( "\"", "\"", $eng_name );
-      mysqli_query( $connect, "UPDATE anime SET eng_name = '$eng_name' WHERE rom_name = '$rom_name'" );
+      mysqli_query( $connect1, "UPDATE anime SET eng_name = '$eng_name' WHERE rom_name = '$rom_name'" );
    }
    if ( strpos( $season, 'Season' ) === false && strpos( $season, 'Arc' ) === false ) {
       $season = 'Season: ' . $season;
    }
    
-   header( "Location: http://localhost/PunkCloud/php/home.php" );
+   header( "Location: http://localhost/PunkCloud/php/pages/home.php" );
 }
 mysqli_close( $connect );
 ?>

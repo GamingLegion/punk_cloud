@@ -10,7 +10,7 @@ echo '<link rel="stylesheet" type="text/css" href="' . $css . 'header.css">';
 
 <div class="headerBar">
    <?php
-   echo '<div class="searchCats"> <a href="home.php"><img src="' . $icons . 'logo.png" alt="PunkCloud Logo" class="homeBtn"></a> </div>';
+   echo '<div class="searchCats"> <a href="' . $pages . 'home.php"><img src="' . $icons . 'logo.png" alt="PunkCloud Logo" class="homeBtn"></a> </div>';
    ?>
    <div class="searchBar">
       <div class="filter-container">
@@ -47,13 +47,13 @@ echo '<link rel="stylesheet" type="text/css" href="' . $css . 'header.css">';
    echo '<div class="userOpts">';
    if ( isset( $_SESSION[ 'user' ] ) ) {
       if ( $_SESSION[ 'user' ] === $admin ) {
-         echo '<a href="addEntry.php"><img src="' . $icons . 'addEntry_icon.png" alt="PunkCloud Logo" class="addEntryBtn"></a>';
+         echo '<a href="' . $adminPages . 'addEntry.php"><img src="' . $icons . 'addEntry_icon.png" alt="PunkCloud Logo" class="addEntryBtn"></a>';
       }
       $result = mysqli_query( $connect1, "Select icon FROM users WHERE username = '" . $_SESSION[ 'user' ] . "' " );
       $record = mysqli_fetch_assoc( $result );
-      echo '<a href="userPage.php"><img src="' . $userIcons . $record[ 'icon' ] . '" alt="User" class="loginBtn"></a>';
+      echo '<a href="' . $pages . 'userPage.php"><img src="' . $userIcons . $record[ 'icon' ] . '" alt="User" class="loginBtn"></a>';
    } else {
-      echo '<a href="login.php"><img src="' . $icons . 'login_icon.png" alt="Login" class="loginBtn"></a>';
+      echo '<a href="' . $pages . 'login.php"><img src="' . $icons . 'login_icon.png" alt="Login" class="loginBtn"></a>';
    }
    echo '</div>';
    ?>
