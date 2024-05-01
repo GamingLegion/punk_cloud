@@ -56,10 +56,10 @@ function updateOverField(pmaField, newValue, fieldName, button) {
    xhr.onreadystatechange = function () {
       if (xhr.readyState === 4 && xhr.status === 200) {
          var field = overlay.querySelector("#" + fieldName);
-         var btn = searchEpi(checkbox).closest('.episode');
+         var epi = searchEpi(checkbox).closest('.episode');
          if (fieldName === 'overlayImg') {
             field.querySelector('img').src = '/PunkCloud/images/episodes/anime/' + newValue;
-            btn.querySelector('img').src = '/PunkCloud/images/episodes/anime/' + newValue;
+            epi.querySelector('img').src = '/PunkCloud/images/episodes/anime/' + newValue;
          } else {
             field.textContent = newValue;
          }
