@@ -170,7 +170,7 @@ function epiIncDec(incdec, index, button) {
    };
 
    var xhr = new XMLHttpRequest();
-   xhr.open('POST', '../php/tools/epiIncDec.php', true);
+   xhr.open('POST', '/PunkCloud/php/tools/epiIncDec.php', true);
    xhr.setRequestHeader('Content-Type', 'application/json');
    xhr.onreadystatechange = function () {
       if (xhr.readyState === 4 && xhr.status === 200) {
@@ -286,7 +286,7 @@ function updateRank(season, rank) {
    };
 
    var xhr = new XMLHttpRequest();
-   xhr.open('POST', '../php/tools/updateRank.php', true);
+   xhr.open('POST', '../../php/tools/updateRank.php', true);
    xhr.setRequestHeader('Content-Type', 'application/json');
    xhr.send(JSON.stringify(data));
 }
