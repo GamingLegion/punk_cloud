@@ -12,6 +12,8 @@ $tools = "/PunkCloud/php/tools/";
 $pages = "/PunkCloud/php/pages/";
 $adminPages = "/PunkCloud/php/adminPages/";
 
+$fonts = "/PunkCloud/fonts/fonts.css";
+
 $header = $_SERVER[ "DOCUMENT_ROOT" ] . "/PunkCloud/php/components/header.php";
 $animeArts = '/PunkCloud/images/arts/anime/';
 $episodeThumbnails = '/PunkCloud/images/episodes/anime/';

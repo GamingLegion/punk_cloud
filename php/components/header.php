@@ -6,6 +6,7 @@
 <?php
 include '../globalVars.php';
 echo '<link rel="stylesheet" type="text/css" href="' . $css . 'header.css">';
+echo '<link rel="stylesheet" type="text/css" href="' . $fonts . '">';
 ?>
 
 <div class="headerBar">
