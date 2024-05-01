@@ -4,7 +4,6 @@ var img = overlay.querySelector("#overlayImg");
 var title = overlay.querySelector("#titleLine");
 var relDate = overlay.querySelector("#episode-release-date");
 //var desc = over.querySelector("#description");
-
 var checkbox = title.querySelector(".checkbox-btn");
 
 var editBtn1 = document.createElement('button');
@@ -52,13 +51,15 @@ function updateOverField(pmaField, newValue, fieldName, button) {
    };
 
    var xhr = new XMLHttpRequest();
-   xhr.open('POST', '../php/tools/editAnimeEpi.php', true);
+   xhr.open('POST', '/PunkCloud/php/tools/editAnimeEpi.php', true);
    xhr.setRequestHeader('Content-Type', 'application/json');
    xhr.onreadystatechange = function () {
       if (xhr.readyState === 4 && xhr.status === 200) {
          var field = overlay.querySelector("#" + fieldName);
+         var btn = searchEpi(checkbox);
          if (fieldName === 'overlayImg') {
-            field.querySelector('img').src = newValue;
+            field.querySelector('img').src = '/PunkCloud/images/episodes/anime/' + newValue;
+            btn.closest('.episode').querySelector('img').src = '/PunkCloud/images/episodes/anime/' + newValue;
          } else {
             field.textContent = newValue;
          }
