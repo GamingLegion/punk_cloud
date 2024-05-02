@@ -14,6 +14,7 @@
 .anime-header, .anime-body {
    display: flex;
    align-items: flex-start;
+   margin-bottom: 10px;
 }
 .anime-image {
    width: 350px;
