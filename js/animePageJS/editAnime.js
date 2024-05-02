@@ -37,20 +37,25 @@ collapses.forEach(function (collapse) {
    });
 });
 collapses.forEach(function (collapse) {
-   var imgDiv = collapse.querySelector(".imgDiv");
+   var imgDiv = collapse.querySelector(".anime-image");
    var img = imgDiv.querySelector("img");
 
    var editButton = document.createElement('button');
    editButton.id = 'editBtn';
    editButton.textContent = 'Edit';
+   editButton.style.position = 'absolute';
+   editButton.style.zIndex = '999';
    editButton.onclick = function () {
-      var newValue = prompt('Enter new value for image path');
+      var newValue = prompt('Enter new value for image path', img.src);
       if (newValue !== null) {
+         if(newValue.indexOf("http://") >= 0) {
+            newValue = newValue.substr(newValue.lastIndexOf("/") + 1);
+         }
          updateField(collapse, img, img.id, img.dataset.season, newValue);
       }
    };
 
-   imgDiv.insertBefore(editButton, img);
+   imgDiv.insertBefore(editButton, imgDiv.querySelector(".anime-image-sub"));
 });
 collapses.forEach(function (collapse) {
    var btnWrap = collapse.querySelector(".collapsible-btn-wrapper");
@@ -124,7 +129,7 @@ function updateField(collapse, line, fieldName, season, newValue) {
          };
 
          var xhr = new XMLHttpRequest();
-         xhr.open('POST', '../php/tools/editAnime.php', true);
+         xhr.open('POST', '/PunkCloud/php/tools/editAnime.php', true);
          xhr.setRequestHeader('Content-Type', 'application/json');
          xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
