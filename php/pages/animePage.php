@@ -25,7 +25,9 @@ include( $header );
          $record = mysqli_fetch_assoc( $result );
 
          echo '<div class="anime-image">';
+         echo '<div class="anime-image-sub">';
          echo '<img src="' . $animeArts . $record[ 'image' ] . '" id="image">';
+         echo '</div>';
          echo '</div>';
          echo '<div class="anime-names">';
          echo '<div class="anime-name">';
@@ -85,7 +87,7 @@ include( $header );
          mysqli_free_result( $result2 );
          $map4 = [];
          foreach ( $map2 as $key => $value ) {
-            $map4[ $key ] = ($map3[ $key ] > 0) ? $map2[ $key ] / $map3[ $key ] : 0;
+            $map4[ $key ] = ( $map3[ $key ] > 0 ) ? $map2[ $key ] / $map3[ $key ] : 0;
          }
          arsort( $map4 );
          $rank2 = 1;
@@ -198,8 +200,10 @@ include( $header );
       echo '<input type="hidden" value="' . $record[ 'season' ] . '">';
       echo '<div class="anime-left">';
       echo '<div class="anime-description">';
-      echo '<div class="imgDiv">';
+      echo '<div class="anime-image">';
+      echo '<div class="anime-image-sub">';
       echo '<img src="' . $animeArts . $record[ 'image' ] . '" id="image" data-season="' . $record[ 'season' ] . '">';
+      echo '</div>';
       echo '</div>';
       echo '<div class="info_line" style="text-align: center;">';
       echo '<a><strong></strong></a>';
@@ -233,12 +237,12 @@ include( $header );
       mysqli_free_result( $result2 );
       $map4 = [];
       foreach ( $map2 as $key => $value ) {
-         $map4[ $key ] = ($map3[ $key ] > 0) ? $map2[ $key ] / $map3[ $key ] : 0;
+         $map4[ $key ] = ( $map3[ $key ] > 0 ) ? $map2[ $key ] / $map3[ $key ] : 0;
       }
       arsort( $map4 );
       $rank2 = 1;
       foreach ( $map4 as $key => $value ) {
-         if ( $value === $map4[ $record['rom_name'] . ' ' . $record['season'] ] ) {
+         if ( $value === $map4[ $record[ 'rom_name' ] . ' ' . $record[ 'season' ] ] ) {
             break;
          }
          $rank2++;

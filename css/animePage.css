@@ -16,17 +16,24 @@
    align-items: flex-start;
    margin-bottom: 10px;
 }
-.anime-image {
+.anime-image  {
+   position: relative;
+   display: inline-block;
    width: 350px;
-   height: auto;
-   border-radius: 4px;
+   height: 375px;
+   overflow: hidden;
+   border-radius: 25px;
    box-shadow: 0 0 10px rgba(0, 0, 0, 0.75);
 }
-.anime-image img {
-   display: flex;
+.anime-image-sub {
+    position: relative;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.anime-image-sub img {
    width: 100%;
-   border-radius: 25px;
-   align-items: center;
 }
 .anime-names {
    width: 100%;
