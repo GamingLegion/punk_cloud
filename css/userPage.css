@@ -31,12 +31,17 @@
 .account {
    display: flex;
 }
-.info {
+.account-left {
    display: inline-block;
    width: 40%;
+   height: 100%;
    margin: 15px 0 0 10px;
    border-radius: 18px;
+}
+.info {
    background-color: #353839;
+   border-radius: 18px;
+   margin-bottom: 15px;
 }
 .username {
    display: flex;
@@ -60,6 +65,10 @@
 }
 .userIcon img {
    width: 75%;
+}
+.sub-info {
+   padding: 10px 20px;
+   color: white;
 }
 .lists {
    display: inline-block;

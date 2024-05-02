@@ -27,15 +27,26 @@ if ( isset( $_SESSION[ 'user' ] ) ) {
    echo '</form>';
    ?>
    <div class="account">
-      <div class="info">
-         <?php
-         $result = mysqli_query( $connect1, "SELECT icon FROM users WHERE username = '" . $_SESSION[ 'user' ] . "'" );
-         $record = mysqli_fetch_assoc( $result );
-         echo '<a class="username">' . $_SESSION[ 'user' ] . '</a>';
-         echo '<div class="userIcon">';
-         echo '<img  src="' . $userIcons . $record[ 'icon' ] . '" alt="User Icon">';
-         echo '</div>';
-         ?>
+      <div class="account-left">
+         <div class="info" id="1">
+            <?php
+            $result = mysqli_query( $connect1, "SELECT icon FROM users WHERE username = '" . $_SESSION[ 'user' ] . "'" );
+            $record = mysqli_fetch_assoc( $result );
+            echo '<a class="username">' . $_SESSION[ 'user' ] . '</a>';
+            echo '<div class="userIcon">';
+            echo '<img  src="' . $userIcons . $record[ 'icon' ] . '" alt="User Icon">';
+            echo '</div>';
+            ?>
+         </div>
+         <div class="info">
+            <div class="sub-info">
+            <?php
+            $result = mysqli_query( $connect1, "SELECT ins_date FROM users WHERE username = '" . $_SESSION[ 'user' ] . "'" );
+            $record = mysqli_fetch_assoc( $result );
+            echo '<a class="start_date">Date Joined: ' . date( 'F j, Y', strtotime( $record[ 'ins_date' ] ) ) . '</a>';
+            ?>
+            </div>
+         </div>
       </div>
       <div class="lists">
          <div class="list allLists">
@@ -112,7 +123,9 @@ if ( isset( $_SESSION[ 'user' ] ) ) {
                <div class="listCards"> </div>
             </div>
          </div>
-         <br><br><br>
+         <br>
+         <br>
+         <br>
          <div class="textLists">
             <div class="list novel">
                <p class="listName">Novel List</p>
@@ -143,7 +156,7 @@ if ( isset( $_SESSION[ 'user' ] ) ) {
                <div class="listCards"> </div>
             </div>
          </div>
-      <br>
+         <br>
       </div>
       <?php
       echo '<script src="' . $js . 'pageClick.js"></script>';
