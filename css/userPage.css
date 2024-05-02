@@ -1,8 +1,92 @@
 /* CSS Document */
 .container {
-   max-width: 1200px;
    margin: 20px auto;
-   background-color: #434748;
+   max-width: 1500px;
    border-radius: 8px;
+   background-color: #434748;
    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.signout {
+   background-color: #353839;
+   border: 1px solid #434748;
+   border-radius: 5px;
+   padding: 3px 10px;
+}
+.signout button {
+   width: 100%;
+   margin: 3px 0;
+   padding: 10px;
+   background-color: #54426E;
+   border: none;
+   border-radius: 0;
+   cursor: pointer;
+   color: white;
+   font-family: "Bank Gothic Medium";
+   transition: all 0.3s ease-in;
+}
+.signout button:hover {
+   background-color: #861A2E;
+   border-radius: 20px;
+}
+.account {
+   display: flex;
+}
+.info {
+   display: inline-block;
+   width: 40%;
+   margin: 15px 0 0 10px;
+   border-radius: 18px;
+   background-color: #353839;
+}
+.username {
+   display: flex;
+   font-family: "Kanit Light";
+   font-weight: 700;
+   font-size: 30px;
+   color: white;
+   padding: 5px 10px 3px 10px;
+   border-top-left-radius: 18px;
+   border-top-right-radius: 18px;
+   background-color: rgba(0, 0, 0, 0.25);
+   justify-content: center;
+}
+.userIcon {
+   display: flex;
+   padding: 10px;
+   border-bottom-left-radius: 18px;
+   border-bottom-right-radius: 18px;
+   background-color: rgba(0, 0, 0, 0.15);
+   justify-content: center;
+}
+.userIcon img {
+   width: 75%;
+}
+.lists {
+   display: inline-block;
+   width: 100%;
+   margin: -15px 10px;
+}
+.list {
+   min-width: calc((180px * 5) + (3px * 5) + 18px);
+   background-color: #353839;
+   border-radius: 18px;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+}
+.listName {
+   font-family: "Bank Gothic Medium";
+   font-style: italic;
+   font-weight: 700;
+   font-size: 22px;
+   color: white;
+   padding: 10px 0 5px 20px;
+   border-top-left-radius: 18px;
+   border-top-right-radius: 18px;
+   background-color: rgba(0, 0, 0, 0.25);
+}
+.listCards {
+   display: flex;
+   min-height: 25px;
+   margin: 0 15px;
+   padding-bottom: 5px;
+   justify-content: space-between;
 }
