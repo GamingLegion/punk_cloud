@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var selectedFilter = searchFilter.value;
 
         if (searchTerm.length > 0) {
-            fetch('../php/tools/search.php?q=' + encodeURIComponent(searchTerm) + '&filter=' + selectedFilter)
+            fetch('/PunkCloud/php/tools/search.php?q=' + encodeURIComponent(searchTerm) + '&filter=' + selectedFilter)
                 .then(response => response.json())
                 .then(data => {
                     showSearchResults(data);
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
             var listItem = document.createElement('li');
             listItem.innerHTML = '<img src="' + result.image + '" alt="' + result.name + '"> ' + result.name;
             listItem.addEventListener('click', function() {
-               var link = "http://localhost/PunkCloud/php/animePage.php?link=" + result.name;
+               var link = "http://localhost/PunkCloud/php/pages/animePage.php?link=" + result.name;
       window.location.href = link;
             });
             searchResultsList.appendChild(listItem);

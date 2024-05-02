@@ -1,11 +1,10 @@
 <?php
-// Connect to your database
-$connect = mysqli_connect( 'localhost', 'root', 'theallseeingeyes', 'punkcloud' );
+include '../globalVars.php';
 
 // Check if the 'q' parameter is set in the URL
 if ( isset( $_GET[ 'q' ] ) ) {
    // Sanitize and escape the search query
-   $searchTerm = mysqli_real_escape_string( $connect, $_GET[ 'q' ] );
+   $searchTerm = mysqli_real_escape_string( $connect1, $_GET[ 'q' ] );
    $filter = $_GET[ 'filter' ];
 
    // Construct the SQL query to search for anime shows based on the rom_name
@@ -20,7 +19,7 @@ if ( isset( $_GET[ 'q' ] ) ) {
    }
 
    // Perform the query
-   $result = mysqli_query( $connect, $query );
+   $result = mysqli_query( $connect1, $query );
 
    // Initialize an array to store the search results
    $searchResults = array();
@@ -29,7 +28,7 @@ if ( isset( $_GET[ 'q' ] ) ) {
    while ( $row = mysqli_fetch_assoc( $result ) ) {
       $searchResults[] = array(
          'name' => $row[ 'rom_name' ],
-         'image' => '../images/arts/anime/' . $row[ 'image' ]
+         'image' => $animeArts . $row[ 'image' ]
       );
    }
 
@@ -39,7 +38,4 @@ if ( isset( $_GET[ 'q' ] ) ) {
    // If the 'q' parameter is not set, return an empty array
    echo json_encode( array() );
 }
-
-// Close the database connection
-mysqli_close( $connect );
 ?>

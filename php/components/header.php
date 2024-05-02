@@ -36,7 +36,7 @@ echo '<link rel="stylesheet" type="text/css" href="' . $fonts . '">';
          </select>
       </div>
       <div class="search-container">
-         <input type="text" class="search-input" placeholder="Search anime...">
+         <input type="text" class="search-input" placeholder="Search...">
          <div class="search-results">
             <ul id="searchResults">
             </ul>
