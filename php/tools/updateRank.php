@@ -13,26 +13,12 @@ if ( isset( $record[ 'anime_name' ] ) ) {
    $old_rank = ( isset( $record[ 'season_rank' ] ) ) ? $record[ 'season_rank' ] : 0;
    $prev = isset( $record[ 'season_rank' ] );
 
+   mysqli_query( $connect2, "UPDATE anime SET addedScore = addedScore - $old_rank, numOfRanks = numOfRanks - 1 WHERE rom_name = '$season'" );
    if ( $rank != "Select Score" ) {
       mysqli_query( $connect3, "UPDATE $user SET season_rank = $rank WHERE anime_name = '$season'" );
+      mysqli_query( $connect2, "UPDATE anime SET addedScore = addedScore + $rank, numOfRanks = numOfRanks + 1 WHERE rom_name = '$season'" );
    } else {
       mysqli_query( $connect3, "UPDATE $user SET season_rank = NULL WHERE anime_name = '$season'" );
    }
-
-   $result2 = mysqli_query( $connect, "SELECT addedScore, numOfRanks FROM anime WHERE rom_name = '$season'" );
-   $record2 = mysqli_fetch_assoc( $result2 );
-   $score = ( isset( $record2[ 'addedScore' ] ) ) ? $record2[ 'addedScore' ] : 0;
-   $score -= $old_rank;
-   $num = ( isset( $record2[ 'numOfRanks' ] ) ) ? $record2[ 'numOfRanks' ] : 0;
-   if ( $prev ) {
-      $num--;
-   }
-
-   if ( $rank != "Select Score" ) {
-      $score += $rank;
-      $num++;
-   }
-
-   mysqli_query( $connect2, "UPDATE anime SET addedScore = $score, numOfRanks = $num WHERE rom_name = '$season'" );
 }
 ?>

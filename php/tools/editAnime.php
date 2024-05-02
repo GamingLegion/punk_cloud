@@ -1,9 +1,8 @@
 <?php
-$connect = mysqli_connect( 'localhost', 'root', 'theallseeingeyes', 'punkcloud' );
-$connect2 = mysqli_connect( 'localhost', 'root', 'theallseeingeyes', 'punkcloud_episodes' );
+include '../globalVars.php';
 $data = json_decode( file_get_contents( 'php://input' ), true );
-
 date_default_timezone_set( 'America/New_York' );
+
 $upd_date = date( "Y-m-d H:i:s" );
 $name = mysqli_real_escape_string($connect, $data['name']);
 $season = mysqli_real_escape_string($connect, $data['season']);
@@ -31,7 +30,4 @@ if($field == 'season') {
     mysqli_stmt_execute($updateStmt2);
     mysqli_stmt_close($updateStmt2);
 }
-
-mysqli_close( $connect );
-mysqli_close( $connect2 );
 ?>

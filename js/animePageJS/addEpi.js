@@ -43,7 +43,7 @@ function addEpisode(addDiv) {
       season: newEpi.dataset.season
    };
    var xhr = new XMLHttpRequest();
-   xhr.open('POST', '../php/tools/addEpi.php', true);
+   xhr.open('POST', '/PunkCloud/php/tools/addEpi.php', true);
    xhr.setRequestHeader('Content-Type', 'application/json');
    xhr.send(JSON.stringify(data));
 }
