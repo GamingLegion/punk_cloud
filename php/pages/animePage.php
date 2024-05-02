@@ -273,7 +273,7 @@ include( $header );
          echo '<div class="i_l" style="display: flex;">';
          echo '<a><strong>User Score:</strong></a>';
          echo '<div class="dropdown">';
-         echo '<select name="user_score" onchange="updateRank(\'' . $record[ 'rom_name' ] . '\', this);">';
+         echo '<select name="user_score" onchange="updateRank(\'' . $record[ 'rom_name' ] . '\', \'' . $record[ 'season' ] . '\', this);">';
          echo '<option value="Select Score">Select Score</option>';
 
          mysqli_free_result( $result3 );

@@ -279,14 +279,15 @@ function checkboxText(incdec, index, buttonbtn, buttontxt) {
    }
 }
 
-function updateRank(season, rank) {
+function updateRank(name, season, rank) {
    var data = {
+      name: name,
       season: season,
       rank: rank.value
    };
 
    var xhr = new XMLHttpRequest();
-   xhr.open('POST', '/PunkCloud/php/tools/epiIncDec.php', true);
+   xhr.open('POST', '/PunkCloud/php/tools/updateRank.php', true);
    xhr.setRequestHeader('Content-Type', 'application/json');
    xhr.send(JSON.stringify(data));
 }
