@@ -141,7 +141,7 @@ include( $header );
       <button id="synopsis">Synopsis</button>
       <button id="characters">Characters</button>
       <button id="trailers">Trailers</button>
-      <button id="stats">Stats</button>
+      <button id="related">Related</button>
       <button id="reviews">Reviews</button>
    </div>
    <?php
@@ -454,8 +454,8 @@ include( $header );
 <div class="section trailers" hidden>
    <p>Trailers</p>
 </div>
-<div class="section stats" hidden>
-   <p>Stats</p>
+<div class="section related" hidden>
+   <p>Related</p>
 </div>
 <div class="section reviews" hidden>
    <p>Reviews</p>
