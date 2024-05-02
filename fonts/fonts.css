@@ -3,3 +3,15 @@
     font-family: 'Bank Gothic Medium';
     src: url('BankGothic-Medium.otf') format('truetype');
 }
+@font-face {
+    font-family: 'Kanit Light';
+    src: url('Kanit-Light.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Kanit Regular';
+    src: url('Kanit-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Kanit Medium';
+    src: url('Kanit-Medium.ttf') format('truetype');
+}
