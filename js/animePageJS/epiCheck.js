@@ -292,6 +292,19 @@ function updateRank(name, season, rank) {
    xhr.send(JSON.stringify(data));
 }
 
+function updateStatus(name, season, status) {
+   var data = {
+      name: name,
+      season: season,
+      status: status.value
+   };
+
+   var xhr = new XMLHttpRequest();
+   xhr.open('POST', '/PunkCloud/php/tools/updateStatus.php', true);
+   xhr.setRequestHeader('Content-Type', 'application/json');
+   xhr.send(JSON.stringify(data));
+}
+
 function sectionHeadCheck(collapse) {
    var collapsi = document.querySelectorAll(".collapsible[data-value]")[collapse - 1];
    var allBtns = collapsi.querySelector("#collapsible").querySelectorAll(".checkbox-btn");

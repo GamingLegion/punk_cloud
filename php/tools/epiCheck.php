@@ -14,24 +14,22 @@ $result = mysqli_query( $connect3, "SELECT id FROM $user WHERE epi_num = $epiNum
 $record = mysqli_fetch_assoc( $result );
 
 if ( is_null( $record ) || $record[ 'id' ] === 0 ) {
-   $result2 = mysqli_query( $connect3, "SELECT epi_num, season_rank FROM $user WHERE anime_name = '$romName' AND anime_season = '$season' ORDER BY epi_num" );
-   $record2 = mysqli_fetch_assoc( $result2 );
-   $rank = isset( $record2[ 'season_rank' ] ) ? $record2[ 'season_rank' ] : NULL;
+   $result2 = mysqli_query( $connect3, "SELECT season_rank FROM $user WHERE epi_num = 0 AND anime_name = '$romName' AND anime_season = '$season'" );
    if ( mysqli_num_rows( $result2 ) < 1 ) {
+      mysqli_query( $connect3, "INSERT INTO $user(id, ins_date, epi_num, anime_name, anime_season) VALUES('NULL', '$ins_date', '0', '$romName', '$season');" );
       mysqli_query( $connect1, "UPDATE anime SET addedWatch = addedWatch + 1 WHERE rom_name = '$romName'" );
    }
    mysqli_query( $connect3, "INSERT INTO $user(id, ins_date, epi_num, anime_name, anime_season) VALUES('NULL', '$ins_date', '$epiNum', '$romName', '$season');" );
-   $id = mysqli_insert_id($connect3);
-   mysqli_query( $connect3, "UPDATE $user SET season_rank = $rank WHERE id = $id" );
 } else {
-   $old_rank = mysqli_fetch_assoc( mysqli_query( $connect3, "SELECT season_rank FROM $user WHERE anime_name = '$romName'" ) )[ 'season_rank' ];
    mysqli_query( $connect3, "DELETE FROM $user WHERE id = " . $record[ 'id' ] );
-   $result2 = mysqli_query( $connect3, "SELECT id FROM $user WHERE anime_name = '$romName'" );
-   if ( mysqli_num_rows( $result2 ) < 1 ) {
-      $res = mysqli_query( $connect1, "SELECT numOfRanks FROM anime WHERE rom_name = '$romName'" );
-      $rec = mysqli_fetch_assoc( $res );
-      $numoranks = ( ( isset( $rec[ 'numOfRanks' ] ) ) ? ( isset( $old_rank ) ? $rec[ 'numOfRanks' ] - 1 : $rec[ 'numOfRanks' ] ) : 0 );
-      mysqli_query( $connect1, "UPDATE anime SET addedScore = addedScore - $old_rank, numOfRanks = $numoranks, addedWatch = addedWatch - 1 WHERE rom_name = '$romName'" );
+   $result2 = mysqli_query( $connect3, "SELECT id FROM $user WHERE anime_name = '$romName' AND anime_season = '$season'" );
+   if ( mysqli_num_rows( $result2 ) < 2 ) {
+      $res = mysqli_query( $connect3, "SELECT season_rank FROM $user WHERE epi_num = 0 AND anime_name = '$romName' AND anime_season = '$season'" );
+      $old_rank = mysqli_fetch_assoc( $res )['season_rank'];
+      $old_rank = isset( $old_rank ) ? $old_rank : 0;
+      $sub = isset( $old_rank ) ? 1 : 0;
+      mysqli_query( $connect3, "DELETE FROM $user WHERE epi_num = 0 AND anime_name = '$romName' AND anime_season = '$season'" );
+      mysqli_query( $connect1, "UPDATE anime SET addedScore = addedScore - $old_rank, numOfRanks = numOfRanks - $sub, addedWatch = addedWatch - 1 WHERE rom_name = '$romName' AND season = '$season'" );
    }
 }
 ?>

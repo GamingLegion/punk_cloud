@@ -268,7 +268,7 @@ include( $header );
       echo '</div>';
 
       if ( isset( $_SESSION[ 'user' ] ) ) {
-         $result3 = mysqli_query( $connect3, "SELECT season_rank FROM " . $_SESSION[ 'user' ] . " WHERE anime_name = '" . $record[ 'rom_name' ] . "'" );
+         $result3 = mysqli_query( $connect3, "SELECT season_rank, status FROM " . $_SESSION[ 'user' ] . " WHERE anime_name = '" . $record[ 'rom_name' ] . "' AND anime_season = '" . $record[ 'season' ] . "'" );
          $record3 = mysqli_fetch_assoc( $result3 );
          echo '<div class="i_l" style="display: flex;">';
          echo '<a><strong>User Score:</strong></a>';
@@ -276,7 +276,6 @@ include( $header );
          echo '<select name="user_score" onchange="updateRank(\'' . $record[ 'rom_name' ] . '\', \'' . $record[ 'season' ] . '\', this);">';
          echo '<option value="Select Score">Select Score</option>';
 
-         mysqli_free_result( $result3 );
          $options = array(
             "10" => "(10) God Tier",
             "9" => "(9) Insane",
@@ -298,6 +297,30 @@ include( $header );
          echo '</select>';
          echo '</div>';
          echo '</div>';
+         
+         echo '<div class="i_l" style="display: flex;">';
+         echo '<a><strong>Status:</strong></a>';
+         echo '<div class="dropdown">';
+         echo '<select name="user_status" onchange="updateRank(\'' . $record[ 'rom_name' ] . '\', \'' . $record[ 'season' ] . '\', this);">';
+         echo '<option value="Select Score">Select Status</option>';
+
+         $options = array(
+            "Watching",
+            "Completed",
+            "Holding",
+            "Dropped",
+            "Planned"
+         );
+
+         mysqli_data_seek( $result3, 0 );
+         $status = isset( $record3[ 'status' ] ) ? $record3[ 'status' ] : "Select Status";
+         foreach ( $options as $value ) {
+            echo '<option value="' . $value . '" ' . ( $status == $value ? 'selected' : '' ) . '>' . $value . '</option>';
+         }
+         echo '</select>';
+         echo '</div>';
+         echo '</div>';
+         mysqli_free_result( $result3 );
       }
       echo '</div>';
 
